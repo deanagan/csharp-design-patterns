@@ -1,0 +1,14 @@
+/home/deanagan/workspace/csharp-design-patterns/visitor_pattern/bin/Debug/netcoreapp2.2/xunit.runner.visualstudio.dotnetcore.testadapter.dll
+/home/deanagan/workspace/csharp-design-patterns/visitor_pattern/bin/Debug/netcoreapp2.2/xunit.runner.reporters.netcoreapp10.dll
+/home/deanagan/workspace/csharp-design-patterns/visitor_pattern/bin/Debug/netcoreapp2.2/xunit.runner.utility.netcoreapp10.dll
+/home/deanagan/workspace/csharp-design-patterns/visitor_pattern/bin/Debug/netcoreapp2.2/visitor_pattern.deps.json
+/home/deanagan/workspace/csharp-design-patterns/visitor_pattern/bin/Debug/netcoreapp2.2/visitor_pattern.runtimeconfig.json
+/home/deanagan/workspace/csharp-design-patterns/visitor_pattern/bin/Debug/netcoreapp2.2/visitor_pattern.runtimeconfig.dev.json
+/home/deanagan/workspace/csharp-design-patterns/visitor_pattern/bin/Debug/netcoreapp2.2/visitor_pattern.dll
+/home/deanagan/workspace/csharp-design-patterns/visitor_pattern/bin/Debug/netcoreapp2.2/visitor_pattern.pdb
+/home/deanagan/workspace/csharp-design-patterns/visitor_pattern/obj/Debug/netcoreapp2.2/visitor_pattern.csprojAssemblyReference.cache
+/home/deanagan/workspace/csharp-design-patterns/visitor_pattern/obj/Debug/netcoreapp2.2/visitor_pattern.csproj.CoreCompileInputs.cache
+/home/deanagan/workspace/csharp-design-patterns/visitor_pattern/obj/Debug/netcoreapp2.2/visitor_pattern.AssemblyInfoInputs.cache
+/home/deanagan/workspace/csharp-design-patterns/visitor_pattern/obj/Debug/netcoreapp2.2/visitor_pattern.AssemblyInfo.cs
+/home/deanagan/workspace/csharp-design-patterns/visitor_pattern/obj/Debug/netcoreapp2.2/visitor_pattern.dll
+/home/deanagan/workspace/csharp-design-patterns/visitor_pattern/obj/Debug/netcoreapp2.2/visitor_pattern.pdb
