@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
-using Xunit;
+﻿using Xunit;
+using Moq;
+using System;
+
 
 namespace visitor_pattern
 {
@@ -17,7 +19,7 @@ namespace visitor_pattern
             Assert.Equal("Luigi", luigi.Name);
 
             Assert.False(mario.Active);
-            Assert.False(mario.Active);
+            Assert.False(luigi.Active);
             Assert.False(instruction.Active);
         }
 
@@ -45,5 +47,12 @@ namespace visitor_pattern
             Assert.True(instruction.Active);
         }
 
+        [Fact]
+        public void MockVisitorObjectGetsVisited_MockObjectGetsAccepted()
+        {
+            var mockVisitor = new Mock<IVisitor>();
+            mario.Accept(mockVisitor.Object);
+            mockVisitor.Verify(dummyVisitor => dummyVisitor.Visit(mario), Times.Once());            
+        }
     }
 }
