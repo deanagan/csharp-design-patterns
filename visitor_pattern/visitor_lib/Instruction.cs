@@ -1,7 +1,7 @@
 
-namespace visitor_pattern
+namespace visitor_lib
 {
-class Instruction : TextElement
+public class Instruction : TextElement
 {
     public override void Accept(IVisitor visitor)
     {

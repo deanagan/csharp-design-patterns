@@ -1,7 +1,7 @@
 
-namespace visitor_pattern
+namespace visitor_lib
 {
-class Sprite : GameElement
+public class Sprite : GameElement
 {
     public string Name {get; }
     public Sprite(string name) { Name = name; }

@@ -1,7 +1,7 @@
 
-namespace visitor_pattern
+namespace visitor_lib
 {
-    class Revealer : IVisitor
+    public class Revealer : IVisitor
 	{
 		public void Visit(GameElement gameObject)
 		{

@@ -8,13 +8,13 @@
 
   <ItemGroup>
     <PackageReference Include="Moq" Version="4.13.1" />
-    <PackageReference Include="nunit" Version="3.11.0" />
-    <PackageReference Include="NUnit3TestAdapter" Version="3.11.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+    <PackageReference Include="nunit" Version="3.12.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.13.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\decorator_lib\decorator_lib.csproj" />
+    <ProjectReference Include="..\visitor_lib\visitor_lib.csproj" />
   </ItemGroup>
 
 </Project>
