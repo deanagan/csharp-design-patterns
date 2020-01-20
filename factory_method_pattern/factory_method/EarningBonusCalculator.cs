@@ -18,11 +18,6 @@ namespace FrequentFlyers
             {
                 return currentTotalMiles + newMilesEarned;
             }
-
-            // var perkProducer = new PerksProducer();
-            // var perks = perkProducer.GetPerks(currentTotalMiles);
-
-            // return currentTotalMiles + newMilesEarned + Convert.ToInt32(Math.Floor(newMilesEarned * perks.EarningBonus()));
         }
     }
 }
