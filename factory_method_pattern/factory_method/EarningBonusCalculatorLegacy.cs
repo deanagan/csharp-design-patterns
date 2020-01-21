@@ -2,7 +2,7 @@ using System;
 
 namespace FrequentFlyers
 {
-    public class EarningBonusCalculator
+    public class EarningBonusCalculatorLegacy
     {
         public int UpdatedMiles(int currentTotalMiles, int newMilesEarned)
         {
