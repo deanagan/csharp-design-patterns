@@ -42,14 +42,10 @@ namespace observer_test
         public void CustomerReceivesSpecials_MustEchoCorrectMessage()
         {
             var mockSubject = new Mock<ISubject>();
-            var mockObserver = new Mock<Customer>();
+            var customer = new Customer();
             mockSubject.SetupGet(subj => subj.SubjectState).Returns("Footwear Sale");
-
-
-            mockSubject.Object.Attach(mockObserver.Object);
-            mockSubject.Object.Notify();
-
-            Assert.AreEqual("Customer received Footwear Sale", mockObserver.Object.Update(mockSubject.Object));
+            mockSubject.Object.Attach(customer);
+            Assert.AreEqual("Customer received Footwear Sale", customer.Update(mockSubject.Object));
         }
     }
 }
