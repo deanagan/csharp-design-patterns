@@ -9,7 +9,7 @@ namespace decorator_lib
 
         public abstract string GetHtmlElement();
 
-        public string GetWrappedHtmlElement()
+        protected string GetWrappedHtmlElement()
         {
             return _htmlElement.GetHtmlElement();
         }
