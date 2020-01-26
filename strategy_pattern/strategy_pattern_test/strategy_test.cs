@@ -11,7 +11,7 @@ namespace Strategy.Test
         }
 
         [Test]
-        public void TestGetDiscountIfMemberBoxingDayCouponValidRegularItem_ShouldReturnMemberDiscountedPrice()
+        public void TestGetDiscountIfMemberCouponValidRegularItem_ShouldReturnMemberDiscountedPrice()
         {
             // Arrange
             var coupon = new Mock<ICoupon>();
@@ -20,42 +20,106 @@ namespace Strategy.Test
 
             var product = new Mock<IProduct>();
             product.Setup(p => p.SellingPrice()).Returns(100.00);
-            
+            product.Setup(p => p.OnSale()).Returns(false);
             // Act
             var sut = new Member(coupon.Object);
+
+            // Assert
+            Assert.AreEqual(90.00,sut.CalculatePrice(product.Object));
+        }
+
+        [Test]
+        public void TestGetDiscountIfNonMemberCouponValidRegularItem_ShouldReturnNonMemberDiscountedPrice()
+        {
+            // Arrange
+            var coupon = new Mock<ICoupon>();
+            coupon.Setup(c => c.IsExpired()).Returns(false);
+            coupon.Setup(c => c.Discount()).Returns(0.05);
+
+            var product = new Mock<IProduct>();
+            product.Setup(p => p.SellingPrice()).Returns(100.00);
+            product.Setup(p => p.OnSale()).Returns(false);
+            // Act
+            var sut = new NonMember(coupon.Object);
 
             // Assert
             Assert.AreEqual(95.00,sut.CalculatePrice(product.Object));
         }
 
         [Test]
-        public void TestGetDiscountIfNonMemberBoxingDayCouponValidRegularItem_ShouldReturnNonMemberDiscountedPrice()
+        public void TestGetDiscountIfMemberCouponExpired_ShouldReturnNoCouponDiscountedPrice()
         {
-            Assert.Fail();
+            // Arrange
+            var coupon = new Mock<ICoupon>();
+            coupon.Setup(c => c.IsExpired()).Returns(true);
+            coupon.Setup(c => c.Discount()).Returns(0.05);
+
+            var product = new Mock<IProduct>();
+            product.Setup(p => p.SellingPrice()).Returns(100.00);
+            product.Setup(p => p.OnSale()).Returns(false);
+            
+            // Act
+            var sut = new Member(coupon.Object);
+
+            // Assert
+            Assert.AreEqual(95.00 ,sut.CalculatePrice(product.Object));
         }
 
         [Test]
-        public void TestGetDiscountIfMemberBoxingDayCouponExpired_ShouldReturnNoMemberDiscountedPrice()
+        public void TestGetDiscountIfNonMemberCouponExpired_ShouldReturnNoNonMemberDiscountedPrice()
         {
-            Assert.Fail();
+            // Arrange
+            var coupon = new Mock<ICoupon>();
+            coupon.Setup(c => c.IsExpired()).Returns(true);
+            coupon.Setup(c => c.Discount()).Returns(0.05);
+
+            var product = new Mock<IProduct>();
+            product.Setup(p => p.SellingPrice()).Returns(100.00);
+            product.Setup(p => p.OnSale()).Returns(false);
+            
+            // Act
+            var sut = new NonMember(coupon.Object);
+
+            // Assert
+            Assert.AreEqual(100.00 ,sut.CalculatePrice(product.Object));
         }
 
         [Test]
-        public void TestGetDiscountIfNonMemberBoxingDayCouponExpired_ShouldReturnNoNonMemberDiscountedPrice()
+        public void TestGetDiscountIfMemberCouponValidOnProductAlreadyOnSale_ShouldReturnBaseMemberDiscountedAddedToSalePrice()
         {
-            Assert.Fail();
+            // Arrange
+            var coupon = new Mock<ICoupon>();
+            coupon.Setup(c => c.IsExpired()).Returns(false);
+            coupon.Setup(c => c.Discount()).Returns(0.05);
+
+            var product = new Mock<IProduct>();
+            product.Setup(p => p.SellingPrice()).Returns(100.00);
+            product.Setup(p => p.OnSale()).Returns(true);
+            
+            // Act
+            var sut = new Member(coupon.Object);
+
+            // Assert
+            Assert.AreEqual(90.00 ,sut.CalculatePrice(product.Object));
         }
 
         [Test]
-        public void TestGetDiscountIfMemberBoxingDayCouponValidOnProductAlreadyOnSale_ShouldReturnNoMemberDiscountedPrice()
+        public void TestGetDiscountIfNonMemberCouponValidOnProductAlreadyOnSale_ShouldReturnSalePrice()
         {
-            Assert.Fail();
-        }
+            // Arrange
+            var coupon = new Mock<ICoupon>();
+            coupon.Setup(c => c.IsExpired()).Returns(false);
+            coupon.Setup(c => c.Discount()).Returns(0.05);
 
-        [Test]
-        public void TestGetDiscountIfNonMemberBoxingDayCouponValidOnProductAlreadyOnSale_ShouldReturnNoNonMemberDiscountedPrice()
-        {
-            Assert.Fail();
+            var product = new Mock<IProduct>();
+            product.Setup(p => p.SellingPrice()).Returns(97.00);
+            product.Setup(p => p.OnSale()).Returns(true);
+            
+            // Act
+            var sut = new NonMember(coupon.Object);
+
+            // Assert
+            Assert.AreEqual(97.00 ,sut.CalculatePrice(product.Object));
         }
     }
 }

@@ -16,7 +16,12 @@ namespace Strategy
         }
         public double CalculatePrice(IProduct product)
         {
-            return 0.0;
+            if (_coupon.IsExpired())
+            {
+                return product.SellingPrice();
+            }
+            var discount = product.OnSale() ? 0.0 : (product.SellingPrice() * _coupon.Discount());
+            return product.SellingPrice() - discount;
         }
     }
 }

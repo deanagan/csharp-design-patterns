@@ -6,6 +6,11 @@ namespace Strategy
     public class Member : ICustomer
     {
         private readonly ICoupon _coupon;
+        
+        struct Discount
+        {
+            public const double BaseMemberDiscount = 0.05;
+        }
 
         public Member(ICoupon coupon)
         {
@@ -16,8 +21,15 @@ namespace Strategy
             return true;
         }
         public double CalculatePrice(IProduct product)
-        {
-            return product.SellingPrice() - (product.SellingPrice()*_coupon.Discount());
+        {            
+            var memberBaseDiscount = product.SellingPrice() * Discount.BaseMemberDiscount;
+            var memberDiscountedPrice = product.SellingPrice() - memberBaseDiscount;
+            if (_coupon.IsExpired())
+            {
+                return memberDiscountedPrice;
+            }
+            
+            return memberDiscountedPrice - (product.SellingPrice() * _coupon.Discount());
         }
     }
 }
