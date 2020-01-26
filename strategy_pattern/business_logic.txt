@@ -1,0 +1,12 @@
+// Business Logic:
+At the DogMandu shop, a discount coupon is provided
+to a customer. The discount has an added 
+5% if the customer is a dogmandu member.
+However, if a coupon is expired, despite
+being a member, no discount is given.
+Also, items already on sale are excluded
+from discounts for non members. Members however still get the
+discount on these items at 5%.
+
+As a store owner, I want to be able to compute for the correct
+discount per customer.
