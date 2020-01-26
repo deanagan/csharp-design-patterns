@@ -17,7 +17,7 @@ namespace Strategy
         }
         public double CalculatePrice(IProduct product)
         {
-            return 0;
+            return product.SellingPrice() - (product.SellingPrice()*_coupon.Discount());
         }
     }
 }
