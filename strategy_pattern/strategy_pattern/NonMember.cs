@@ -14,7 +14,7 @@ namespace Strategy
         {
             return false;
         }
-        public Decimal CalculatePrice(IProduct product)
+        public Decimal Price(IProduct product)
         {
             if (_coupon.IsExpired())
             {

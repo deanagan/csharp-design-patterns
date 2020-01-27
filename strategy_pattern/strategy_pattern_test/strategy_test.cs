@@ -29,7 +29,7 @@ namespace Strategy.Test
             var sut = new Member(_coupon.Object);
 
             // Assert
-            Assert.AreEqual(90M, sut.CalculatePrice(_product.Object));
+            Assert.AreEqual(90M, sut.Price(_product.Object));
         }
 
         [Test]
@@ -46,7 +46,7 @@ namespace Strategy.Test
             var sut = new NonMember(_coupon.Object);
 
             // Assert
-            Assert.AreEqual(95M, sut.CalculatePrice(_product.Object));
+            Assert.AreEqual(95M, sut.Price(_product.Object));
         }
 
         [Test]
@@ -63,7 +63,7 @@ namespace Strategy.Test
             var sut = new Member(_coupon.Object);
 
             // Assert
-            Assert.AreEqual(95M, sut.CalculatePrice(_product.Object));
+            Assert.AreEqual(95M, sut.Price(_product.Object));
         }
 
         [Test]
@@ -80,7 +80,7 @@ namespace Strategy.Test
             var sut = new NonMember(_coupon.Object);
 
             // Assert
-            Assert.AreEqual(100M, sut.CalculatePrice(_product.Object));
+            Assert.AreEqual(100M, sut.Price(_product.Object));
         }
 
         [Test]
@@ -97,7 +97,7 @@ namespace Strategy.Test
             var sut = new Member(_coupon.Object);
 
             // Assert
-            Assert.AreEqual(90M, sut.CalculatePrice(_product.Object));
+            Assert.AreEqual(90M, sut.Price(_product.Object));
         }
 
         [Test]
@@ -114,7 +114,7 @@ namespace Strategy.Test
             var sut = new NonMember(_coupon.Object);
 
             // Assert
-            Assert.AreEqual(97M, sut.CalculatePrice(_product.Object));
+            Assert.AreEqual(97M, sut.Price(_product.Object));
         }
     }
 }
