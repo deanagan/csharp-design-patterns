@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using Moq;
+using FluentAssertions;
 
 namespace Strategy.Test
 {
@@ -40,10 +41,10 @@ namespace Strategy.Test
             _mockProduct = CreateMockProduct(100M, false);
 
             // Act
-            var sut = new Member(_mockCoupon);
+            var member = new Member(_mockCoupon);
 
             // Assert
-            Assert.AreEqual(90M, sut.Price(_mockProduct));
+            member.Price(_mockProduct).Should().Be(90M);
         }
 
         [Test]
@@ -54,10 +55,10 @@ namespace Strategy.Test
            _mockProduct = CreateMockProduct(100M, false);
 
             // Act
-            var sut = new NonMember(_mockCoupon);
+            var nonmember = new NonMember(_mockCoupon);
 
             // Assert
-            Assert.AreEqual(95M, sut.Price(_mockProduct));
+            nonmember.Price(_mockProduct).Should().Be(95M);
         }
 
         [Test]
@@ -68,10 +69,10 @@ namespace Strategy.Test
             _mockProduct = CreateMockProduct(100M, false);
             
             // Act
-            var sut = new Member(_mockCoupon);
+            var member = new Member(_mockCoupon);
 
             // Assert
-            Assert.AreEqual(95M, sut.Price(_mockProduct));
+            member.Price(_mockProduct).Should().Be(95M);
         }
 
         [Test]
@@ -82,10 +83,10 @@ namespace Strategy.Test
             _mockProduct = CreateMockProduct(100M, false);
             
             // Act
-            var sut = new NonMember(_mockCoupon);
+            var nonmember = new NonMember(_mockCoupon);
 
             // Assert
-            Assert.AreEqual(100M, sut.Price(_mockProduct));
+            nonmember.Price(_mockProduct).Should().Be(100M);
         }
 
         [Test]
@@ -96,10 +97,10 @@ namespace Strategy.Test
             _mockProduct = CreateMockProduct(100M, true);
             
             // Act
-            var sut = new Member(_mockCoupon);
+            var member = new Member(_mockCoupon);
 
             // Assert
-            Assert.AreEqual(90M, sut.Price(_mockProduct));
+            member.Price(_mockProduct).Should().Be(90M);
         }
 
         [Test]
@@ -110,10 +111,10 @@ namespace Strategy.Test
             _mockProduct = CreateMockProduct(97M, true);
           
             // Act
-            var sut = new NonMember(_mockCoupon);
+            var nonmember = new NonMember(_mockCoupon);
 
             // Assert
-            Assert.AreEqual(97M, sut.Price(_mockProduct));
+            nonmember.Price(_mockProduct).Should().Be(97M);
         }
     }
 }
