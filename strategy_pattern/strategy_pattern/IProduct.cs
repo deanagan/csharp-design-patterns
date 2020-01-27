@@ -5,7 +5,7 @@ namespace Strategy
 {
     public interface IProduct
     {
-        double SellingPrice();
+        Decimal SellingPrice();
 
         bool OnSale();
     }

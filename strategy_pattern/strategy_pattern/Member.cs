@@ -9,7 +9,7 @@ namespace Strategy
         
         struct Discount
         {
-            public const double BaseMemberDiscount = 0.05;
+            public const int BaseMemberDiscount = 5;
         }
 
         public Member(ICoupon coupon)
@@ -20,16 +20,16 @@ namespace Strategy
         {
             return true;
         }
-        public double CalculatePrice(IProduct product)
+        public Decimal CalculatePrice(IProduct product)
         {            
-            var memberBaseDiscount = product.SellingPrice() * Discount.BaseMemberDiscount;
+            var memberBaseDiscount = product.SellingPrice() * (Discount.BaseMemberDiscount / 100M);
             var memberDiscountedPrice = product.SellingPrice() - memberBaseDiscount;
             if (_coupon.IsExpired())
             {
                 return memberDiscountedPrice;
             }
             
-            return memberDiscountedPrice - (product.SellingPrice() * _coupon.Discount());
+            return memberDiscountedPrice - (product.SellingPrice() * (_coupon.DiscountPercentage()/ 100M));
         }
     }
 }

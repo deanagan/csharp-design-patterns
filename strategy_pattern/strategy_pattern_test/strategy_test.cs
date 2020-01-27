@@ -16,10 +16,10 @@ namespace Strategy.Test
             // Arrange
             var coupon = new Mock<ICoupon>();
             coupon.Setup(c => c.IsExpired()).Returns(false);
-            coupon.Setup(c => c.Discount()).Returns(0.05);
+            coupon.Setup(c => c.DiscountPercentage()).Returns(5);
 
             var product = new Mock<IProduct>();
-            product.Setup(p => p.SellingPrice()).Returns(100.00);
+            product.Setup(p => p.SellingPrice()).Returns(100M);
             product.Setup(p => p.OnSale()).Returns(false);
             // Act
             var sut = new Member(coupon.Object);
@@ -34,10 +34,10 @@ namespace Strategy.Test
             // Arrange
             var coupon = new Mock<ICoupon>();
             coupon.Setup(c => c.IsExpired()).Returns(false);
-            coupon.Setup(c => c.Discount()).Returns(0.05);
+            coupon.Setup(c => c.DiscountPercentage()).Returns(5);
 
             var product = new Mock<IProduct>();
-            product.Setup(p => p.SellingPrice()).Returns(100.00);
+            product.Setup(p => p.SellingPrice()).Returns(100M);
             product.Setup(p => p.OnSale()).Returns(false);
             // Act
             var sut = new NonMember(coupon.Object);
@@ -52,10 +52,10 @@ namespace Strategy.Test
             // Arrange
             var coupon = new Mock<ICoupon>();
             coupon.Setup(c => c.IsExpired()).Returns(true);
-            coupon.Setup(c => c.Discount()).Returns(0.05);
+            coupon.Setup(c => c.DiscountPercentage()).Returns(5);
 
             var product = new Mock<IProduct>();
-            product.Setup(p => p.SellingPrice()).Returns(100.00);
+            product.Setup(p => p.SellingPrice()).Returns(100M);
             product.Setup(p => p.OnSale()).Returns(false);
             
             // Act
@@ -71,10 +71,10 @@ namespace Strategy.Test
             // Arrange
             var coupon = new Mock<ICoupon>();
             coupon.Setup(c => c.IsExpired()).Returns(true);
-            coupon.Setup(c => c.Discount()).Returns(0.05);
+            coupon.Setup(c => c.DiscountPercentage()).Returns(5);
 
             var product = new Mock<IProduct>();
-            product.Setup(p => p.SellingPrice()).Returns(100.00);
+            product.Setup(p => p.SellingPrice()).Returns(100M);
             product.Setup(p => p.OnSale()).Returns(false);
             
             // Act
@@ -90,17 +90,17 @@ namespace Strategy.Test
             // Arrange
             var coupon = new Mock<ICoupon>();
             coupon.Setup(c => c.IsExpired()).Returns(false);
-            coupon.Setup(c => c.Discount()).Returns(0.05);
+            coupon.Setup(c => c.DiscountPercentage()).Returns(5);
 
             var product = new Mock<IProduct>();
-            product.Setup(p => p.SellingPrice()).Returns(100.00);
+            product.Setup(p => p.SellingPrice()).Returns(100M);
             product.Setup(p => p.OnSale()).Returns(true);
             
             // Act
             var sut = new Member(coupon.Object);
 
             // Assert
-            Assert.AreEqual(90.00 ,sut.CalculatePrice(product.Object));
+            Assert.AreEqual(90M ,sut.CalculatePrice(product.Object));
         }
 
         [Test]
@@ -109,17 +109,17 @@ namespace Strategy.Test
             // Arrange
             var coupon = new Mock<ICoupon>();
             coupon.Setup(c => c.IsExpired()).Returns(false);
-            coupon.Setup(c => c.Discount()).Returns(0.05);
+            coupon.Setup(c => c.DiscountPercentage()).Returns(5);
 
             var product = new Mock<IProduct>();
-            product.Setup(p => p.SellingPrice()).Returns(97.00);
+            product.Setup(p => p.SellingPrice()).Returns(97M);
             product.Setup(p => p.OnSale()).Returns(true);
             
             // Act
             var sut = new NonMember(coupon.Object);
 
             // Assert
-            Assert.AreEqual(97.00 ,sut.CalculatePrice(product.Object));
+            Assert.AreEqual(97M ,sut.CalculatePrice(product.Object));
         }
     }
 }

@@ -4,7 +4,7 @@ namespace Strategy
 {
     public interface ICoupon
     {
-        double Discount();
+        int DiscountPercentage();
         bool IsExpired();
     }
 }
