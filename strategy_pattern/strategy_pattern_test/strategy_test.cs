@@ -34,7 +34,7 @@ namespace Strategy.Test
         }
 
         [Test]
-        public void TestGetDiscountIfMemberCouponValidRegularItem_ShouldReturnMemberDiscountedPrice()
+        public void DiscountIfMember_WithValidCoupon_ForRegularItem_ShouldReturnMemberDiscountedPrice()
         {
             // Arrange
             _mockCoupon = CreateMockCoupon(false, 5);
@@ -48,7 +48,7 @@ namespace Strategy.Test
         }
 
         [Test]
-        public void TestGetDiscountIfNonMemberCouponValidRegularItem_ShouldReturnNonMemberDiscountedPrice()
+        public void DiscountIfNonMember_WithValidCoupon_ForRegularItem_ShouldReturnNonMemberDiscountedPrice()
         {
             // Arrange
            _mockCoupon = CreateMockCoupon(false, 5);
@@ -62,7 +62,7 @@ namespace Strategy.Test
         }
 
         [Test]
-        public void TestGetDiscountIfMemberCouponExpired_ShouldReturnNoCouponDiscountedPrice()
+        public void DiscountIfMember_WithCouponExpired_ShouldReturnBaseMemberDiscountOnly()
         {
             // Arrange
             _mockCoupon = CreateMockCoupon(true, 5);
@@ -76,7 +76,7 @@ namespace Strategy.Test
         }
 
         [Test]
-        public void TestGetDiscountIfNonMemberCouponExpired_ShouldReturnNoNonMemberDiscountedPrice()
+        public void DiscountIfNonMember_WithCouponExpired_ShouldReturnNoDiscount()
         {
             // Arrange
             _mockCoupon = CreateMockCoupon(true, 5);
@@ -90,7 +90,7 @@ namespace Strategy.Test
         }
 
         [Test]
-        public void TestGetDiscountIfMemberCouponValidOnProductAlreadyOnSale_ShouldReturnBaseMemberDiscountedAddedToSalePrice()
+        public void DiscountIfMember_WithValidCoupon_ForProductAlreadyOnSale_ShouldReturnBaseMemberDiscountedAddedToSalePrice()
         {
             // Arrange
             _mockCoupon = CreateMockCoupon(false, 5);
@@ -104,7 +104,7 @@ namespace Strategy.Test
         }
 
         [Test]
-        public void TestGetDiscountIfNonMemberCouponValidOnProductAlreadyOnSale_ShouldReturnSalePrice()
+        public void DiscountIfNonMember_WithValidCoupon_ForProductAlreadyOnSale_ShouldReturnSalePriceOnly()
         {
             // Arrange
             _mockCoupon = CreateMockCoupon(false, 5);
