@@ -5,6 +5,6 @@ namespace Strategy
     public interface ICustomer
     {
         bool IsMember();
-        Decimal Price(IProduct product);
+        decimal Price(IProduct product);
     }
 }

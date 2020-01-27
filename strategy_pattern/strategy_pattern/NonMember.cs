@@ -14,13 +14,13 @@ namespace Strategy
         {
             return false;
         }
-        public Decimal Price(IProduct product)
+        public decimal Price(IProduct product)
         {
             if (_coupon.IsExpired())
             {
                 return product.SellingPrice();
             }
-            var discount = product.OnSale() ? 0M : (product.SellingPrice() * (_coupon.DiscountPercentage()/ 100M));
+            var discount = product.IsOnSale() ? 0M : (product.SellingPrice() * (_coupon.DiscountPercentage()/ 100M));
             return product.SellingPrice() - discount;
         }
     }

@@ -20,7 +20,7 @@ namespace Strategy
         {
             return true;
         }
-        public Decimal Price(IProduct product)
+        public decimal Price(IProduct product)
         {            
             var memberBaseDiscount = product.SellingPrice() * (Discount.BaseMemberDiscount / 100M);
             var memberDiscountedPrice = product.SellingPrice() - memberBaseDiscount;
