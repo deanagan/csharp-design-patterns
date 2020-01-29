@@ -38,10 +38,10 @@ namespace Mediator.Tests
         [Test]
         public void PurchaserThrowsException_WhenAlertScreenIsNull()
         {
-            // Arrange
+            // Act
             Action act = () => new Purchaser(null, _mediator);
 
-            // Act and Assert
+            // Assert
             act.Should().ThrowExactly<ArgumentNullException>();
         }
 
@@ -51,11 +51,40 @@ namespace Mediator.Tests
             // Arrange
             var alertScreen = new Mock<IAlertScreen>();
 
-            // Arrange
+            // Act
             Action act = () => new Purchaser(alertScreen.Object, null);
 
-            // Act and Assert
+            // Assert
             act.Should().ThrowExactly<ArgumentNullException>();
+        }
+
+        [Test]
+        public void MediatorReturnsFalse_WhenPurchaserIsNotRegistered()
+        {
+            // Arrange
+            var alertScreen = new Mock<IAlertScreen>();
+            var purchaser = new Mock<IPurchaser>();
+
+            // Act
+
+            // Assert
+            _mediator.BroadcastPurchaseCompletion(purchaser.Object).Should().Be(false);
+
+        }
+
+        [Test]
+        public void MediatorReturnsFalse_WhenPurchaserRegisteredTwice()
+        {
+            // Arrange
+            var alertScreen = new Mock<IAlertScreen>();
+            var purchaser = new Mock<IPurchaser>();
+
+            // Act
+            _mediator.AddPurchaser(purchaser.Object);
+
+            // Assert
+            _mediator.AddPurchaser(purchaser.Object).Should().Be(false);
+
         }
     }
 }

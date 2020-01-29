@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 
@@ -11,14 +12,26 @@ namespace Mediator
         {
             _activePurchasers = new List<IPurchaser>();
         }
-        public void BroadcastPurchaseCompletion(IPurchaser purchaser)
+        public bool BroadcastPurchaseCompletion(IPurchaser purchaser)
         {
-            _activePurchasers.Remove(purchaser);
-            _activePurchasers.ForEach(p => p.Receive(purchaser));
+            var isPurchaserActive = _activePurchasers.Remove(purchaser);
+
+            if (isPurchaserActive)
+            {
+                _activePurchasers.ForEach(p => p.Receive(purchaser));
+            }
+
+            return isPurchaserActive;
         }
-        public void AddPurchaser(IPurchaser purchaser)
+        public bool AddPurchaser(IPurchaser purchaser)
         {
-            _activePurchasers.Add(purchaser);
+            if (_activePurchasers.Contains(purchaser) == false)
+            {
+                _activePurchasers.Add(purchaser);
+                return true;
+            }
+
+            return false;
         }
     }
 }

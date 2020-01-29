@@ -4,7 +4,7 @@ namespace Mediator
 {
     public interface IMediator
     {
-        void BroadcastPurchaseCompletion(IPurchaser purchaser);
-        void AddPurchaser(IPurchaser purchaser);
+        bool BroadcastPurchaseCompletion(IPurchaser purchaser);
+        bool AddPurchaser(IPurchaser purchaser);
     }
 }
