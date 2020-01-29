@@ -1,3 +1,5 @@
+using System;
+
 namespace Mediator
 {
     public class Purchaser : IPurchaser
@@ -9,6 +11,16 @@ namespace Mediator
         private IMediator _mediator;
         public Purchaser(IAlertScreen alertScreen, IMediator mediator)
         {
+            if (alertScreen == null)
+            {
+                throw new ArgumentNullException("IAlertScreen is null");
+            }
+
+            if (mediator == null)
+            {
+                throw new ArgumentNullException("IMediator is null");
+            }
+
             _alertScreen = alertScreen;
             _mediator = mediator;
         }

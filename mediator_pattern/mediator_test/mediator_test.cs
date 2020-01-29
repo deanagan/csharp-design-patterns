@@ -1,7 +1,7 @@
+using System;
 using NUnit.Framework;
 using Moq;
 using FluentAssertions;
-using Mediator;
 
 namespace Mediator.Tests
 {
@@ -20,7 +20,6 @@ namespace Mediator.Tests
         public void AlertScreen_WhenOnePurchaserCompletesTransaction()
         {
             // Arrange
-
             var alertScreenForCompletedPurchaser = new Mock<IAlertScreen>();
             var alertScreenForActivePurchaser = new Mock<IAlertScreen>();
             var completedPurchaser = new Purchaser(alertScreenForCompletedPurchaser.Object, _mediator);
@@ -34,6 +33,29 @@ namespace Mediator.Tests
             // Assert
             alertScreenForActivePurchaser.Verify(sc => sc.ShowMessage(_product.Item, _product.Location));
             alertScreenForCompletedPurchaser.Verify(sc => sc.ShowMessage(It.IsAny<string>(), It.IsAny<string>()), Times.Never());
+        }
+
+        [Test]
+        public void PurchaserThrowsException_WhenAlertScreenIsNull()
+        {
+            // Arrange
+            Action act = () => new Purchaser(null, _mediator);
+
+            // Act and Assert
+            act.Should().ThrowExactly<ArgumentNullException>();
+        }
+
+        [Test]
+        public void PurchaserThrowsException_WhenMediatorIsNull()
+        {
+            // Arrange
+            var alertScreen = new Mock<IAlertScreen>();
+
+            // Arrange
+            Action act = () => new Purchaser(alertScreen.Object, null);
+
+            // Act and Assert
+            act.Should().ThrowExactly<ArgumentNullException>();
         }
     }
 }
