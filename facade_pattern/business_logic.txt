@@ -1,0 +1,19 @@
+User Story: As a customer, I want to be able to pay for my purchases in a secure way.
+
+We are integrating a payment gateway into our site. The task for this is to implement
+a way to pay securely using an SDK. 
+
+In using the payment gateway SDK, these are the following steps:
+
+1. IEnvironment - Set the environment. Assume step to either be SANDBOX or PRODUCTION. 
+2. IMerchantAuthenticationType - Assume interface requires login id and transaction key.
+3. IBillingAddress - A billing address type. Require first name, last name, address, city and zip code.
+3. ICreditCardType - Can be a visa, mastercard or amex credit card. Must implement typename, account number, cvc and expiry date.
+4. ITransactionRequest - Requires amount in decimal, IBillingAddress and ICreditCardType supplied.
+5. ITransactionController - Requires an ITransactionRequest, an Execute function and a GetApiResponse function.
+    The GetApiResponse function returns either OK or Declined.
+    - Decline if
+        + Environment not Set
+        + Merchant authentication not set.
+        + ICreditCardType has expired date.
+    - Otherwise, returns OK.
