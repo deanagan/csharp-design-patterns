@@ -2,7 +2,7 @@
 
 namespace Adapter
 {
-    public interface ISocialMediaInterface
+    public interface ISocialMediaProfile
     {
         string Name();
         string UserName();
