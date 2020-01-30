@@ -1,4 +1,4 @@
-
+using System;
 
 namespace Adapter
 {
@@ -7,6 +7,10 @@ namespace Adapter
         private ISocialMediaProfile _socialMediaProfile;
         public SocialMediaProfileAdapter(ISocialMediaProfile socialMediaProfile)
         {
+            if (socialMediaProfile == null)
+            {
+                throw new ArgumentNullException();
+            }
             _socialMediaProfile = socialMediaProfile;
         }
         public string Name()
