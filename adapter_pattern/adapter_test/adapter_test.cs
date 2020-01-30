@@ -1,3 +1,4 @@
+using System;
 using NUnit.Framework;
 using Moq;
 using FluentAssertions;
@@ -32,7 +33,11 @@ namespace Adapter.Tests
         [Test]
         public void SocialMediaProfileAdapter_ThrowsException_WhenSocialMediaAdapteeIsNull()
         {
-            Assert.Fail();
+            // Act
+            Action act = () => new SocialMediaProfileAdapter(null);
+
+            // Assert
+            act.Should().ThrowExactly<ArgumentNullException>();
         }
     }
 }
