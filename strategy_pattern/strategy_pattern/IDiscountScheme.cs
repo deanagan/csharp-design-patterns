@@ -1,6 +1,6 @@
 namespace Strategy
 {
-    public interface IPayment
+    public interface IDiscountScheme
     {
         decimal ComputePrice();
     }
