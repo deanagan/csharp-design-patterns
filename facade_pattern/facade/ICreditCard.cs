@@ -10,7 +10,7 @@ namespace facade
     }
     public interface ICreditCard
     {
-        CreditCard CreditCardType {get;set;}
+        CreditCard Type {get;set;}
         string AccountNumber {get;set;}
 
         string CVC {get;set;}
