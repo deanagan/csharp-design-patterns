@@ -6,5 +6,7 @@ namespace Strategy
     {
         bool IsMember();
         decimal Price(IProduct product);
+
+        void ComputePrice();
     }
 }

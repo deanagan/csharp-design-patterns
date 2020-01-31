@@ -31,5 +31,10 @@ namespace Strategy
             
             return memberDiscountedPrice - (product.SellingPrice() * (_coupon.DiscountPercentage()/ 100M));
         }
+
+        public void ComputePrice()
+        {
+            
+        }
     }
 }

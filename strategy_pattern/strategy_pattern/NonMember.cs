@@ -23,5 +23,10 @@ namespace Strategy
             var discount = product.IsOnSale() ? 0M : (product.SellingPrice() * (_coupon.DiscountPercentage()/ 100M));
             return product.SellingPrice() - discount;
         }
+
+        public void ComputePrice()
+        {
+            
+        }
     }
 }
