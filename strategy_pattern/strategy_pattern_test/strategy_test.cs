@@ -6,8 +6,10 @@ namespace Strategy.Test
 {
     public class Tests
     {
+        private delegate decimal PriceCalc(IProduct product);
         private ICoupon _mockCoupon;
         private IProduct _mockProduct;
+        private IDiscountScheme _discountScheme;
         
         ICoupon CreateMockCoupon(bool isExpired, int discountPercentage)
         {
@@ -28,6 +30,7 @@ namespace Strategy.Test
                 product.IsOnSale() == isOnSale
             );
         }
+
         [SetUp]
         public void Setup()
         {
@@ -39,12 +42,13 @@ namespace Strategy.Test
             // Arrange
             _mockCoupon = CreateMockCoupon(false, 5);
             _mockProduct = CreateMockProduct(100M, false);
+            _discountScheme = new MemberDiscountScheme();
 
             // Act
-            var member = new Member(_mockCoupon);
-
+            var price = _discountScheme.ComputePrice(_mockProduct, _mockCoupon);
+            
             // Assert
-            member.Price(_mockProduct).Should().Be(90M);
+            price.Should().Be(90M);
         }
 
         [Test]
@@ -53,12 +57,13 @@ namespace Strategy.Test
             // Arrange
            _mockCoupon = CreateMockCoupon(false, 5);
            _mockProduct = CreateMockProduct(100M, false);
+           _discountScheme = new NonMemberDiscountScheme();
 
             // Act
-            var nonmember = new NonMember(_mockCoupon);
+            var price = _discountScheme.ComputePrice(_mockProduct, _mockCoupon);
 
             // Assert
-            nonmember.Price(_mockProduct).Should().Be(95M);
+            price.Should().Be(95M);
         }
 
         [Test]
@@ -67,12 +72,13 @@ namespace Strategy.Test
             // Arrange
             _mockCoupon = CreateMockCoupon(true, 5);
             _mockProduct = CreateMockProduct(100M, false);
+            _discountScheme = new MemberDiscountScheme();
             
             // Act
-            var member = new Member(_mockCoupon);
+            var price = _discountScheme.ComputePrice(_mockProduct, _mockCoupon);
 
             // Assert
-            member.Price(_mockProduct).Should().Be(95M);
+            price.Should().Be(95M);
         }
 
         [Test]
@@ -81,12 +87,13 @@ namespace Strategy.Test
             // Arrange
             _mockCoupon = CreateMockCoupon(true, 5);
             _mockProduct = CreateMockProduct(100M, false);
+            _discountScheme = new NonMemberDiscountScheme();
             
             // Act
-            var nonmember = new NonMember(_mockCoupon);
+            var price = _discountScheme.ComputePrice(_mockProduct, _mockCoupon);
 
             // Assert
-            nonmember.Price(_mockProduct).Should().Be(100M);
+            price.Should().Be(100M);
         }
 
         [Test]
@@ -95,12 +102,13 @@ namespace Strategy.Test
             // Arrange
             _mockCoupon = CreateMockCoupon(false, 5);
             _mockProduct = CreateMockProduct(100M, true);
+            _discountScheme = new MemberDiscountScheme();
             
             // Act
-            var member = new Member(_mockCoupon);
+            var price = _discountScheme.ComputePrice(_mockProduct, _mockCoupon);
 
             // Assert
-            member.Price(_mockProduct).Should().Be(90M);
+            price.Should().Be(90M);
         }
 
         [Test]
@@ -109,12 +117,13 @@ namespace Strategy.Test
             // Arrange
             _mockCoupon = CreateMockCoupon(false, 5);
             _mockProduct = CreateMockProduct(97M, true);
+            _discountScheme = new NonMemberDiscountScheme();
           
             // Act
-            var nonmember = new NonMember(_mockCoupon);
+            var price = _discountScheme.ComputePrice(_mockProduct, _mockCoupon);
 
             // Assert
-            nonmember.Price(_mockProduct).Should().Be(97M);
+            price.Should().Be(97M);
         }
     }
 }
