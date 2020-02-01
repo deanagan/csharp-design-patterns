@@ -2,6 +2,6 @@ namespace Strategy
 {
     public interface IDiscountScheme
     {
-        decimal ComputePrice();
+        decimal ComputePrice(IProduct product, ICoupon coupon);
     }
 }
