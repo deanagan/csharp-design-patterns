@@ -1,3 +1,4 @@
+using System;
 using NUnit.Framework;
 using Moq;
 using FluentAssertions;
@@ -25,7 +26,7 @@ namespace facade_test
             );
         }
 
-        ICreditCard CreateMockCreditCard(bool isExpired)
+        ICreditCard CreateMockCreditCard(DateTime expiryDate)
         {
             return Mock.Of<ICreditCard>
             (
@@ -33,7 +34,7 @@ namespace facade_test
                     creditCard.Type == CreditCard.VISA &&
                     creditCard.AccountNumber == "123456789" &&
                     creditCard.CVC == "987" &&
-                    creditCard.ExpiryDate = new DateTime(DateTime.AddDays(isExpired ? -1 : 1))
+                    creditCard.ExpiryDate == expiryDate
             );
         }
 
@@ -67,15 +68,16 @@ namespace facade_test
         }
 
         [Test]
-        public void SubmitPaymentReturnsOK_WithoutUsingFacade()
+        public void SubmitPaymentReturnsOK_UsingFacade()
         {
-           
-            
-        }
+            // Arrange
+            var paymentProcessor = new PaymentProcessor();
 
-        [Test]
-        public void SubmitPaymentReturnsOK_WithFacadeComposedOfTransactionController()
-        {
+            // Act
+            paymentProcessor.InitializePaymentGatewayInterface();
+
+            // Assert
+            paymentProcessor.SubmitPayment().Should().Be(true);
             
         }
 
