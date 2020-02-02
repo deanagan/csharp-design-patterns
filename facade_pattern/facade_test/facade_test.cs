@@ -42,7 +42,7 @@ namespace facade_test
         {
             return Mock.Of<IEnvironment>
             (
-                environment => environment.environmentVariableTarget == EnvironmentTarget.SANDBOX
+                environment => environment.environmentVariableTarget == EnvironmentTarget.UNINITIALIZED
             );
         }
 
@@ -68,16 +68,23 @@ namespace facade_test
         }
 
         [Test]
-        public void SubmitPaymentReturnsOK_UsingFacade()
+        public void EnvironmentSetCorrectly_WhenFacadeInitializesPaymentGatewayInterface()
         {
             // Arrange
-            var paymentProcessor = new PaymentProcessor();
+            // var dateTomorrow = DateTime.Today.AddDays(1);
+            var env = CreateMockEnvironment();
+            // var creditCard = CreateMockCreditCard(dateTomorrow);
+            // var billingAddress = CreateMockBillingAddress();
+            // var txnReq = CreateMockTransactionRequest(billingAddress, creditCard);
+            // var merchAuthType = CreateMockMerchantAuthenticationType();
+            var paymentProcessor = new PaymentProcessor(env);
 
             // Act
             paymentProcessor.InitializePaymentGatewayInterface();
 
             // Assert
-            paymentProcessor.SubmitPayment().Should().Be(true);
+            // paymentProcessor.SubmitPayment().Should().Be(true);
+            env.environmentVariableTarget.Should().NotBe(EnvironmentTarget.UNINITIALIZED);
             
         }
 
