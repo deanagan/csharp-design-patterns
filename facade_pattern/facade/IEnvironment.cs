@@ -4,6 +4,7 @@ namespace facade
 {
     public enum EnvironmentTarget
     {
+        UNINITIALIZED,
         SANDBOX,
         PRODUCTiON
     }
