@@ -10,6 +10,7 @@ namespace facade
             IMerchantAuthenticationType merchAuthType,
             ITransactionRequest txnRequest)
         {
+            // TODO: Add data invariance. Use contracts?
             _environment = environment;
             _merchAuthType = merchAuthType;
             _txnRequest = txnRequest;
@@ -17,6 +18,8 @@ namespace facade
         public void InitializePaymentGatewayInterface()
         {
             _environment.environmentVariableTarget = EnvironmentTarget.SANDBOX;
+            _merchAuthType.TransactionKey = "transaction_key";
+            _merchAuthType.LoginID = "login_id";
         }
         public bool SubmitPayment()
         {
