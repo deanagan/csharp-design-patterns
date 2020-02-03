@@ -50,8 +50,8 @@ namespace facade_test
         {
             return Mock.Of<IMerchantAuthenticationType>
             (
-                merchAuthType => merchAuthType.LoginID == "Admin" &&
-                                 merchAuthType.TransactionKey == "54321"
+                merchAuthType => merchAuthType.LoginID == null &&
+                                 merchAuthType.TransactionKey == null
             );
         }
 
@@ -71,20 +71,37 @@ namespace facade_test
         public void EnvironmentSetCorrectly_WhenFacadeInitializesPaymentGatewayInterface()
         {
             // Arrange
-            // var dateTomorrow = DateTime.Today.AddDays(1);
             var env = CreateMockEnvironment();
-            // var creditCard = CreateMockCreditCard(dateTomorrow);
-            // var billingAddress = CreateMockBillingAddress();
-            // var txnReq = CreateMockTransactionRequest(billingAddress, creditCard);
-            // var merchAuthType = CreateMockMerchantAuthenticationType();
-            var paymentProcessor = new PaymentProcessor(env);
+            var merchAuthType = CreateMockMerchantAuthenticationType();
+            var billingAddress = CreateMockBillingAddress();
+            var creditCard = CreateMockCreditCard(DateTime.Today.AddDays(1));
+            var txnReq = CreateMockTransactionRequest(billingAddress, creditCard);
+            var paymentProcessor = new PaymentProcessor(env, merchAuthType, txnReq);
 
             // Act
             paymentProcessor.InitializePaymentGatewayInterface();
 
             // Assert
-            // paymentProcessor.SubmitPayment().Should().Be(true);
-            env.environmentVariableTarget.Should().NotBe(EnvironmentTarget.UNINITIALIZED);
+            env.environmentVariableTarget.Should().NotBe(EnvironmentTarget.UNINITIALIZED);            
+        }
+
+        [Test]
+        public void MerchantAuthenticated_WhenFacadeInitializesPaymentGatewayInterface()
+        {
+            // Arrange
+            var env = CreateMockEnvironment();
+            var merchAuthType = CreateMockMerchantAuthenticationType();
+            var billingAddress = CreateMockBillingAddress();
+            var creditCard = CreateMockCreditCard(DateTime.Today.AddDays(1));
+            var txnReq = CreateMockTransactionRequest(billingAddress, creditCard);
+            var paymentProcessor = new PaymentProcessor(env, merchAuthType, txnReq);
+
+            // Act
+            paymentProcessor.InitializePaymentGatewayInterface();
+
+            // Assert
+            merchAuthType.LoginID.Should().NotBe(null);
+            merchAuthType.TransactionKey.Should().NotBe(null);
             
         }
 
