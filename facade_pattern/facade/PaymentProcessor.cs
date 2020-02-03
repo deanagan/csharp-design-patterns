@@ -1,3 +1,5 @@
+using System;
+
 namespace facade
 {
     public class PaymentProcessor : IPaymentProcessor
@@ -23,7 +25,10 @@ namespace facade
         }
         public bool SubmitPayment()
         {
-            return true;
+            // Most likely a violation of the law of demeter. We shouldn't be
+            // talking to the credit card class, but rather, to the txnRequest
+            // which is a dependency. TO pass, we just do this for now.
+            return _txnRequest.CreditCard.ExpiryDate.CompareTo(DateTime.Today) > 0;
         }
     }
 }
