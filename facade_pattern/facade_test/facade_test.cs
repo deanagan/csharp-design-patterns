@@ -123,5 +123,23 @@ namespace facade_test
             paymentProcessor.SubmitPayment().Should().BeTrue();
         }
 
+        [Test]
+        public void PaymentSubmissionFails_WhenCreditCardIsExpired()
+        {
+            // Arrange
+            var env = CreateMockEnvironment();
+            var merchAuthType = CreateMockMerchantAuthenticationType();
+            var billingAddress = CreateMockBillingAddress();
+            var creditCard = CreateMockCreditCard(DateTime.Today.AddDays(-1));
+            var txnReq = CreateMockTransactionRequest(billingAddress, creditCard);
+            var paymentProcessor = new PaymentProcessor(env, merchAuthType, txnReq);
+
+            // Act
+            paymentProcessor.InitializePaymentGatewayInterface();
+
+            // Assert
+            paymentProcessor.SubmitPayment().Should().BeFalse();
+        }
+
     }
 }
