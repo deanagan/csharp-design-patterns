@@ -23,7 +23,7 @@ namespace facade
         }
         public bool SubmitPayment()
         {
-            return false;
+            return true;
         }
     }
 }
