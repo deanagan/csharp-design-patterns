@@ -3,9 +3,16 @@ namespace facade
     public class PaymentProcessor : IPaymentProcessor
     {
         private readonly IEnvironment _environment;
-        public PaymentProcessor(IEnvironment environment)
+        private readonly IMerchantAuthenticationType _merchAuthType;
+        private readonly ITransactionRequest _txnRequest;
+        public PaymentProcessor(
+            IEnvironment environment, 
+            IMerchantAuthenticationType merchAuthType,
+            ITransactionRequest txnRequest)
         {
             _environment = environment;
+            _merchAuthType = merchAuthType;
+            _txnRequest = txnRequest;
         }
         public void InitializePaymentGatewayInterface()
         {
