@@ -101,8 +101,26 @@ namespace facade_test
 
             // Assert
             merchAuthType.LoginID.Should().NotBe(null);
-            merchAuthType.TransactionKey.Should().NotBe(null);
-            
+            merchAuthType.TransactionKey.Should().NotBe(null);   
+        }
+
+        
+        [Test]
+        public void PaymentSubmittedSuccesfully_WhenFacadeInitializesCorrectlyAndChecksCreditCardExpiry()
+        {
+            // Arrange
+            var env = CreateMockEnvironment();
+            var merchAuthType = CreateMockMerchantAuthenticationType();
+            var billingAddress = CreateMockBillingAddress();
+            var creditCard = CreateMockCreditCard(DateTime.Today.AddDays(1));
+            var txnReq = CreateMockTransactionRequest(billingAddress, creditCard);
+            var paymentProcessor = new PaymentProcessor(env, merchAuthType, txnReq);
+
+            // Act
+            paymentProcessor.InitializePaymentGatewayInterface();
+
+            // Assert
+            paymentProcessor.SubmitPayment().Should().BeTrue();
         }
 
     }
