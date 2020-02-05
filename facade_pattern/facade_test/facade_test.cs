@@ -67,6 +67,28 @@ namespace facade_test
             );
         }
 
+        Mock<ITransactionController> CreateMockTransactionController(
+            ITransactionRequest txnReq,
+            ICreditCard creditCard)
+        {
+            var response = TransactionResponseType.DECLINED;
+
+            if (creditCard.ExpiryDate.CompareTo(DateTime.Today) > 0 &&
+                txnReq.Amount > 0.0M)
+            {
+                response = TransactionResponseType.OK;
+            }
+            // We use a mock here rather than linq to moq because we need to setup execute for a strict mock behavior.
+            var mockTxnCtrl = new Mock<ITransactionController>(MockBehavior.Strict);
+            var seq = new MockSequence();
+
+            mockTxnCtrl.InSequence(seq).Setup(ex => ex.Execute());
+            mockTxnCtrl.InSequence(seq).Setup(ar => ar.GetApiResponse()).Returns(response);
+            mockTxnCtrl.InSequence(seq).SetupGet(r => r.TransactionRequest).Returns(txnReq);
+
+            return mockTxnCtrl;
+        }
+
         [Test]
         public void EnvironmentSetCorrectly_WhenFacadeInitializesPaymentGatewayInterface()
         {
@@ -76,13 +98,14 @@ namespace facade_test
             var billingAddress = CreateMockBillingAddress();
             var creditCard = CreateMockCreditCard(DateTime.Today.AddDays(1));
             var txnReq = CreateMockTransactionRequest(billingAddress, creditCard);
-            var paymentProcessor = new PaymentProcessor(env, merchAuthType, txnReq);
+            var txnCtrl = CreateMockTransactionController(txnReq,creditCard);
+            var paymentProcessor = new PaymentProcessor(env, merchAuthType, txnCtrl.Object);
 
             // Act
             paymentProcessor.InitializePaymentGatewayInterface();
 
             // Assert
-            env.environmentVariableTarget.Should().NotBe(EnvironmentTarget.UNINITIALIZED);            
+            env.environmentVariableTarget.Should().NotBe(EnvironmentTarget.UNINITIALIZED);
         }
 
         [Test]
@@ -94,17 +117,18 @@ namespace facade_test
             var billingAddress = CreateMockBillingAddress();
             var creditCard = CreateMockCreditCard(DateTime.Today.AddDays(1));
             var txnReq = CreateMockTransactionRequest(billingAddress, creditCard);
-            var paymentProcessor = new PaymentProcessor(env, merchAuthType, txnReq);
+            var txnCtrl = CreateMockTransactionController(txnReq,creditCard);
+            var paymentProcessor = new PaymentProcessor(env, merchAuthType, txnCtrl.Object);
 
             // Act
             paymentProcessor.InitializePaymentGatewayInterface();
 
             // Assert
             merchAuthType.LoginID.Should().NotBe(null);
-            merchAuthType.TransactionKey.Should().NotBe(null);   
+            merchAuthType.TransactionKey.Should().NotBe(null);
         }
 
-        
+
         [Test]
         public void PaymentSubmittedSuccesfully_WhenFacadeInitializesCorrectlyAndChecksCreditCardExpiry()
         {
@@ -114,13 +138,18 @@ namespace facade_test
             var billingAddress = CreateMockBillingAddress();
             var creditCard = CreateMockCreditCard(DateTime.Today.AddDays(1));
             var txnReq = CreateMockTransactionRequest(billingAddress, creditCard);
-            var paymentProcessor = new PaymentProcessor(env, merchAuthType, txnReq);
+            var txnCtrl = CreateMockTransactionController(txnReq,creditCard);
+            var paymentProcessor = new PaymentProcessor(env, merchAuthType, txnCtrl.Object);
 
             // Act
             paymentProcessor.InitializePaymentGatewayInterface();
 
             // Assert
             paymentProcessor.SubmitPayment().Should().BeTrue();
+
+
+            txnCtrl.Verify(tc => tc.Execute(), Times.Once);
+            txnCtrl.Verify(ar => ar.GetApiResponse(), Times.Once);
         }
 
         [Test]
@@ -132,7 +161,8 @@ namespace facade_test
             var billingAddress = CreateMockBillingAddress();
             var creditCard = CreateMockCreditCard(DateTime.Today.AddDays(-1));
             var txnReq = CreateMockTransactionRequest(billingAddress, creditCard);
-            var paymentProcessor = new PaymentProcessor(env, merchAuthType, txnReq);
+            var txnCtrl = CreateMockTransactionController(txnReq,creditCard);
+            var paymentProcessor = new PaymentProcessor(env, merchAuthType, txnCtrl.Object);
 
             // Act
             paymentProcessor.InitializePaymentGatewayInterface();
