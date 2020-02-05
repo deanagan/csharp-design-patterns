@@ -6,16 +6,16 @@ namespace facade
     {
         private readonly IEnvironment _environment;
         private readonly IMerchantAuthenticationType _merchAuthType;
-        private readonly ITransactionRequest _txnRequest;
+        private readonly ITransactionController _txnCtrl;
         public PaymentProcessor(
-            IEnvironment environment, 
+            IEnvironment environment,
             IMerchantAuthenticationType merchAuthType,
-            ITransactionRequest txnRequest)
+            ITransactionController txnCtrl)
         {
             // TODO: Add data invariance. Use contracts?
             _environment = environment;
             _merchAuthType = merchAuthType;
-            _txnRequest = txnRequest;
+            _txnCtrl = txnCtrl;
         }
         public void InitializePaymentGatewayInterface()
         {
@@ -25,10 +25,9 @@ namespace facade
         }
         public bool SubmitPayment()
         {
-            // Most likely a violation of the law of demeter. We shouldn't be
-            // talking to the credit card class, but rather, to the txnRequest
-            // which is a dependency. TO pass, we just do this for now.
-            return _txnRequest.CreditCard.ExpiryDate.CompareTo(DateTime.Today) > 0;
+            _txnCtrl.Execute();
+            var t =  _txnCtrl.GetApiResponse() == TransactionResponseType.OK;
+            return t;
         }
     }
 }
