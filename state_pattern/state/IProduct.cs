@@ -4,6 +4,6 @@ namespace State
 {
     public interface IProduct
     {
-        decimal Price();
+        decimal Price {get;}
     }
 }
