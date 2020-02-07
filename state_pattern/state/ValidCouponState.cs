@@ -9,9 +9,9 @@ namespace State
 
         }
 
-        public decimal GetDiscount()
+        public bool UseDiscount()
         {
-            return 0.0M;
+            return true;
         }
     }
     
