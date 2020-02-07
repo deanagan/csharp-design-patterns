@@ -20,7 +20,7 @@ namespace State.Test
             var product = Mock.Of<IProduct> ( p => p.Price == 100.0M);
             var expiry = DateTime.Today.AddDays(2);
             var coupon = new Coupon(5, expiry);       
-
+            
             // Assert
             coupon.FinalSellingPrice(product).Should().Be(95.0M);
         }
@@ -43,7 +43,15 @@ namespace State.Test
         [Test]
         public void ArgumentException_IsThrown_WhenCouponConstructedAsExpired()
         {
-            Assert.Fail();
+            // Arrange
+            var product = Mock.Of<IProduct> ( p => p.Price == 100.0M);
+            var expiry = DateTime.Today.AddDays(-2);
+            
+            // Act
+            Action act = () => new Coupon(5, expiry);
+
+            // Assert
+            act.Should().ThrowExactly<ArgumentException>();
         }
     }
 }
