@@ -11,6 +11,10 @@ namespace State
         
         public Coupon(int discount, DateTime expiry)
         {
+            if (expiry < DateTime.Today)
+            {
+                throw new ArgumentException("Coupon must be constructed with valid expiry date");
+            }
             _expiry = expiry;
             _discount = discount;
             // Because coupon states are internal, we will
