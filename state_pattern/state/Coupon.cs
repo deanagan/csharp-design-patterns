@@ -17,7 +17,7 @@ namespace State
             // couple them with the specific states so they
             // are highly cohesive. For this implementation,
             // we will construct on state change.
-            _currentState = new ValidCouponState();            
+            _currentState = new ValidCouponState();
         }
 
         public void SetCouponState(ICouponState state)
@@ -33,7 +33,7 @@ namespace State
         public decimal FinalSellingPrice(IProduct product)
         {
             var price = product.Price;
-            return price - (price * (_discount/100.0M));
+            return _currentState.UseDiscount() ? price - (price * (_discount/100.0M)) : price;
         }
     }
     
