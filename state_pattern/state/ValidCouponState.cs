@@ -4,7 +4,7 @@ namespace State
 {
     public class ValidCouponState : ICouponState
     {
-        public void ChangeExpiryDate(DateTime dateTime)
+        public void ChangeExpiryDate(DateTime dateTime, ICoupon coupon)
         {
 
         }
