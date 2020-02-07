@@ -6,6 +6,8 @@ namespace State
     {
         void UpdateExpiryDate(DateTime dateTime);
         decimal FinalSellingPrice(IProduct product);
+
+        void SetCouponState(ICouponState state);
     }
     
 }
