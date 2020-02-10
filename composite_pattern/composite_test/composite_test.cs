@@ -1,6 +1,8 @@
 using NUnit.Framework;
+using Moq;
+using FluentAssertions;
 
-namespace composite_test
+namespace Composite.Tests
 {
     public class Tests
     {
@@ -10,9 +12,16 @@ namespace composite_test
         }
 
         [Test]
-        public void Test1()
+        public void BookPriceIsCorrect_WhenBookIsPurchasedByItself()
         {
-            Assert.Pass();
+            // Arrange
+            var book = new Book("Python Cookbook", 50.0M);
+
+            // Act
+            var price = book.Price;
+
+            // Assert
+            price.Should().Be(50.0M);
         }
     }
 }
