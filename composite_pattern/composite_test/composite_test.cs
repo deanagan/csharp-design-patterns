@@ -23,5 +23,23 @@ namespace Composite.Tests
             // Assert
             price.Should().Be(50.0M);
         }
+
+        [Test]
+        public void BookPriceDiscountedAsSet_WhenBooksArePurchasedUnderBookComposite()
+        {
+            // Arrange
+            var book1 = new Book("Effective C++", 65.0M);
+            var book2 = new Book("More Effective C++", 35.0M);
+            var bookComposite = new BookComposite(5, "Effective C++ Series");
+            bookComposite.Add(book1);
+            bookComposite.Add(book2);
+
+            // Act
+            var compositePrice = bookComposite.Price;
+            
+            // Assert
+            compositePrice.Should().Be(95.0M);
+
+        }
     }
 }
