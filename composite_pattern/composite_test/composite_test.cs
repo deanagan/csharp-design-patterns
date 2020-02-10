@@ -11,6 +11,11 @@ namespace Composite.Tests
         {
         }
 
+        private decimal ComputeDiscount(int discount, decimal price)
+        {
+            return price - (price * (discount / 100M));
+        }
+
         [Test]
         public void BookPriceIsCorrect_WhenBookIsPurchasedByItself()
         {
@@ -18,7 +23,7 @@ namespace Composite.Tests
             var book = new Book("Python Cookbook", 50.0M);
 
             // Act
-            var price = book.Price;
+            var price = ComputeDiscount(book.Discount, book.Price);
 
             // Assert
             price.Should().Be(50.0M);
@@ -35,7 +40,7 @@ namespace Composite.Tests
             bookComposite.Add(book2);
 
             // Act
-            var compositePrice = bookComposite.Price;
+            var compositePrice = ComputeDiscount(bookComposite.Discount, bookComposite.Price);
             
             // Assert
             compositePrice.Should().Be(95.0M);
