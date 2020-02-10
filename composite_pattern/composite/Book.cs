@@ -9,7 +9,8 @@ namespace Composite
 
         public Book(string name, decimal price)
         {
-            
+            Price = price;
+            Name = name;
         }
     }
 }
