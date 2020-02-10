@@ -6,5 +6,7 @@ namespace Composite
     {
         decimal Price { get; }
         string Name { get; }
+
+        int Discount { get; }
     }
 }
