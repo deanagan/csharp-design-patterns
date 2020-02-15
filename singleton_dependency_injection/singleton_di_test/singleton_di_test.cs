@@ -32,5 +32,17 @@ namespace SingletonDi.Test
 
             logger1.Should().NotBeSameAs(logger2);           
         }
+
+        [Test]
+        public void InstanceIsSame_WhenComparingInSingletonScope()
+        {
+            var container = new StandardKernel();
+            container.Bind<ILogger>().To<Logger>().InSingletonScope();
+
+            var logger1 = container.Get<ILogger>();
+            var logger2 = container.Get<ILogger>();
+
+            logger1.Should().BeSameAs(logger2);
+        }
     }
 }
