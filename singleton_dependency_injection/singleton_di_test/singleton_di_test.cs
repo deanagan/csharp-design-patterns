@@ -1,7 +1,7 @@
 using NUnit.Framework;
 using Moq;
 using FluentAssertions;
-using SingletonDi;
+using Ninject;
 
 namespace SingletonDi.Test
 {
@@ -19,6 +19,18 @@ namespace SingletonDi.Test
             var logger2 = GoFLogger.Instance;
 
             logger1.Should().BeSameAs(logger2);
+        }
+
+        [Test]
+        public void InstanceIsNotSame_WhenComparingNotInSingletonScope()
+        {
+            var container = new StandardKernel();
+            container.Bind<ILogger>().To<Logger>();
+
+            var logger1 = container.Get<ILogger>();
+            var logger2 = container.Get<ILogger>();
+
+            logger1.Should().NotBeSameAs(logger2);           
         }
     }
 }
