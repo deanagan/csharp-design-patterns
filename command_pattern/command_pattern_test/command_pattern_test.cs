@@ -60,6 +60,29 @@ namespace Command.Test
                                           .Contain(_RefactoringBook);
         }
 
-        
+        [Test]
+        public void ItemsRemoved_WhenUsingRemovingCommand()
+        {
+            // Arrange
+            var addCommand = new AddCommand(_ProductList);
+            addCommand.Execute(_CleanCodeBook);
+            addCommand.Execute(_RefactoringBook);
+
+            var removeCommand = new RemoveCommand(_ProductList);
+            
+            // Act
+            removeCommand.Execute(_CleanCodeBook);
+
+            // Assert
+            _ProductList.Products.Should().NotBeNullOrEmpty()
+                                          .And
+                                          .HaveCount(1)
+                                          .And
+                                          .OnlyHaveUniqueItems()
+                                          .And
+                                          .NotContain(_CleanCodeBook)
+                                          .And
+                                          .Contain(_RefactoringBook);
+        }
     }
 }
