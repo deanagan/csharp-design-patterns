@@ -87,6 +87,24 @@ namespace Command.Test
                                           .Contain(_Product1);
         }
 
+        [Test]
+        public void ItemsEmpty_WhenUsingClearCommand()
+        {
+            // Arrange
+            var addProd1Command = new AddCommand(_ProductList, _Product1);
+            var addProd2Command = new AddCommand(_ProductList, _Product2);
+            addProd1Command.Execute();
+            addProd2Command.Execute();
+
+            var clearCommand = new ClearCommand(_ProductList);
+            
+            // Act
+            clearCommand.Execute();
+
+            // Assert
+            _ProductList.Products.Should().BeEmpty();
+        }
+
         
     }
 }
