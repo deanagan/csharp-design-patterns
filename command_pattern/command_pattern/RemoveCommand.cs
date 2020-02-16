@@ -3,13 +3,15 @@ namespace Command
     public class RemoveCommand : ICommand
     {
         private IProductList _productList;
-        public RemoveCommand(IProductList productList)
+        private IProduct _product;
+        public RemoveCommand(IProductList productList, IProduct product)
         {
             _productList = productList;
+            _product = product;
         }
-        public void Execute(IProduct product)
+        public void Execute()
         {
-            _productList.Products.Remove(product);
+            _productList.Products.Remove(_product);
         }
     }
 }
