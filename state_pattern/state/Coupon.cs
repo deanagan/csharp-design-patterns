@@ -34,7 +34,7 @@ namespace State
             _currentState.ChangeExpiryDate(dateTime, this);
         }
         
-        public decimal FinalSellingPrice(IProduct product)
+        public decimal ApplyDiscountTo(IProduct product)
         {
             var price = product.Price;
             return _currentState.UseDiscount() ? price - (price * (_discount/100.0M)) : price;

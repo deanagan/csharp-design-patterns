@@ -5,7 +5,7 @@ namespace State
     public interface ICoupon
     {
         void UpdateExpiryDate(DateTime dateTime);
-        decimal FinalSellingPrice(IProduct product);
+        decimal ApplyDiscountTo(IProduct product);
 
         void SetCouponState(ICouponState state);
     }

@@ -22,7 +22,7 @@ namespace State.Test
             var coupon = new Coupon(5, expiry);       
             
             // Assert
-            coupon.FinalSellingPrice(product).Should().Be(95.0M);
+            coupon.ApplyDiscountTo(product).Should().Be(95.0M);
         }
 
         [Test]
@@ -37,7 +37,7 @@ namespace State.Test
             coupon.UpdateExpiryDate(expiry.AddDays(-4));
 
             // Assert
-            coupon.FinalSellingPrice(product).Should().Be(100.0M);
+            coupon.ApplyDiscountTo(product).Should().Be(100.0M);
         }
 
         [Test]
