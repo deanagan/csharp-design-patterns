@@ -14,4 +14,8 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\proxy_pattern\proxy_pattern.csproj" />
+  </ItemGroup>
+
 </Project>
