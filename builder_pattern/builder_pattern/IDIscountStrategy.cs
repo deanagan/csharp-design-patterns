@@ -4,6 +4,8 @@ namespace BuilderPattern
 {
     public interface IDiscountStrategy
     {
+        int Discount { get; set; }
+        string SkuCodeStart {get; set;}
         decimal CalculateDiscountedRetailPrice(IProduct product);
 
     }

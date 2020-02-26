@@ -4,8 +4,8 @@ namespace BuilderPattern
 {
     public interface IDiscountStrategyBuilder
     {
-        IDiscountStrategyBuilder WithBeginningSKUCode(string skuBeginning);
-        IDiscountStrategyBuilder WithDiscountValuedAt(int discountInPercentage);
+        IDiscountStrategyBuilder ApplicableToSKUCodeStartingWith(string skuBeginning);
+        IDiscountStrategyBuilder WithDiscount(int discountInPercentage);
         IDiscountStrategy Build();
     }
 }
