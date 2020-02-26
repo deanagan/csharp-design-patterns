@@ -3,10 +3,10 @@ namespace BuilderPattern
     public class SkuCodeStartDiscountStrategy : IDiscountStrategy
     {
         public int DiscountInPercentage { get; set; }
-        public string SkuCodeStart { get; set;}
+        public string SkuCode { get; set;}
         public decimal CalculateDiscountedRetailPrice(Product product)
         {
-            if (!product.StockKeepingUnit.StartsWith(SkuCodeStart))
+            if (!product.StockKeepingUnit.StartsWith(SkuCode))
             {
                 return product.RegularRetailPrice;
             }
