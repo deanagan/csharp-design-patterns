@@ -4,8 +4,8 @@ namespace BuilderPattern
 {
     public class Product
     {
-        string StockKeepingUnit { get; set; }
-        decimal RegularRetailPrice { get; set; }
-        string Name { get; set; }
+        public string StockKeepingUnit { get; set; }
+        public decimal RegularRetailPrice { get; set; }
+        public string Name { get; set; }
     }
 }
