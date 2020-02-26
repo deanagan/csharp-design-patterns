@@ -6,7 +6,7 @@ namespace BuilderPattern
     {
         int Discount { get; set; }
         string SkuCodeStart {get; set;}
-        decimal CalculateDiscountedRetailPrice(IProduct product);
+        decimal CalculateDiscountedRetailPrice(Product product);
 
     }
 }
