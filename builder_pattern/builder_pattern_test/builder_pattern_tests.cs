@@ -39,7 +39,7 @@ namespace BuilderPattern.Tests
             // Arrange
             var strategy = new SkuCodeStartDiscountStrategyBuilder()
                             .WithDiscountInPercentage(5)
-                            .ApplicableToSKUCodeStartingWith("Food")
+                            .ApplicableToSKUCode("Food")
                             .Build();
             // Act
             var totalAmount = _groceryShoppingCart
