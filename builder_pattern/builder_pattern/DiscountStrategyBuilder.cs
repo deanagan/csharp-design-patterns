@@ -11,18 +11,18 @@ namespace BuilderPattern
             _discountStrategy = discountStrategy;
         }
 
-        DiscountStrategyBuilder ApplicableToSKUCodeStartingWith(string skuCodeStart)
+        public DiscountStrategyBuilder ApplicableToSKUCodeStartingWith(string skuCodeStart)
         {
             _discountStrategy.SkuCodeStart = skuCodeStart;
             return this;
         }
 
-        DiscountStrategyBuilder WithDiscount(int discountInPercentage)
+        public DiscountStrategyBuilder WithDiscountInPercentage(int discountInPercentage)
         {
             _discountStrategy.DiscountInPercentage = discountInPercentage;
             return this;
         }
-        IDiscountStrategy Build()
+        public IDiscountStrategy Build()
         {
             return _discountStrategy;
         }
