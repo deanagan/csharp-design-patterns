@@ -10,7 +10,13 @@ namespace chain_of_responsibility_tests
         }
 
         [Test]
-        public void Test1()
+        public void CorrectProductCodeHandler_ComputesDiscount_WhenMatchedWithProductCode()
+        {
+            Assert.Pass();
+        }
+
+        [Test]
+        public void UseDefaultHandler_WhenProductCodeHasNoMatch()
         {
             Assert.Pass();
         }
