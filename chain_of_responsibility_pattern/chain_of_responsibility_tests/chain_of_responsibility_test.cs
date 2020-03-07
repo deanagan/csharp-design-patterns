@@ -6,6 +6,16 @@ using System.Collections.Generic;
 
 namespace ChainOfResponsibility.Tests
 {
+    public static class GatewayExtension
+    {
+        public static void CalledWith<T>(this Mock<IPaymentGateway> gateway, ICreditCard creditCard, Times times)
+        {
+            gateway
+                .Verify(paymentGateway => paymentGateway
+                    .SubmitVerification(It.Is<ICreditCardHandler>(ch => ch.GetType() == typeof(T)), creditCard), times);
+        }
+    }
+
     public class Tests
     {
         private ICreditCardHandler creditCardHandler;
@@ -22,7 +32,6 @@ namespace ChainOfResponsibility.Tests
                              .SetNext(new MastercardHandler(paymentGatewayMock.Object));
         }
         
-
         private ICreditCard PrepareCreditCardPayment(string cardNumber)
         {
             paymentGatewayMock
@@ -43,11 +52,7 @@ namespace ChainOfResponsibility.Tests
 
             // Assert
             isValid.Should().BeTrue();
-            paymentGatewayMock
-                .Verify(paymentGateway => paymentGateway
-                .SubmitVerification(It.IsAny<AmexCardHandler>(), 
-                                    amexCreditCard), Times.Once);
-
+            paymentGatewayMock.CalledWith<AmexCardHandler>(amexCreditCard, Times.Once());
         }
 
         [Test]
@@ -61,11 +66,7 @@ namespace ChainOfResponsibility.Tests
 
             // Assert
             isValid.Should().BeTrue();
-            paymentGatewayMock
-                .Verify(paymentGateway => paymentGateway
-                .SubmitVerification(It.IsAny<VisaCardHandler>(), 
-                                    visaCreditCard), Times.Once);
-
+            paymentGatewayMock.CalledWith<VisaCardHandler>(visaCreditCard, Times.Once());
         }
 
         [Test]
@@ -79,11 +80,7 @@ namespace ChainOfResponsibility.Tests
 
             // Assert
             isValid.Should().BeTrue();
-            paymentGatewayMock
-                .Verify(paymentGateway => paymentGateway
-                .SubmitVerification(It.IsAny<MastercardHandler>(), 
-                                    masterCreditCard), Times.Once);
-
+            paymentGatewayMock.CalledWith<MastercardHandler>(masterCreditCard, Times.Once());
         }
 
         [Test]
@@ -97,10 +94,7 @@ namespace ChainOfResponsibility.Tests
 
             // Assert
             isValid.Should().BeFalse();
-            paymentGatewayMock
-                .Verify(paymentGateway => paymentGateway
-                .SubmitVerification(It.IsAny<ICreditCardHandler>(), It.IsAny<ICreditCard>()), Times.Never);
-
+            paymentGatewayMock.CalledWith<ICreditCardHandler>(It.IsAny<ICreditCard>(), Times.Never());
         }
     }
 }
