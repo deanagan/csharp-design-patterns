@@ -16,7 +16,7 @@ namespace BridgePattern.Test
         private void VerifyPaymentMethod<T>(decimal amount)
         {
             Mock.Get(_mPaymentGateway).Verify(
-                pg => pg.ProcessPayment(20.0M, It.Is<CreditCardPayment>
+                pg => pg.ProcessPayment(20.0M, It.Is<IPayment>
                     (p => p.GetType() == typeof(T))), Times.Once());
 
         }
@@ -26,7 +26,7 @@ namespace BridgePattern.Test
         {
             // Arrange
             var paymentMethod = new CreditCardPayment(_mPaymentGateway);
-            var order = new Order(paymentMethod);
+            var order = new PurchaseOrder(paymentMethod);
             
             // Act
             order.Checkout(20.0M);
@@ -40,7 +40,7 @@ namespace BridgePattern.Test
         {
             // Arrange
             var paymentMethod = new PaypalPayment(_mPaymentGateway);
-            var order = new Order(paymentMethod);
+            var order = new PurchaseOrder(paymentMethod);
             
             // Act
             order.Checkout(20.0M);
