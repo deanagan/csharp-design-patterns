@@ -2,16 +2,13 @@ using System;
 
 namespace BridgePattern
 {
-    public class Order : IOrder
+    public abstract class Order
     {
-        private readonly IPayment _mPayment;
+        protected IPayment Payment { get; }
         public Order(IPayment payment)
         {
-            _mPayment = payment;
+            Payment = payment;
         }
-        public void Checkout(decimal amount)
-        {
-            _mPayment.SubmitPayment(amount);
-        }
+        public abstract void Checkout(decimal amount);
     }
 }
