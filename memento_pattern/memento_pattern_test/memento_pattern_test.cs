@@ -17,17 +17,18 @@ namespace MementoPattern.Test
         public void CorrectMementoRetrievedWhenRetrievingFromCaretaker()
         {
             // Arrange
-            var product = Mock.Of<IProduct>(product => product.Name == "Rice" && product.Price == 4.99M);
+            var product = Mock.Of<Product>(product => product.Name == "Rice" && product.Price == 4.99M);
             var productOriginator = new ProductOriginator(product);
-            var productMemento = productOriginator.CreateMemento();
+            var productMemento = productOriginator.GetMemento();
             productCaretaker.AddProductMemento(productMemento);
-            product.Price = 2.99M;
+            productMemento.Price = 2.99M;
 
             // Act
             productOriginator.SetMemento(productCaretaker.GetLastMemento());
+            productMemento = productOriginator.GetMemento();
 
             // Assert
-            product.Price.Should().Be(4.99M);
+            productMemento.Price.Should().Be(4.99M);
         }
     }
 }
