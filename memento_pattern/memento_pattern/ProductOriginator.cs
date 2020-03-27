@@ -4,19 +4,19 @@ namespace MementoPattern
 {
     public class ProductOriginator : IProductOriginator
     {
-        private IProduct product;
+        private Product product;
 
-        public ProductOriginator(IProduct product)
+        public ProductOriginator(Product product)
         {
             SetMemento(product);
         }
 
-        public void SetMemento(IProduct product)
+        public void SetMemento(Product product)
         {
             this.product = product;
         }
 
-        public IProduct CreateMemento()
+        public Product GetMemento()
         {
             return this.product;
         }
