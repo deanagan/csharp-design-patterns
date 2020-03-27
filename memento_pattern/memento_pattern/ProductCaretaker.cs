@@ -1,15 +1,20 @@
+using System.Collections.Generic;
+using System.Linq;
+
 namespace MementoPattern
 {
     public class ProductCaretaker : IProductCaretaker
     {
-        public void AddProductMemento(IProduct product)
+        private IList<Product> productMementos = new List<Product>();
+        public void AddProductMemento(Product product)
         {
-
+            var memento = new Product { Name = product.Name, Price = product.Price };
+            productMementos.Add(memento);
         }
 
-        public IProduct GetLastMemento()
+        public Product GetLastMemento()
         {
-            return null;
+            return productMementos.DefaultIfEmpty(null).Last();
         }
     }
 }
