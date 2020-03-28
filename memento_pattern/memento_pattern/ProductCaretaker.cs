@@ -8,8 +8,7 @@ namespace MementoPattern
         private IList<Product> productMementos = new List<Product>();
         public void AddProductMemento(Product product)
         {
-            var memento = new Product { Name = product.Name, Price = product.Price };
-            productMementos.Add(memento);
+            productMementos.Add(product.ShallowCopy());
         }
 
         public Product GetLastMemento()
