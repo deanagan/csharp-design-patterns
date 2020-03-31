@@ -1,6 +1,6 @@
 using System;
 
-namespace flyweight_pattern
+namespace FlyweightPattern
 {
     public interface TextDownloader
     {
