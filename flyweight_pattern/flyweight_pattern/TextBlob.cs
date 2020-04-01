@@ -2,7 +2,7 @@
 
 namespace FlyweightPattern
 {
-    public interface Blob
+    public interface TextBlob
     {
         void Download(int id, string blobContent);
     }
