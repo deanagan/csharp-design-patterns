@@ -14,14 +14,13 @@ namespace FlyweightPattern
 
         public TextBlob GetTextBlob(int id)
         {
-            var textBlob = textBlobDictionary[id];
-
-            if (textBlob == null)
+            if (textBlobDictionary.ContainsKey(id))
             {
-                textBlob = new XmlTextBlob(textDownloader);
-                textBlobDictionary[id] = textBlob;
+                return textBlobDictionary[id];
             }
 
+            var textBlob = new XmlTextBlob(textDownloader);
+            textBlobDictionary[id] = textBlob;
             return textBlob;
         }
     }
