@@ -17,14 +17,28 @@ namespace FlyweightPattern.Test
         public void ObjectNotRecreated_WhenAskingSameObject()
         {
             // Arrange
-            var sut = new XmlTextBlobFactory(this.textDownloader);
+            var xmlTextBlob = new XmlTextBlobFactory(this.textDownloader);
 
             // Act
-            var blob1 = sut.GetTextBlob(1);
-            var blob2 = sut.GetTextBlob(1);
+            var blob1 = xmlTextBlob.GetTextBlob(1);
+            var blob2 = xmlTextBlob.GetTextBlob(1);
 
             // Assert
             blob1.GetHashCode().Should().Be(blob2.GetHashCode());
+        }
+
+        [Fact]
+        public void TextDownloaderInvokedWithMatchingId_WhenXmlTextBlobDownloadInvoked()
+        {
+            // Arrange
+            var xmlTextBlob = new XmlTextBlobFactory(this.textDownloader);
+
+            // Act
+            var blob = xmlTextBlob.GetTextBlob(1);
+            blob.Download(1, "Hello");
+
+            // Assert
+            Mock.Get(textDownloader).Verify(td => td.DownloadFile($"https://localhost:5001/api/getitem/1", It.IsAny<string>()));
         }
     }
 }
