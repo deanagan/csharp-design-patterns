@@ -20,7 +20,7 @@ namespace Command.Test
                     productList.Products == (new List<IProduct>())
             );
 
-            _productInvoker = new ProductInvoker();
+            _productInvoker = new ProductCommandInvoker();
         }
 
         public static IEnumerable<object[]> GetProducts()

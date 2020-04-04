@@ -2,11 +2,11 @@ using System.Collections.Generic;
 
 namespace Command
 {
-    public class ProductInvoker : IInvoker
+    public class ProductCommandInvoker : IInvoker
     {
         private Dictionary<string, ICommand> _commands;
 
-        public ProductInvoker()
+        public ProductCommandInvoker()
         {
             _commands = new Dictionary<string, ICommand>();
         }
