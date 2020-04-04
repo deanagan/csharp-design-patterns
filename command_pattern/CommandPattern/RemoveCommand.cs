@@ -1,17 +1,17 @@
 namespace Command
 {
-    public class AddCommand : ICommand
+    public class RemoveCommand : ICommand
     {
-        private IProductList _productList;
+         private IProductList _productList;
         private IProduct _product;
-        public AddCommand(IProductList productList, IProduct product)
+        public RemoveCommand(IProductList productList, IProduct product)
         {
             _productList = productList;
             _product = product;
         }
         public void Execute()
         {
-            _productList.Products.Add(_product);
+            _productList.Products.Remove(_product);
         }
     }
 }
