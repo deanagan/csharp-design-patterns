@@ -49,5 +49,35 @@ namespace Laptop.Test
             storage.ReadSpeedInMBytesPerSec().Should().Be(speed);
         }
 
+        public static IEnumerable<object[]> FactoriesType
+        {
+            get
+            {
+                yield return new object[] { (new LenovoPartsFactory()) };
+                yield return new object[] { (new DellPartsFactory()) };
+            }
+        }
+
+        [Theory]
+        [MemberData(nameof(FactoriesType))]
+        public void ImplementIStorage_WhenUsingFactory(ILaptopPartsFactory factory)
+        {
+            // Act
+            var storage = factory.CreateStorage();
+
+            // Assert
+           storage.GetType().Should().Implement<IStorage>();
+        }
+
+        [Theory]
+        [MemberData(nameof(FactoriesType))]
+        public void ImplementIProcessor_WhenUsingFactory(ILaptopPartsFactory factory)
+        {
+            // Act
+            var processor = factory.CreateProcessor();
+
+            // Assert
+           processor.GetType().Should().Implement<IProcessor>();
+        }
     }
 }
