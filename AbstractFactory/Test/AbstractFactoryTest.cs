@@ -7,7 +7,7 @@ namespace Laptop.Test
 {
     public class AbstractFactoryShould
     {
-        public static IEnumerable<object[]> FactoriesAndExpectations
+        public static IEnumerable<object[]> FactoriesAndProcessorExpectations
         {
             get
             {
@@ -17,8 +17,8 @@ namespace Laptop.Test
         }
 
         [Theory]
-        [MemberData(nameof(FactoriesAndExpectations))]
-        public void HaveCorrectSpecification_WhenUsingFactory(ILaptopPartsFactory factory, string name, double speed)
+        [MemberData(nameof(FactoriesAndProcessorExpectations))]
+        public void HaveCorrectProcessor_WhenUsingFactory(ILaptopPartsFactory factory, string name, double speed)
         {
             // Act
             var processor = factory.CreateProcessor();
@@ -26,6 +26,27 @@ namespace Laptop.Test
             // Assert
             processor.BrandName().Should().Be(name);
             processor.SpeedInGigaHertz().Should().Be(speed);
+        }
+
+        public static IEnumerable<object[]> FactoriesAndStorageExpectations
+        {
+            get
+            {
+                yield return new object[] { (new LenovoPartsFactory()), "hdd", 50 };
+                yield return new object[] { (new DellPartsFactory()), "ssd", 250 };
+            }
+        }
+
+        [Theory]
+        [MemberData(nameof(FactoriesAndStorageExpectations))]
+        public void HaveCorrectStorage_WhenUsingFactory(ILaptopPartsFactory factory, string hwtype, int speed)
+        {
+            // Act
+            var storage = factory.CreateStorage();
+
+            // Assert
+            storage.HardwareType().Should().Be(hwtype);
+            storage.ReadSpeedInMBytesPerSec().Should().Be(speed);
         }
 
     }
