@@ -13,14 +13,9 @@ namespace Adapter
             }
             _socialMediaProfile = socialMediaProfile;
         }
-        public string Name()
-        {
-            return _socialMediaProfile.Name();
-        }
 
-        public string Email()
-        {
-            return _socialMediaProfile.Email();
-        }
+        public string Name { get { return _socialMediaProfile.Name; } }
+
+        public string Email { get { return _socialMediaProfile.Email; } }
     }
 }
