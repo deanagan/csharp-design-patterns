@@ -11,19 +11,21 @@ namespace Adapter.Tests
         public void Return_SocialMediaProfileContent_WhenAccessingViaAdapter()
         {
             // Arrange
-            var mockSocialMediaProfile = new Mock<ISocialMediaProfile>();
-            mockSocialMediaProfile.SetupGet(msmp => msmp.Name).Returns("John Smith");
-            mockSocialMediaProfile.SetupGet(msmp => msmp.UserName).Returns("jsmith");
-            mockSocialMediaProfile.SetupGet(msmp => msmp.Email).Returns("jsmith@google.com");
+            var mockSocialMediaProfile = Mock.Of<ISocialMediaProfile>(msmp => msmp.Name == "John Smith" &&
+                                                                      msmp.UserName == "jsmith" &&
+                                                                      msmp.Email == "jsmith@google.com");
 
             // Act
-            var goodReadsProfile = new SocialMediaProfileAdapter(mockSocialMediaProfile.Object);
+            var goodReadsProfile = new SocialMediaProfileAdapter(mockSocialMediaProfile);
 
             // Assert
-            goodReadsProfile.Name.Should().Be(mockSocialMediaProfile.Object.Name);
-            goodReadsProfile.Email.Should().Be(mockSocialMediaProfile.Object.Email);
-        }
+            using (new FluentAssertions.Execution.AssertionScope("profile"))
+            {
+                goodReadsProfile.Name.Should().Be(mockSocialMediaProfile.Name);
+                goodReadsProfile.Email.Should().Be(mockSocialMediaProfile.Email);
+            }
 
+        }
 
         [Fact]
         public void ThrowException_WhenSocialMediaAdapteeIsNull()
