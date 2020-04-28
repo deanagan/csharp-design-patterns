@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Xunit;
 using Moq;
 using FluentAssertions;
@@ -13,40 +14,38 @@ namespace Bridge.Test
             _mPaymentGateway = Mock.Of<IPaymentGateway>();
         }
 
-        private void VerifyPaymentMethod<T>(decimal amount)
-        {
-            Mock.Get(_mPaymentGateway).Verify(
-                pg => pg.ProcessPayment(20.0M, It.Is<IPayment>
-                    (p => p.GetType() == typeof(T))), Times.Once());
+        public delegate IPayment PaymentMethodCreator(IPaymentGateway gateway);
 
+        public static IEnumerable<object[]> PaymentMethodCreators
+        {
+            get
+            {
+                yield return new object[] { new PaymentMethodCreator((gateway) => new CreditCardPayment(gateway)) };
+                yield return new object[] { new PaymentMethodCreator((gateway) => new PaypalPayment(gateway)) };
+            }
         }
 
-        [Fact]
-        public void CreditCardPaymentReceivedWhenCheckingOutWithCreditCard()
+        [Theory]
+        [MemberData(nameof(PaymentMethodCreators))]
+        public void UseCorrectPaymentMethod_WhenCheckingOut(PaymentMethodCreator paymentMethodCreator)
         {
             // Arrange
-            var paymentMethod = new CreditCardPayment(_mPaymentGateway);
+            var paymentMethod = paymentMethodCreator(_mPaymentGateway);
             var order = new PurchaseOrder(paymentMethod);
 
             // Act
             order.Checkout(20.0M);
 
             // Assert
-            VerifyPaymentMethod<CreditCardPayment>(20.0M);
+            using (new FluentAssertions.Execution.AssertionScope("payments"))
+            {
+                Mock.Get(_mPaymentGateway).Verify(
+                    pp => pp.ProcessPayment(20.0M,
+                    It.Is<IPayment>(p => p.GetType() == paymentMethod.GetType())), Times.Once);
+
+                paymentMethod.GetType().Should().Implement<IPayment>();
+            }
         }
 
-        [Fact]
-        public void PaypalPaymentReceivedWhenCheckingOutWithPaypal()
-        {
-            // Arrange
-            var paymentMethod = new PaypalPayment(_mPaymentGateway);
-            var order = new PurchaseOrder(paymentMethod);
-
-            // Act
-            order.Checkout(20.0M);
-
-            // Assert
-            VerifyPaymentMethod<PaypalPayment>(20.0M);
-        }
     }
 }
