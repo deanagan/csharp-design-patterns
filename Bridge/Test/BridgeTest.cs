@@ -1,14 +1,14 @@
-using NUnit.Framework;
+using Xunit;
 using Moq;
 using FluentAssertions;
 
-namespace BridgePattern.Test
+namespace Bridge.Test
 {
-    public class Tests
+    public class BridgeShould
     {
         private IPaymentGateway _mPaymentGateway;
-        [SetUp]
-        public void Setup()
+
+        public BridgeShould()
         {
             _mPaymentGateway = Mock.Of<IPaymentGateway>();
         }
@@ -21,32 +21,32 @@ namespace BridgePattern.Test
 
         }
 
-        [Test]
+        [Fact]
         public void CreditCardPaymentReceivedWhenCheckingOutWithCreditCard()
         {
             // Arrange
             var paymentMethod = new CreditCardPayment(_mPaymentGateway);
             var order = new PurchaseOrder(paymentMethod);
-            
+
             // Act
             order.Checkout(20.0M);
 
             // Assert
-            VerifyPaymentMethod<CreditCardPayment>(20.0M);            
+            VerifyPaymentMethod<CreditCardPayment>(20.0M);
         }
 
-         [Test]
+        [Fact]
         public void PaypalPaymentReceivedWhenCheckingOutWithPaypal()
         {
             // Arrange
             var paymentMethod = new PaypalPayment(_mPaymentGateway);
             var order = new PurchaseOrder(paymentMethod);
-            
+
             // Act
             order.Checkout(20.0M);
 
             // Assert
-            VerifyPaymentMethod<PaypalPayment>(20.0M);            
+            VerifyPaymentMethod<PaypalPayment>(20.0M);
         }
     }
 }

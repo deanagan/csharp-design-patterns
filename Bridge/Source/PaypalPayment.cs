@@ -1,12 +1,12 @@
 
 
-namespace BridgePattern
+namespace Bridge
 {
-    public class CreditCardPayment : IPayment
+    public class PaypalPayment : IPayment
     {
         private IPaymentGateway _mPaymentGateway;
 
-        public CreditCardPayment(IPaymentGateway paymentGateway)
+        public PaypalPayment(IPaymentGateway paymentGateway)
         {
             _mPaymentGateway = paymentGateway;
         }
