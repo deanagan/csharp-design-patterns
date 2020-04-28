@@ -24,8 +24,11 @@ namespace Laptop.Test
             var processor = factory.CreateProcessor();
 
             // Assert
-            processor.BrandName().Should().Be(name);
-            processor.SpeedInGigaHertz().Should().Be(speed);
+            using (new FluentAssertions.Execution.AssertionScope("processor") )
+            {
+                processor.BrandName().Should().Be(name);
+                processor.SpeedInGigaHertz().Should().Be(speed);
+            }
         }
 
         public static IEnumerable<object[]> FactoriesAndStorageExpectations
@@ -45,8 +48,11 @@ namespace Laptop.Test
             var storage = factory.CreateStorage();
 
             // Assert
-            storage.HardwareType().Should().Be(hwtype);
-            storage.ReadSpeedInMBytesPerSec().Should().Be(speed);
+            using (new FluentAssertions.Execution.AssertionScope("storage"))
+            {
+                storage.HardwareType().Should().Be(hwtype);
+                storage.ReadSpeedInMBytesPerSec().Should().Be(speed);
+            }
         }
 
         public static IEnumerable<object[]> FactoriesType
