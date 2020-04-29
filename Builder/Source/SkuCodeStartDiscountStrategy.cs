@@ -1,4 +1,4 @@
-namespace BuilderPattern
+namespace Builder
 {
     public class SkuCodeStartDiscountStrategy : IDiscountStrategy
     {
@@ -10,7 +10,7 @@ namespace BuilderPattern
             {
                 return product.RegularRetailPrice;
             }
-            
+
             return product.RegularRetailPrice - (DiscountInPercentage/100m * product.RegularRetailPrice);
         }
 

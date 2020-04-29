@@ -1,6 +1,6 @@
 using System;
 
-namespace BuilderPattern
+namespace Builder
 {
     public interface IDiscountStrategy
     {

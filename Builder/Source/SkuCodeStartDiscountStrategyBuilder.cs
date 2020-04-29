@@ -1,10 +1,10 @@
-namespace BuilderPattern
+namespace Builder
 {
     public class SkuCodeStartDiscountStrategyBuilder : DiscountStrategyBuilder
     {
-        public SkuCodeStartDiscountStrategyBuilder() 
+        public SkuCodeStartDiscountStrategyBuilder()
             : base(new SkuCodeStartDiscountStrategy())
         {
         }
-    }   
+    }
 }

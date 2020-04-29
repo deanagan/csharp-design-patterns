@@ -1,6 +1,5 @@
-﻿using System;
-
-namespace BuilderPattern
+﻿
+namespace Builder
 {
     public abstract class DiscountStrategyBuilder
     {

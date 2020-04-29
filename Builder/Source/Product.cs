@@ -1,6 +1,4 @@
-using System;
-
-namespace BuilderPattern
+namespace Builder
 {
     public class Product
     {
