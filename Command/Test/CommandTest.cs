@@ -6,12 +6,12 @@ using FluentAssertions;
 
 namespace Command.Test
 {
-    public class CommandPatternShould
+    public class CommandShould
     {
         private IProductList _ProductList;
         private IInvoker _productInvoker;
 
-        public CommandPatternShould()
+        public CommandShould()
         {
             _ProductList = Mock.Of<IProductList>
             (
