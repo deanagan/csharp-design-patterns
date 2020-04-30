@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Source", "Source\Source.csproj", "{A75F2439-1844-4EFC-9626-0A6FD22607F0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChainOfResponsibility", "Source\ChainOfResponsibility.csproj", "{A75F2439-1844-4EFC-9626-0A6FD22607F0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChainOfResponsibilityTest", "Test\ChainOfResponsibilityTest.csproj", "{132DECAC-D088-4596-A238-DE216B8FE28F}"
 EndProject

@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Source\Source.csproj" />
+    <ProjectReference Include="..\Source\ChainOfResponsibility.csproj" />
   </ItemGroup>
 
 </Project>
