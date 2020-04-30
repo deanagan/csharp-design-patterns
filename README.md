@@ -1,6 +1,7 @@
 # csharp-design-patterns
-A demo for design patterns written in C#, unit tested with nunit, moq and fluent assertions applied. Ninject is used for
+A demo for design patterns written in C#, unit tested with xunit, moq and fluent assertions applied. Ninject is used for
 the demo on DI based singletons.
+
 
 # How To Run the Demos
 1. Demos are divided into folders with the pattern. Cd to one of these folders.
