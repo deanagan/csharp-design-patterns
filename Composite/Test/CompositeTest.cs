@@ -1,23 +1,19 @@
-using NUnit.Framework;
+using Xunit;
 using Moq;
 using FluentAssertions;
 
-namespace Composite.Tests
+namespace Composite.Test
 {
-    public class Tests
+    public class CompositeShould
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
 
         private decimal ComputeDiscount(int discount, decimal price)
         {
             return price - (price * (discount / 100M));
         }
 
-        [Test]
-        public void BookPriceIsCorrect_WhenBookIsPurchasedByItself()
+        [Fact]
+        public void HaveCorrectBookPrice_WhenBookIsPurchasedByItself()
         {
             // Arrange
             var book = new Book("Python Cookbook", 50.0M);
@@ -29,8 +25,8 @@ namespace Composite.Tests
             price.Should().Be(50.0M);
         }
 
-        [Test]
-        public void BookPriceDiscountedAsSet_WhenBooksArePurchasedUnderBookComposite()
+        [Fact]
+        public void DiscountBookPriceAsSet_WhenBooksArePurchasedUnderBookComposite()
         {
             // Arrange
             var book1 = new Book("Effective C++", 65.0M);
@@ -41,13 +37,13 @@ namespace Composite.Tests
 
             // Act
             var compositePrice = ComputeDiscount(bookComposite.Discount, bookComposite.Price);
-            
+
             // Assert
             compositePrice.Should().Be(95.0M);
         }
 
-        [Test]
-        public void BookPriceDiscountedWithTopSet_WhenBooksArePurchasedUnderBookCompositeWithAnotherComposite()
+        [Fact]
+        public void DiscountBookPricesWithTopSet_WhenBooksArePurchasedUnderBookCompositeWithAnotherComposite()
         {
             // Arrange
             var book1 = new Book("Effective C++", 65.0M);
@@ -69,7 +65,7 @@ namespace Composite.Tests
 
             // Act
             var effectiveSeriesPrice = ComputeDiscount(effectiveSeries.Discount, effectiveSeries.Price);
-            
+
             // Assert
             effectiveSeriesPrice.Should().Be(170.0M);
 

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "composite", "composite\composite.csproj", "{DC56EAC3-2E8F-45B8-A2A9-F768A2AA6F4B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Composite", "Source\Composite.csproj", "{DC56EAC3-2E8F-45B8-A2A9-F768A2AA6F4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "composite_test", "composite_test\composite_test.csproj", "{F19F2889-E277-40F9-AFF9-5D4F2B50E00E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompositeTest", "Test\CompositeTest.csproj", "{F19F2889-E277-40F9-AFF9-5D4F2B50E00E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
