@@ -1,10 +1,9 @@
 using Moq;
 using NUnit.Framework;
-using decorator_lib;
 
-namespace decorator_test
+namespace Decorator.Test
 {
-    public class Tests
+    public class DecoratorShould
     {
         private Mock<IHtmlElement> _htmlElement;
         private BoldenHtmlElement _boldenHtmlElement;

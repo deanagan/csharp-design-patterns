@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\decorator_lib\decorator_lib.csproj" />
+    <ProjectReference Include="..\Source\Decorator.csproj" />
   </ItemGroup>
 
 </Project>

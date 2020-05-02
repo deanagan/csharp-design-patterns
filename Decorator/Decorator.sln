@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "decorator_lib", "decorator_lib\decorator_lib.csproj", "{09A761B2-F3BC-4612-B4C9-F4461819F571}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Decorator", "Source\Decorator.csproj", "{09A761B2-F3BC-4612-B4C9-F4461819F571}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "decorator_test", "decorator_test\decorator_test.csproj", "{80768502-2592-4B37-BAF4-2D8BF0389450}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecoratorTest", "Test\DecoratorTest.csproj", "{80768502-2592-4B37-BAF4-2D8BF0389450}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

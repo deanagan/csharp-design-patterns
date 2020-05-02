@@ -1,6 +1,6 @@
 using System;
 
-namespace decorator_lib
+namespace Decorator
 {
     public class BoldenHtmlElement : HtmlElementDecorator
     {
