@@ -11,7 +11,7 @@ namespace Decorator
 
         public override string GetHtmlElement()
         {
-            return $"<em>{GetWrappedHtmlElement()}</em>";
+            return $"<em>{base.GetWrappedHtmlElement()}</em>";
         }
 
     }

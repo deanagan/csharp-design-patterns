@@ -12,7 +12,7 @@ namespace Decorator
 
         public override string GetHtmlElement()
         {
-            return $"<a href=\"{_link}\">{GetWrappedHtmlElement()}</a>";
+            return $"<a href=\"{_link}\">{base.GetWrappedHtmlElement()}</a>";
         }
     }
 

@@ -10,7 +10,7 @@ namespace Decorator
 
         public override string GetHtmlElement()
         {
-            return $"<b>{GetWrappedHtmlElement()}</b>";
+            return $"<b>{base.GetWrappedHtmlElement()}</b>";
         }
     }
 }
