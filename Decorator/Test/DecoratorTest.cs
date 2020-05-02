@@ -1,60 +1,50 @@
 using Moq;
-using NUnit.Framework;
+using Xunit;
+using FluentAssertions;
 
 namespace Decorator.Test
 {
     public class DecoratorShould
     {
-        private Mock<IHtmlElement> _htmlElement;
-        private BoldenHtmlElement _boldenHtmlElement;
-        private ItalicizeHtmlElement _italicizeHtmlElement;
-        private HyperLinkifyHtmlElement _hyperLinkifyHtmlElement;
-        [SetUp]
-        public void Setup()
+        private IHtmlElement _htmlElement;
+        private string _Dummy = "Dummy";
+
+        public DecoratorShould()
         {
-            _htmlElement = new Mock<IHtmlElement>();
-            _boldenHtmlElement = new BoldenHtmlElement(_htmlElement.Object);
-            _italicizeHtmlElement = new ItalicizeHtmlElement(_htmlElement.Object);
-            _hyperLinkifyHtmlElement = new HyperLinkifyHtmlElement("www.google.com", _htmlElement.Object);
-            _htmlElement.Setup(htmlElement => htmlElement.GetHtmlElement()).Returns("Google");
+            _htmlElement = Mock.Of<IHtmlElement>();
+            Mock.Get(_htmlElement).Setup(htmlElement => htmlElement.GetHtmlElement()).Returns(_Dummy);
         }
 
-        [Test]
-        public void TestGetHtmlElementShouldReturnBoldenedElement()
+        [Fact]
+        public void BoldenHtmlElement_WhenUsingBoldenDecorator()
         {
-            Assert.That(_boldenHtmlElement.GetHtmlElement(), Is.EqualTo("<b>Google</b>"));
-            _htmlElement.Verify(htmlElement => htmlElement.GetHtmlElement(), Times.Once);
+            // Arrange
+            var bolden = new BoldenHtmlElement(_htmlElement);
+            // Act
+            var result = bolden.GetHtmlElement();
+            // Assert
+            using (new FluentAssertions.Execution.AssertionScope("boldened html element"))
+            {
+                result.Should().Be($"<b>{_Dummy}</b>");
+                Mock.Get(_htmlElement).Verify(htmlElement => htmlElement.GetHtmlElement(), Times.Once);
+            }
         }
 
-        [Test]
-        public void TestGetHtmlElementShouldReturnItalicizedElement()
+        [Fact]
+        public void ItalicizeHtmlElement_WhenUsingItalicizeDecorator()
         {
-            Assert.That(_italicizeHtmlElement.GetHtmlElement(), Is.EqualTo("<em>Google</em>"));
-            _htmlElement.Verify(htmlElement => htmlElement.GetHtmlElement(), Times.Once);
+            // Arrange
+            var italicized = new ItalicizeHtmlElement(_htmlElement);
+            // Act
+            var result = italicized.GetHtmlElement();
+            // Assert
+            using (new FluentAssertions.Execution.AssertionScope("italicized html element"))
+            {
+                result.Should().Be($"<em>{_Dummy}</em>");
+                Mock.Get(_htmlElement).Verify(htmlElement => htmlElement.GetHtmlElement(), Times.Once);
+            }
         }
 
-        [Test]
-        public void TestGetHtmlElementShouldReturnHyperLinkifiedElement()
-        {
-            Assert.That(_hyperLinkifyHtmlElement.GetHtmlElement(), Is.EqualTo("<a href=\"www.google.com\">Google</a>"));
-            _htmlElement.Verify(htmlElement => htmlElement.GetHtmlElement(), Times.Once);
-        }
 
-        [Test]
-        public void TestGetHtmlElementShouldReturnHyperLinkifiedAndBoldenedElement()
-        {
-            var boldenHtmlElement = new BoldenHtmlElement(_hyperLinkifyHtmlElement);
-            Assert.That(boldenHtmlElement.GetHtmlElement(), Is.EqualTo("<b><a href=\"www.google.com\">Google</a></b>"));
-            _htmlElement.Verify(htmlElement => htmlElement.GetHtmlElement(), Times.Once);
-        }
-
-        [Test]
-        public void TestGetHtmlElementShouldReturnHyperLinkifiedItalicizedAndBoldenedElement()
-        {
-            var italicizedLinkifiedElement = new ItalicizeHtmlElement(_hyperLinkifyHtmlElement);
-            var boldenedItalicizedLinkifiedHtmlElement = new BoldenHtmlElement(italicizedLinkifiedElement);
-            Assert.That(boldenedItalicizedLinkifiedHtmlElement.GetHtmlElement(), Is.EqualTo("<b><em><a href=\"www.google.com\">Google</a></em></b>"));
-            _htmlElement.Verify(htmlElement => htmlElement.GetHtmlElement(), Times.Once);
-        }
     }
 }
