@@ -7,163 +7,71 @@ namespace Facade.Test
 {
     public class FacadeShould
     {
-        IBillingAddress CreateMockBillingAddress()
+        private IEnvironment _environment = FacadeTestData.CreateMockEnvironment();
+        private IMerchantAuthenticationType _merchantAuthenticationType = FacadeTestData.CreateMockMerchantAuthenticationType();
+        private IBillingAddress _billingAddress = FacadeTestData.CreateMockBillingAddress();
+        private ITransactionController _transactionController;
+
+        private IPaymentProcessor CreatePaymentProcessor(DateTime creditCardExpiryDate)
         {
-            return Mock.Of<IBillingAddress>
-            (
-                billingAddress =>
-                    billingAddress.FirstName == "John" &&
-                    billingAddress.LastName == "Wick" &&
-                    billingAddress.Address == "W 43rd Street" &&
-                    billingAddress.City == "New York" &&
-                    billingAddress.ZipCode == "10036"
-            );
+            var creditCard = FacadeTestData.CreateMockCreditCard(creditCardExpiryDate);
+            var txnReq = FacadeTestData.CreateMockTransactionRequest(_billingAddress, creditCard);
+            _transactionController = FacadeTestData.CreateMockTransactionController(txnReq, creditCard);
+            return new PaymentProcessor(_environment, _merchantAuthenticationType, _transactionController);
+        }
+        [Fact]
+        public void SetEnvironmentCorrectly_WhenFacadeInitializesPaymentGatewayInterface()
+        {
+            // Arrange
+            var paymentProcessor = CreatePaymentProcessor(DateTime.Today.AddDays(1));
+            // Act
+            paymentProcessor.InitializePaymentGatewayInterface();
+            // Assert
+            _environment.environmentVariableTarget.Should().NotBe(EnvironmentTarget.UNINITIALIZED);
         }
 
-        ICreditCard CreateMockCreditCard(DateTime expiryDate)
+        [Fact]
+        public void MerchantAuthenticated_WhenFacadeInitializesPaymentGatewayInterface()
         {
-            return Mock.Of<ICreditCard>
-            (
-                creditCard =>
-                    creditCard.Type == CreditCard.VISA &&
-                    creditCard.AccountNumber == "123456789" &&
-                    creditCard.CVC == "987" &&
-                    creditCard.ExpiryDate == expiryDate
-            );
-        }
-
-        IEnvironment CreateMockEnvironment()
-        {
-            return Mock.Of<IEnvironment>
-            (
-                environment => environment.environmentVariableTarget == EnvironmentTarget.UNINITIALIZED
-            );
-        }
-
-        IMerchantAuthenticationType CreateMockMerchantAuthenticationType()
-        {
-            return Mock.Of<IMerchantAuthenticationType>
-            (
-                merchAuthType => merchAuthType.LoginID == null &&
-                                 merchAuthType.TransactionKey == null
-            );
-        }
-
-        ITransactionRequest CreateMockTransactionRequest(
-            IBillingAddress billingAddress,
-            ICreditCard creditCard)
-        {
-            return Mock.Of<ITransactionRequest>
-            (
-                txnReq => txnReq.Amount == 123.45M &&
-                          txnReq.BillingAddress == billingAddress &&
-                          txnReq.CreditCard == creditCard
-            );
-        }
-
-        Mock<ITransactionController> CreateMockTransactionController(
-            ITransactionRequest txnReq,
-            ICreditCard creditCard)
-        {
-            var response = TransactionResponseType.DECLINED;
-
-            if (creditCard.ExpiryDate.CompareTo(DateTime.Today) > 0 &&
-                txnReq.Amount > 0.0M)
+            // Arrange
+            var paymentProcessor = CreatePaymentProcessor(DateTime.Today.AddDays(1));
+            // Act
+            paymentProcessor.InitializePaymentGatewayInterface();
+            // Assert
+            using (new FluentAssertions.Execution.AssertionScope("merchant"))
             {
-                response = TransactionResponseType.OK;
+                _merchantAuthenticationType.LoginID.Should().NotBe(null);
+                _merchantAuthenticationType.TransactionKey.Should().NotBe(null);
             }
-            // We use a mock here rather than linq to moq because we need to setup execute for a strict mock behavior.
-            var mockTxnCtrl = new Mock<ITransactionController>(MockBehavior.Strict);
-            var seq = new MockSequence();
-
-            mockTxnCtrl.InSequence(seq).Setup(ex => ex.Execute());
-            mockTxnCtrl.InSequence(seq).Setup(ar => ar.GetApiResponse()).Returns(response);
-            mockTxnCtrl.InSequence(seq).SetupGet(r => r.TransactionRequest).Returns(txnReq);
-
-            return mockTxnCtrl;
         }
 
-        // [Test]
-        // public void EnvironmentSetCorrectly_WhenFacadeInitializesPaymentGatewayInterface()
-        // {
-        //     // Arrange
-        //     var env = CreateMockEnvironment();
-        //     var merchAuthType = CreateMockMerchantAuthenticationType();
-        //     var billingAddress = CreateMockBillingAddress();
-        //     var creditCard = CreateMockCreditCard(DateTime.Today.AddDays(1));
-        //     var txnReq = CreateMockTransactionRequest(billingAddress, creditCard);
-        //     var txnCtrl = CreateMockTransactionController(txnReq,creditCard);
-        //     var paymentProcessor = new PaymentProcessor(env, merchAuthType, txnCtrl.Object);
+        [Fact]
+        public void PaymentSubmittedSuccesfully_WhenFacadeInitializesCorrectlyAndChecksCreditCardExpiry()
+        {
+            // Arrange
+            var paymentProcessor = CreatePaymentProcessor(DateTime.Today.AddDays(1));
+            // Act
+            paymentProcessor.InitializePaymentGatewayInterface();
+            // Assert
+            paymentProcessor.SubmitPayment().Should().BeTrue();
+            using (new FluentAssertions.Execution.AssertionScope("transaction controller"))
+            {
+                var txnCtrl = Mock.Get(_transactionController);
+                txnCtrl.Verify(tc => tc.Execute(), Times.Once);
+                txnCtrl.Verify(ar => ar.GetApiResponse(), Times.Once);
+            }
+        }
 
-        //     // Act
-        //     paymentProcessor.InitializePaymentGatewayInterface();
-
-        //     // Assert
-        //     env.environmentVariableTarget.Should().NotBe(EnvironmentTarget.UNINITIALIZED);
-        // }
-
-        // [Test]
-        // public void MerchantAuthenticated_WhenFacadeInitializesPaymentGatewayInterface()
-        // {
-        //     // Arrange
-        //     var env = CreateMockEnvironment();
-        //     var merchAuthType = CreateMockMerchantAuthenticationType();
-        //     var billingAddress = CreateMockBillingAddress();
-        //     var creditCard = CreateMockCreditCard(DateTime.Today.AddDays(1));
-        //     var txnReq = CreateMockTransactionRequest(billingAddress, creditCard);
-        //     var txnCtrl = CreateMockTransactionController(txnReq,creditCard);
-        //     var paymentProcessor = new PaymentProcessor(env, merchAuthType, txnCtrl.Object);
-
-        //     // Act
-        //     paymentProcessor.InitializePaymentGatewayInterface();
-
-        //     // Assert
-        //     merchAuthType.LoginID.Should().NotBe(null);
-        //     merchAuthType.TransactionKey.Should().NotBe(null);
-        // }
-
-
-        // [Test]
-        // public void PaymentSubmittedSuccesfully_WhenFacadeInitializesCorrectlyAndChecksCreditCardExpiry()
-        // {
-        //     // Arrange
-        //     var env = CreateMockEnvironment();
-        //     var merchAuthType = CreateMockMerchantAuthenticationType();
-        //     var billingAddress = CreateMockBillingAddress();
-        //     var creditCard = CreateMockCreditCard(DateTime.Today.AddDays(1));
-        //     var txnReq = CreateMockTransactionRequest(billingAddress, creditCard);
-        //     var txnCtrl = CreateMockTransactionController(txnReq,creditCard);
-        //     var paymentProcessor = new PaymentProcessor(env, merchAuthType, txnCtrl.Object);
-
-        //     // Act
-        //     paymentProcessor.InitializePaymentGatewayInterface();
-
-        //     // Assert
-        //     paymentProcessor.SubmitPayment().Should().BeTrue();
-
-
-        //     txnCtrl.Verify(tc => tc.Execute(), Times.Once);
-        //     txnCtrl.Verify(ar => ar.GetApiResponse(), Times.Once);
-        // }
-
-        // [Test]
-        // public void PaymentSubmissionFails_WhenCreditCardIsExpired()
-        // {
-        //     // Arrange
-        //     var env = CreateMockEnvironment();
-        //     var merchAuthType = CreateMockMerchantAuthenticationType();
-        //     var billingAddress = CreateMockBillingAddress();
-        //     var creditCard = CreateMockCreditCard(DateTime.Today.AddDays(-1));
-        //     var txnReq = CreateMockTransactionRequest(billingAddress, creditCard);
-        //     var txnCtrl = CreateMockTransactionController(txnReq,creditCard);
-        //     var paymentProcessor = new PaymentProcessor(env, merchAuthType, txnCtrl.Object);
-
-        //     // Act
-        //     paymentProcessor.InitializePaymentGatewayInterface();
-
-        //     // Assert
-        //     paymentProcessor.SubmitPayment().Should().BeFalse();
-        // }
+        [Fact]
+        public void PaymentSubmissionFails_WhenCreditCardIsExpired()
+        {
+            // Arrange
+            var paymentProcessor = CreatePaymentProcessor(DateTime.Today.AddDays(-1));
+            // Act
+            paymentProcessor.InitializePaymentGatewayInterface();
+            // Assert
+            paymentProcessor.SubmitPayment().Should().BeFalse();
+        }
 
     }
 }
