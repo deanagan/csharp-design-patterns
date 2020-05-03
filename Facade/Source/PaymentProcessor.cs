@@ -1,6 +1,6 @@
 using System;
 
-namespace facade
+namespace Facade
 {
     public class PaymentProcessor : IPaymentProcessor
     {

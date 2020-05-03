@@ -3,9 +3,9 @@ using Moq;
 using FluentAssertions;
 using Xunit;
 
-namespace facade_test
+namespace Facade.Test
 {
-    public class Tests
+    public class FacadeShould
     {
         IBillingAddress CreateMockBillingAddress()
         {

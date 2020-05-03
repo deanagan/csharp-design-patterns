@@ -1,4 +1,4 @@
-namespace facade
+namespace Facade
 {
     public interface IBillingAddress
     {

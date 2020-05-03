@@ -1,6 +1,6 @@
 using System;
 
-namespace facade
+namespace Facade
 {
     public enum CreditCard
     {

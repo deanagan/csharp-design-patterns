@@ -1,4 +1,4 @@
-namespace facade
+namespace Facade
 {
 
     public enum TransactionResponseType
@@ -10,7 +10,7 @@ namespace facade
     {
         ITransactionRequest TransactionRequest {get;set;}
         void Execute();
-        
+
         TransactionResponseType GetApiResponse();
     }
 }
