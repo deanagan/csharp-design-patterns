@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "facade", "facade\facade.csproj", "{334C6EB7-ADAA-4327-ADC6-FBA21BAA45A6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Facade", "Source\Facade.csproj", "{334C6EB7-ADAA-4327-ADC6-FBA21BAA45A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "facade_test", "facade_test\facade_test.csproj", "{B86BC41F-49DA-493E-9E5A-C82D5BC8E304}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FacadeTest", "Test\FacadeTest.csproj", "{B86BC41F-49DA-493E-9E5A-C82D5BC8E304}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
