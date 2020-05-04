@@ -1,5 +1,5 @@
 using System;
-using NUnit.Framework;
+using Xunit;
 using System.Collections.Generic;
 using Moq;
 using FluentAssertions;
@@ -15,30 +15,25 @@ namespace FactoryMethod.Test
                 ( SilverPerksThreshold, "SilverPerks")
             };
 
-        [SetUp]
-        public void Setup()
-        {
-        }
-
-        [Test]
-        public void GetBasicPerks_WhenMilesEarnedIsLessThanSilver()
+        [Fact]
+        public void ReturnBasicPerksType_WhenMilesEarnedIsLessThanSilver()
         {
             // Arrange
-            var perksProducer = new PerksProducer(_thresholds);
+            var perksFactory = new PerksFactory(_thresholds);
 
             // Act
-            var perks = perksProducer.GetPerks(8000);
+            var perks = perksFactory.GetPerks(8000);
 
             // Assert
             perks.Should().BeOfType<BasicPerks>();
         }
 
-        [Test]
-        public void TotalMiles_WhenUsingBasicPerks()
+        [Fact]
+        public void HaveCorrectTotalMiles_WhenUsingBasicPerks()
         {
             // Arrange
-            var perksProducer = new PerksProducer(_thresholds);
-            var calc = new EarningBonusCalculator(perksProducer);
+            var perksFactory = new PerksFactory(_thresholds);
+            var calc = new EarningBonusCalculator(perksFactory);
 
             // Act
             var totalMiles = calc.UpdatedMiles(8000, 100);
@@ -47,25 +42,25 @@ namespace FactoryMethod.Test
             totalMiles.Should().Be(8100);
         }
 
-        [Test]
+        [Fact]
         public void GetSilverPerks_WhenMilesEarnedIsAtSilverThreshold()
         {
             // Arrange
-            var perksProducer = new PerksProducer(_thresholds);
+            var perksFactory = new PerksFactory(_thresholds);
 
             // Act
-            var perks = perksProducer.GetPerks(10000);
+            var perks = perksFactory.GetPerks(10000);
 
             // Assert
             perks.Should().BeOfType<SilverPerks>();
         }
 
-        [Test]
+        [Fact]
         public void AddingMilesAtSilverPerks_AddsSilverPerkMilesEarned()
         {
             // Arrange
-            var perksProducer = new PerksProducer(_thresholds);
-            var calc = new EarningBonusCalculator(perksProducer);
+            var perksFactory = new PerksFactory(_thresholds);
+            var calc = new EarningBonusCalculator(perksFactory);
 
             // Act
             var totalMiles = calc.UpdatedMiles(10000, 2000);
@@ -74,25 +69,25 @@ namespace FactoryMethod.Test
             totalMiles.Should().Be(13000);
         }
 
-        [Test]
+        [Fact]
         public void GetGoldPerks_WhenMilesEarnedIsAtGoldThreshold()
         {
             // Arrange
-            var perksProducer = new PerksProducer(_thresholds);
+            var perksFactory = new PerksFactory(_thresholds);
 
             // Act
-            var perks = perksProducer.GetPerks(20001);
+            var perks = perksFactory.GetPerks(20001);
 
             // Assert
             perks.Should().BeOfType<GoldPerks>();
         }
 
-        [Test]
+        [Fact]
         public void AddingMilesAtGoldPerks_AddsGoldPerkMilesEarned()
         {
            // Arrange
-            var perksProducer = new PerksProducer(_thresholds);
-            var calc = new EarningBonusCalculator(perksProducer);
+            var perksFactory = new PerksFactory(_thresholds);
+            var calc = new EarningBonusCalculator(perksFactory);
 
             // Act
             var totalMiles = calc.UpdatedMiles(20000, 2000);
