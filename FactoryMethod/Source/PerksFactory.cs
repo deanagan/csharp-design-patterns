@@ -4,11 +4,11 @@ using System.Linq;
 
 namespace FactoryMethod
 {
-    public class PerksProducer
+    public class PerksFactory
     {
         private List<(int, string)> thresholds;
 
-        public PerksProducer(List<(int, string)> thresholds)
+        public PerksFactory(List<(int, string)> thresholds)
         {
             this.thresholds = thresholds;
         }
@@ -19,7 +19,7 @@ namespace FactoryMethod
                                   .DefaultIfEmpty("BasicPerks")
                                   .First();
 
-            var fullyQualifiedPerksName = $"FrequentFlyers.{perks}";
+            var fullyQualifiedPerksName = $"FactoryMethod.{perks}";
 
             var perksType = Type.GetType(fullyQualifiedPerksName);
             return (IPerks) Activator.CreateInstance(perksType);

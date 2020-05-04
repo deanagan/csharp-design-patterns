@@ -4,15 +4,15 @@ namespace FactoryMethod
 {
     public class EarningBonusCalculator
     {
-        private PerksProducer perksProducer;
+        private PerksFactory perksFactory;
 
-        public EarningBonusCalculator(PerksProducer perksProducer)
+        public EarningBonusCalculator(PerksFactory perksFactory)
         {
-            this.perksProducer = perksProducer;
+            this.perksFactory = perksFactory;
         }
         public int UpdatedMiles(int currentTotalMiles, int newMilesEarned)
         {
-            var perks = perksProducer.GetPerks(currentTotalMiles);
+            var perks = perksFactory.GetPerks(currentTotalMiles);
             return currentTotalMiles + newMilesEarned + Convert.ToInt32(Math.Floor(newMilesEarned * perks.EarningBonus()));
         }
     }
