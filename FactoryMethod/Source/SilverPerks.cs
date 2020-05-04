@@ -1,7 +1,4 @@
-
-
-
-namespace FrequentFlyers
+namespace FactoryMethod
 {
     public class SilverPerks : IPerks
     {

@@ -1,4 +1,4 @@
-namespace FrequentFlyers
+namespace FactoryMethod
 {
     public interface IPerks
     {

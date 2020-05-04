@@ -1,6 +1,6 @@
 using System;
 
-namespace FrequentFlyers
+namespace FactoryMethod
 {
     public class EarningBonusCalculatorLegacy
     {

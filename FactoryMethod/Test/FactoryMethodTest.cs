@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using Moq;
 using FluentAssertions;
 
-namespace FrequentFlyers.Test
+namespace FactoryMethod.Test
 {
-    public class Tests
+    public class FactoryMethodShould
     {
         private const int GoldPerksThreshold = 20000;
         private const int SilverPerksThreshold = 10000;
@@ -14,7 +14,7 @@ namespace FrequentFlyers.Test
                 ( GoldPerksThreshold, "GoldPerks"),
                 ( SilverPerksThreshold, "SilverPerks")
             };
-        
+
         [SetUp]
         public void Setup()
         {
@@ -30,7 +30,7 @@ namespace FrequentFlyers.Test
             var perks = perksProducer.GetPerks(8000);
 
             // Assert
-            perks.Should().BeOfType<BasicPerks>();            
+            perks.Should().BeOfType<BasicPerks>();
         }
 
         [Test]
@@ -57,7 +57,7 @@ namespace FrequentFlyers.Test
             var perks = perksProducer.GetPerks(10000);
 
             // Assert
-            perks.Should().BeOfType<SilverPerks>();            
+            perks.Should().BeOfType<SilverPerks>();
         }
 
         [Test]
@@ -84,15 +84,12 @@ namespace FrequentFlyers.Test
             var perks = perksProducer.GetPerks(20001);
 
             // Assert
-            perks.Should().BeOfType<GoldPerks>();            
+            perks.Should().BeOfType<GoldPerks>();
         }
 
         [Test]
         public void AddingMilesAtGoldPerks_AddsGoldPerkMilesEarned()
         {
-            
-           // Assert.That(_calculator.UpdatedMiles(20000, 2000) == 24000, Is.True);
-
            // Arrange
             var perksProducer = new PerksProducer(_thresholds);
             var calc = new EarningBonusCalculator(perksProducer);

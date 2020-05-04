@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FrequentFlyers
+namespace FactoryMethod
 {
     public class PerksProducer
     {
@@ -18,7 +18,7 @@ namespace FrequentFlyers
                                   .Select(p=>p.Item2)
                                   .DefaultIfEmpty("BasicPerks")
                                   .First();
-                                   
+
             var fullyQualifiedPerksName = $"FrequentFlyers.{perks}";
 
             var perksType = Type.GetType(fullyQualifiedPerksName);
