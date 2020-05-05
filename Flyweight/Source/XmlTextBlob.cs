@@ -1,6 +1,6 @@
 using System;
 
-namespace FlyweightPattern
+namespace Flyweight
 {
     public class XmlTextBlob : TextBlob
     {

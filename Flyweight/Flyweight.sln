@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "flyweight_pattern", "flyweight_pattern\flyweight_pattern.csproj", "{0595BC16-FD47-4967-A8B8-A1967F7B2DEA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flyweight", "Source\Flyweight.csproj", "{0595BC16-FD47-4967-A8B8-A1967F7B2DEA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "flyweight_pattern_test", "flyweight_pattern_test\flyweight_pattern_test.csproj", "{0EF07762-C430-416B-9D26-DE934149B7A8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlyweightTest", "Test\FlyweightTest.csproj", "{0EF07762-C430-416B-9D26-DE934149B7A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

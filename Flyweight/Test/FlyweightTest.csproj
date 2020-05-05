@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\flyweight_pattern\flyweight_pattern.csproj" />
+    <ProjectReference Include="..\Source\Flyweight.csproj" />
   </ItemGroup>
 
 </Project>
