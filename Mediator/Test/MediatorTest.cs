@@ -1,22 +1,22 @@
 using System;
-using NUnit.Framework;
+using Xunit;
 using Moq;
 using FluentAssertions;
 
-namespace Mediator.Tests
+namespace Mediator.Test
 {
-    public class Tests
+    public class MediatorShould
     {
         private Product _product;
         private IMediator _mediator;
-        [SetUp]
-        public void Setup()
+
+        public MediatorShould()
         {
             _product = new Product { Item = "Ball", Location = "Sydney" };
             _mediator = new PurchaseMediator();
         }
 
-        [Test]
+        [Fact]
         public void AlertScreen_WhenOnePurchaserCompletesTransaction()
         {
             // Arrange
@@ -35,7 +35,7 @@ namespace Mediator.Tests
             alertScreenForCompletedPurchaser.Verify(sc => sc.ShowMessage(It.IsAny<string>(), It.IsAny<string>()), Times.Never());
         }
 
-        [Test]
+        [Fact]
         public void PurchaserThrowsException_WhenAlertScreenIsNull()
         {
             // Act
@@ -45,7 +45,7 @@ namespace Mediator.Tests
             act.Should().ThrowExactly<ArgumentNullException>();
         }
 
-        [Test]
+        [Fact]
         public void PurchaserThrowsException_WhenMediatorIsNull()
         {
             // Arrange
@@ -58,7 +58,7 @@ namespace Mediator.Tests
             act.Should().ThrowExactly<ArgumentNullException>();
         }
 
-        [Test]
+        [Fact]
         public void MediatorReturnsFalse_WhenPurchaserIsNotRegistered()
         {
             // Arrange
@@ -72,7 +72,7 @@ namespace Mediator.Tests
 
         }
 
-        [Test]
+        [Fact]
         public void MediatorReturnsFalse_WhenPurchaserRegisteredTwice()
         {
             // Arrange
@@ -85,7 +85,7 @@ namespace Mediator.Tests
             _mediator.AddPurchaser(purchaser.Object).Should().Be(false);
         }
 
-        [Test]
+        [Fact]
         public void AlertScreenNotCalled_WhenThereIsNoPurchaserToAlert()
         {
             // Arrange
@@ -97,7 +97,7 @@ namespace Mediator.Tests
             purchaser.Complete(_product);
 
             // Assert
-            alertScreen.Verify(asc => asc.ShowMessage(It.IsAny<string>(), It.IsAny<string>()), Times.Never());
+            alertScreen.Verify(asc => asc.ShowMessage(It.IsAny<string>(), It.IsAny<string>()), Times.Never);
         }
     }
 }
