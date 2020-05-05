@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mediator", "mediator\mediator.csproj", "{DE09A4A4-7536-4DE2-872A-931885AB14D7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mediator", "Source\Mediator.csproj", "{DE09A4A4-7536-4DE2-872A-931885AB14D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mediator_test", "mediator_test\mediator_test.csproj", "{8FD36DB1-B527-47BA-B260-89BE8F3371C7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediatorTest", "Test\MediatorTest.csproj", "{8FD36DB1-B527-47BA-B260-89BE8F3371C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
