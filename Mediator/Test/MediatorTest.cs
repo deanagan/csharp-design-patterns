@@ -31,73 +31,66 @@ namespace Mediator.Test
             completedPurchaser.Complete(_product);
 
             // Assert
-            alertScreenForActivePurchaser.Verify(sc => sc.ShowMessage(_product.Item, _product.Location));
-            alertScreenForCompletedPurchaser.Verify(sc => sc.ShowMessage(It.IsAny<string>(), It.IsAny<string>()), Times.Never());
+            using (new FluentAssertions.Execution.AssertionScope("purchaser"))
+            {
+                alertScreenForActivePurchaser.Verify(sc => sc.ShowMessage(_product.Item, _product.Location));
+                alertScreenForCompletedPurchaser.Verify(sc => sc.ShowMessage(It.IsAny<string>(), It.IsAny<string>()), Times.Never);
+            }
         }
 
         [Fact]
-        public void PurchaserThrowsException_WhenAlertScreenIsNull()
+        public void ExpectExceptionThrownByPurchaser_WhenAlertScreenIsNull()
         {
             // Act
             Action act = () => new Purchaser(null, _mediator);
-
             // Assert
             act.Should().ThrowExactly<ArgumentNullException>();
         }
 
         [Fact]
-        public void PurchaserThrowsException_WhenMediatorIsNull()
+        public void ExpectExceptionThrownByPurchaser_WhenMediatorIsNull()
         {
             // Arrange
-            var alertScreen = new Mock<IAlertScreen>();
-
+            var alertScreen = Mock.Of<IAlertScreen>();
             // Act
-            Action act = () => new Purchaser(alertScreen.Object, null);
-
+            Action act = () => new Purchaser(alertScreen, null);
             // Assert
             act.Should().ThrowExactly<ArgumentNullException>();
         }
 
         [Fact]
-        public void MediatorReturnsFalse_WhenPurchaserIsNotRegistered()
+        public void ReturnFalse_WhenPurchaserIsNotRegistered()
         {
             // Arrange
-            var alertScreen = new Mock<IAlertScreen>();
-            var purchaser = new Mock<IPurchaser>();
-
+            var purchaser = Mock.Of<IPurchaser>();
             // Act
-
+            var result = _mediator.BroadcastPurchaseCompletion(purchaser);
             // Assert
-            _mediator.BroadcastPurchaseCompletion(purchaser.Object).Should().Be(false);
-
+            result.Should().BeFalse();
         }
 
         [Fact]
-        public void MediatorReturnsFalse_WhenPurchaserRegisteredTwice()
+        public void ReturnFalse_WhenPurchaserRegisteredTwice()
         {
             // Arrange
-            var purchaser = new Mock<IPurchaser>();
-
+            var purchaser = Mock.Of<IPurchaser>();
             // Act
-            _mediator.AddPurchaser(purchaser.Object);
-
+            var result = _mediator.AddPurchaser(purchaser) && _mediator.AddPurchaser(purchaser);
             // Assert
-            _mediator.AddPurchaser(purchaser.Object).Should().Be(false);
+            result.Should().BeFalse();
         }
 
         [Fact]
-        public void AlertScreenNotCalled_WhenThereIsNoPurchaserToAlert()
+        public void NotCallAlertScreen_WhenThereIsNoPurchaserToAlert()
         {
             // Arrange
-            var alertScreen = new Mock<IAlertScreen>();
-            var purchaser = new Purchaser(alertScreen.Object, _mediator);
-
+            var alertScreen = Mock.Of<IAlertScreen>();
+            var purchaser = new Purchaser(alertScreen, _mediator);
             // Act
             _mediator.AddPurchaser(purchaser);
             purchaser.Complete(_product);
-
             // Assert
-            alertScreen.Verify(asc => asc.ShowMessage(It.IsAny<string>(), It.IsAny<string>()), Times.Never);
+            Mock.Get(alertScreen).Verify(asc => asc.ShowMessage(It.IsAny<string>(), It.IsAny<string>()), Times.Never);
         }
     }
 }
