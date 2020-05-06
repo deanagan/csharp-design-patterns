@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MementoPattern
+namespace Memento
 {
     public class ProductCaretaker : IProductCaretaker
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MementoPattern
+namespace Memento
 {
     public class ProductOriginator : IProductOriginator
     {
