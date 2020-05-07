@@ -1,6 +1,6 @@
 using System;
 
-namespace observer
+namespace Observer
 {
     public class Customer : IObserver
     {

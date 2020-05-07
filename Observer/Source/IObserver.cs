@@ -1,4 +1,4 @@
-namespace observer
+namespace Observer
 {
     public interface IObserver
     {

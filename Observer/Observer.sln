@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "observer", "observer\observer.csproj", "{6B442066-9400-4295-8D58-1E667C4A3224}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Observer", "Source\Observer.csproj", "{6B442066-9400-4295-8D58-1E667C4A3224}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "observer_test", "observer_test\observer_test.csproj", "{12585CFC-52CC-46E4-8EE5-379C2D104DE6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObserverTest", "Test\ObserverTest.csproj", "{12585CFC-52CC-46E4-8EE5-379C2D104DE6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,51 +1,50 @@
 using System.Collections.Generic;
-using NUnit.Framework;
-using observer;
+using Xunit;
 using Moq;
+using FluentAssertions;
 
-namespace observer_test
+namespace Observer.Test
 {
-    public class Tests
+    public class ObserverShould
     {
-        [SetUp]
-        public void Setup()
+        [Fact]
+        public void UpdateObserverOnce_WhenSubjectHasSpecials()
         {
-        }
-
-        [Test]
-        public void SpecialSubjectHasSpecials_ObserverUpdated_MustCallUpdateOnce()
-        {
+            // Arrange
             var subject = new SpecialsSubject();
-
             var mockObserver = new Mock<IObserver>();
-
+            // Act
             subject.Attach(mockObserver.Object);
             subject.SubjectState = "Footwear Sale";
             subject.Notify();
+            // Assert
             mockObserver.Verify(observer => observer.Update(subject), Times.Once());
-            subject.Detach(mockObserver.Object);
-
         }
 
-        [Test]
-        public void SpecialSubjectHasSpecials_ObserverDetach_MustNotCallUpdate()
+        [Fact]
+        public void NotCallUpdate_WhenObserverNotAttachedToSubject()
         {
+            // Arrange
             var subject = new SpecialsSubject();
-
             var mockObserver = new Mock<IObserver>();
+            // Act
             subject.SubjectState = "Footwear Sale";
             subject.Notify();
+            // Assert
             mockObserver.Verify(observer => observer.Update(subject), Times.Never());
         }
 
-        [Test]
-        public void CustomerReceivesSpecials_MustEchoCorrectMessage()
+        [Fact]
+        public void EchoMessage_WhenReceivingSubjectNotification()
         {
+            // Arrange
             var mockSubject = new Mock<ISubject>();
             var customer = new Customer();
+            // Act
             mockSubject.SetupGet(subj => subj.SubjectState).Returns("Footwear Sale");
             mockSubject.Object.Attach(customer);
-            Assert.AreEqual("Customer received Footwear Sale", customer.Update(mockSubject.Object));
+            // Assert
+            customer.Update(mockSubject.Object).Should().Be("Customer received Footwear Sale");
         }
     }
 }

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace observer
+namespace Observer
 {
     public class SpecialsSubject : ISubject
     {
