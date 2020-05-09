@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Billing
+namespace Prototype
 {
     public class Address
     {

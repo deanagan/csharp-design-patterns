@@ -2,13 +2,13 @@ using NUnit.Framework;
 using FluentAssertions;
 using Moq;
 
-namespace Billing.Tests
+namespace Prototype.Test
 {
-    public class Tests
+    public class PrototypeShould
     {
         private BasicCustomer _basicCustomer;
-        [SetUp]
-        public void Setup()
+
+        public PrototypeShould()
         {
             _basicCustomer = new Customer();
             _basicCustomer.FirstName = "John";
@@ -21,7 +21,7 @@ namespace Billing.Tests
                 Country = "Australia",
                 PostCode = "2000"
             };
-            _basicCustomer.BillingAddress = new Address 
+            _basicCustomer.BillingAddress = new Address
             {
                 StreetAddress = _basicCustomer.HomeAddress.StreetAddress,
                 City = _basicCustomer.HomeAddress.City,
@@ -31,7 +31,7 @@ namespace Billing.Tests
             };
         }
 
-        [Test]
+        [Fact]
         public void NewCustomer_ShallowCloneFromCustomerWithSameAddress_AddressObjectsAreShared()
         {
             // Arrange
@@ -42,12 +42,12 @@ namespace Billing.Tests
             var relatedCustomer = (Customer)customer.Clone();
             relatedCustomer.FirstName = "Jane";
             relatedCustomer.HomeAddress.StreetAddress = newStreetAddress;
-            
+
             // Assert
             customer.HomeAddress.Should().Be(relatedCustomer.HomeAddress);
-        
         }
-        [Test]
+
+        [Fact]
         public void NewCustomer_DeepCloneFromCustomerWithDifferentAddressSameFirstName_AddressObjectsAreDifferent()
         {
             // Arrange
@@ -62,7 +62,7 @@ namespace Billing.Tests
             diffCustomer.HomeAddress.State = "Kentucky";
             diffCustomer.HomeAddress.Country = "United States Of America";
             diffCustomer.HomeAddress.PostCode = "40511";
-            
+
             // Assert
             customer.HomeAddress.Should().NotBeEquivalentTo(diffCustomer.HomeAddress);
             customer.FirstName.Should().BeEquivalentTo("John");

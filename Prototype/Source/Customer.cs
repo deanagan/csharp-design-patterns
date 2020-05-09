@@ -1,6 +1,6 @@
 using System;
 
-namespace Billing
+namespace Prototype
 {
     public class Customer : BasicCustomer
     {
@@ -14,7 +14,7 @@ namespace Billing
 
             customer.BillingAddress = new Address
             {
-                StreetAddress = this.BillingAddress.StreetAddress,    
+                StreetAddress = this.BillingAddress.StreetAddress,
                 City = this.BillingAddress.City,
                 State = this.BillingAddress.State,
                 Country = this.BillingAddress.Country,
@@ -23,7 +23,7 @@ namespace Billing
 
             customer.HomeAddress = new Address
             {
-                StreetAddress = this.HomeAddress.StreetAddress,    
+                StreetAddress = this.HomeAddress.StreetAddress,
                 City = this.HomeAddress.City,
                 State = this.HomeAddress.State,
                 Country = this.HomeAddress.Country,
