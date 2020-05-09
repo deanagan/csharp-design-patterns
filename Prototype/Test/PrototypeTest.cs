@@ -1,4 +1,4 @@
-using NUnit.Framework;
+using Xunit;
 using FluentAssertions;
 using Moq;
 
@@ -32,7 +32,7 @@ namespace Prototype.Test
         }
 
         [Fact]
-        public void NewCustomer_ShallowCloneFromCustomerWithSameAddress_AddressObjectsAreShared()
+        public void ShallowCloneCustomerWithSameAddress_WhenAddressObjectsAreShared()
         {
             // Arrange
             var customer = (Customer)_basicCustomer.Clone();
@@ -48,7 +48,7 @@ namespace Prototype.Test
         }
 
         [Fact]
-        public void NewCustomer_DeepCloneFromCustomerWithDifferentAddressSameFirstName_AddressObjectsAreDifferent()
+        public void DeepCloneCustomerWithDifferentAddressButWithSameFirstName_WhenAddressObjectsAreDifferent()
         {
             // Arrange
             var customer = (Customer)_basicCustomer.Clone();
