@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace ProxyPattern
+namespace Proxy
 {
     public class Entries : IEntries
     {

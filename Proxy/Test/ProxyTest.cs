@@ -4,7 +4,7 @@ using NUnit.Framework;
 using Moq;
 using FluentAssertions;
 
-namespace ProxyPattern.Tests
+namespace Proxy.Test
 {
     public class Tests
     {
@@ -17,17 +17,17 @@ namespace ProxyPattern.Tests
         [SetUp]
         public void Setup()
         {
-            _products = new Dictionary<int, IProductInfo> 
+            _products = new Dictionary<int, IProductInfo>
             {
                 {1, Mock.Of<IProductInfo>(
-                    productInfo => 
-                        productInfo.Name == "Xbox360" && 
+                    productInfo =>
+                        productInfo.Name == "Xbox360" &&
                         productInfo.Id == 1)
                 }
             };
             _adminUser = Mock.Of<IUser> (user => user.IsAdmin == true);
             _regularUser = Mock.Of<IUser> (user => user.IsAdmin == false);
-            
+
             _createAuthController = (user) => new AuthenticationController(user);
             _entries = new Entries(_products);
         }
@@ -38,7 +38,7 @@ namespace ProxyPattern.Tests
             // Arrange
             var authCtrl = _createAuthController(_regularUser);
             var entries = new EntriesProxy(authCtrl, _entries);
-            
+
             // Act
             var productInfo = entries.Get(1);
 

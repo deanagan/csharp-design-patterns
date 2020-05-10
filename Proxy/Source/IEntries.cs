@@ -1,6 +1,5 @@
-﻿using System;
-
-namespace ProxyPattern
+﻿
+namespace Proxy
 {
     public interface IEntries
     {

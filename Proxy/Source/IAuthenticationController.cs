@@ -1,4 +1,4 @@
-namespace ProxyPattern
+namespace Proxy
 {
     public interface IAuthenticationController
     {
