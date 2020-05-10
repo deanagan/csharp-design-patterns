@@ -33,7 +33,7 @@ namespace Proxy.Test
         }
 
         [Fact]
-        public void GetProductInfoSuccess_WhenReadingAsRegularUser()
+        public void GetProductInfoSuccessfully_WhenReadingAsRegularUser()
         {
             // Arrange
             var authCtrl = _createAuthController(_regularUser);
@@ -48,7 +48,7 @@ namespace Proxy.Test
         }
 
         [Fact]
-        public void GetProductInfoSuccess_WhenReadingAsAdminUser()
+        public void GetProductInfoSuccessfully_WhenReadingAsAdminUser()
         {
             // Arrange
             var authCtrl = _createAuthController(_adminUser);
@@ -63,7 +63,7 @@ namespace Proxy.Test
         }
 
         [Fact]
-        public void DeleteProductInfoSuccess_WhenDeletingAsAdminUser()
+        public void DeleteProductInfoSuccessfully_WhenDeletingAsAdminUser()
         {
             // Arrange
             var authCtrl = _createAuthController(_adminUser);
@@ -78,7 +78,7 @@ namespace Proxy.Test
         }
 
         [Fact]
-        public void DeleteProductInfoFailed_WhenDeletingAsRegularUser()
+        public void BeUnableToDeleteProductInfo_WhenDeletingAsRegularUser()
         {
             // Arrange
             var authCtrl = _createAuthController(_regularUser);
