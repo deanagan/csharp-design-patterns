@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\proxy_pattern\proxy_pattern.csproj" />
+    <ProjectReference Include="..\Source\Proxy.csproj" />
   </ItemGroup>
 
 </Project>

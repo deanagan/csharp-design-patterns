@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "proxy_pattern", "proxy_pattern\proxy_pattern.csproj", "{94C6AD19-9034-4546-95C7-E0938FD55022}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proxy", "Source\Proxy.csproj", "{94C6AD19-9034-4546-95C7-E0938FD55022}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "proxy_pattern_test", "proxy_pattern_test\proxy_pattern_test.csproj", "{7BDD068D-2892-4013-9C52-D1B89B85CA7E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProxyTest", "Test\ProxyTest.csproj", "{7BDD068D-2892-4013-9C52-D1B89B85CA7E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
