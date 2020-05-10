@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
-using NUnit.Framework;
+using Xunit;
 using Moq;
 using FluentAssertions;
 
 namespace Proxy.Test
 {
-    public class Tests
+    public class ProxyShould
     {
         Dictionary<int, IProductInfo> _products;
         IEntries _entries;
@@ -14,8 +14,8 @@ namespace Proxy.Test
         IUser _regularUser;
         delegate IAuthenticationController CreateAuthController(IUser user);
         CreateAuthController _createAuthController;
-        [SetUp]
-        public void Setup()
+
+        public ProxyShould()
         {
             _products = new Dictionary<int, IProductInfo>
             {
@@ -32,7 +32,7 @@ namespace Proxy.Test
             _entries = new Entries(_products);
         }
 
-        [Test]
+        [Fact]
         public void GetProductInfoSuccess_WhenReadingAsRegularUser()
         {
             // Arrange
@@ -47,7 +47,7 @@ namespace Proxy.Test
             productInfo.Name.Should().Be("Xbox360");
         }
 
-        [Test]
+        [Fact]
         public void GetProductInfoSuccess_WhenReadingAsAdminUser()
         {
             // Arrange
@@ -62,7 +62,7 @@ namespace Proxy.Test
             productInfo.Name.Should().Be("Xbox360");
         }
 
-        [Test]
+        [Fact]
         public void DeleteProductInfoSuccess_WhenDeletingAsAdminUser()
         {
             // Arrange
@@ -77,7 +77,7 @@ namespace Proxy.Test
             entries.Get(1).Should().Be(null);
         }
 
-        [Test]
+        [Fact]
         public void DeleteProductInfoFailed_WhenDeletingAsRegularUser()
         {
             // Arrange
