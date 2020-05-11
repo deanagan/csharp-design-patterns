@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "singleton_di", "singleton_di\singleton_di.csproj", "{4AAA914A-7AD4-4A2D-ADC5-F1D2FB572AB1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingletonDI", "Source\SingletonDI.csproj", "{4AAA914A-7AD4-4A2D-ADC5-F1D2FB572AB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "singleton_di_test", "singleton_di_test\singleton_di_test.csproj", "{4EB56624-1A00-401C-82E7-8ABBCC2387E9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingletonDITest", "Test\SingletonDITest.csproj", "{4EB56624-1A00-401C-82E7-8ABBCC2387E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
