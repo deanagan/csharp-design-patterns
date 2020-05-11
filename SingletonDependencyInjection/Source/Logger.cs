@@ -1,6 +1,6 @@
 using System;
 
-namespace SingletonDi
+namespace SingletonDI
 {
     public class Logger : ILogger
     {

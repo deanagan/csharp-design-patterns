@@ -1,5 +1,5 @@
 ﻿
-namespace SingletonDi
+namespace SingletonDI
 {
     public interface ILogger
     {
