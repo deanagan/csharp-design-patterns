@@ -1,47 +1,47 @@
-using NUnit.Framework;
+using Xunit;
 using Moq;
 using FluentAssertions;
 using Ninject;
 
-namespace SingletonDi.Test
+namespace SingletonDI.Test
 {
-    public class Tests
+    public class SingletonDIShould
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
 
-        [Test]
-        public void InstanceIsSame_WhenComparingGoFSingleton()
+        [Fact]
+        public void ReturnSameInstance_WhenComparingGoFSingleton()
         {
+            // Arrange
             var logger1 = GoFLogger.Instance;
+            // Act
             var logger2 = GoFLogger.Instance;
-
+            // Assert
             logger1.Should().BeSameAs(logger2);
         }
 
-        [Test]
-        public void InstanceIsNotSame_WhenComparingNotInSingletonScope()
+        [Fact]
+        public void ReturnDifferentInstance_WhenComparingInstanceCreatedByNinjectInTransientScope()
         {
+            // Arrange
             var container = new StandardKernel();
             container.Bind<ILogger>().To<Logger>();
-
+            // Act
             var logger1 = container.Get<ILogger>();
             var logger2 = container.Get<ILogger>();
-
-            logger1.Should().NotBeSameAs(logger2);           
+            // Assert
+            logger1.Should().NotBeSameAs(logger2);
         }
 
-        [Test]
-        public void InstanceIsSame_WhenComparingInSingletonScope()
+        [Fact]
+        public void ReturnSameInstance_WhenComparingInstanceCreatedByNinjectInSingletonScope()
         {
+            // Arrange
             var container = new StandardKernel();
             container.Bind<ILogger>().To<Logger>().InSingletonScope();
-
+            // Act
             var logger1 = container.Get<ILogger>();
             var logger2 = container.Get<ILogger>();
-
+            // Assert
             logger1.Should().BeSameAs(logger2);
         }
     }
