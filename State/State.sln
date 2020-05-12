@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "state", "state\state.csproj", "{719BB551-14DE-4ADE-A184-EB02C743E723}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "State", "Source\State.csproj", "{719BB551-14DE-4ADE-A184-EB02C743E723}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "state_test", "state_test\state_test.csproj", "{3118526D-6263-4725-B2A7-8BD6A19CECA7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StateTest", "Test\StateTest.csproj", "{3118526D-6263-4725-B2A7-8BD6A19CECA7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
