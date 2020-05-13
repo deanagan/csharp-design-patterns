@@ -1,21 +1,21 @@
-using NUnit.Framework;
+using Xunit;
 using Moq;
 using FluentAssertions;
 
 namespace Strategy.Test
 {
-    public class Tests
+    public class StrategyShould
     {
         private delegate decimal PriceCalc(IProduct product);
         private ICoupon _mockCoupon;
         private IProduct _mockProduct;
         private IDiscountScheme _discountScheme;
-        
+
         ICoupon CreateMockCoupon(bool isExpired, int discountPercentage)
         {
-            return Mock.Of<ICoupon> 
+            return Mock.Of<ICoupon>
             (
-                coupon => 
+                coupon =>
                 coupon.IsExpired() == isExpired &&
                 coupon.DiscountPercentage() == discountPercentage
             );
@@ -31,13 +31,8 @@ namespace Strategy.Test
             );
         }
 
-        [SetUp]
-        public void Setup()
-        {
-        }
-
-        [Test]
-        public void DiscountIfMember_WithValidCoupon_ForRegularItem_ShouldReturnMemberDiscountedPrice()
+        [Fact]
+        public void ReturnMemberDiscountedPrice_WhenMemberWithValidCouponForRegularItem()
         {
             // Arrange
             _mockCoupon = CreateMockCoupon(false, 5);
@@ -46,13 +41,13 @@ namespace Strategy.Test
 
             // Act
             var price = _discountScheme.ComputePrice(_mockProduct, _mockCoupon);
-            
+
             // Assert
             price.Should().Be(90M);
         }
 
-        [Test]
-        public void DiscountIfNonMember_WithValidCoupon_ForRegularItem_ShouldReturnNonMemberDiscountedPrice()
+        [Fact]
+        public void ReturnNonMemberDiscountedPrice_WhenNonMemberWithValidCouponForRegularItem()
         {
             // Arrange
            _mockCoupon = CreateMockCoupon(false, 5);
@@ -66,14 +61,14 @@ namespace Strategy.Test
             price.Should().Be(95M);
         }
 
-        [Test]
-        public void DiscountIfMember_WithCouponExpired_ShouldReturnBaseMemberDiscountOnly()
+        [Fact]
+        public void ReturnBaseMemberDiscountOnly_WhenMemberUsesExpiredCoupon()
         {
             // Arrange
             _mockCoupon = CreateMockCoupon(true, 5);
             _mockProduct = CreateMockProduct(100M, false);
             _discountScheme = new MemberDiscountScheme();
-            
+
             // Act
             var price = _discountScheme.ComputePrice(_mockProduct, _mockCoupon);
 
@@ -81,14 +76,14 @@ namespace Strategy.Test
             price.Should().Be(95M);
         }
 
-        [Test]
-        public void DiscountIfNonMember_WithCouponExpired_ShouldReturnNoDiscount()
+        [Fact]
+        public void ReturnNoDiscount_WhenNonMemberUsesExpiredCoupon()
         {
             // Arrange
             _mockCoupon = CreateMockCoupon(true, 5);
             _mockProduct = CreateMockProduct(100M, false);
             _discountScheme = new NonMemberDiscountScheme();
-            
+
             // Act
             var price = _discountScheme.ComputePrice(_mockProduct, _mockCoupon);
 
@@ -96,14 +91,14 @@ namespace Strategy.Test
             price.Should().Be(100M);
         }
 
-        [Test]
-        public void DiscountIfMember_WithValidCoupon_ForProductAlreadyOnSale_ShouldReturnBaseMemberDiscountedAddedToSalePrice()
+        [Fact]
+        public void ReturnBaseMemberDiscountedPrice_WhenMemberUsesValidCouponForProductAlreadyOnSale()
         {
             // Arrange
             _mockCoupon = CreateMockCoupon(false, 5);
             _mockProduct = CreateMockProduct(100M, true);
             _discountScheme = new MemberDiscountScheme();
-            
+
             // Act
             var price = _discountScheme.ComputePrice(_mockProduct, _mockCoupon);
 
@@ -111,14 +106,14 @@ namespace Strategy.Test
             price.Should().Be(90M);
         }
 
-        [Test]
-        public void DiscountIfNonMember_WithValidCoupon_ForProductAlreadyOnSale_ShouldReturnSalePriceOnly()
+        [Fact]
+        public void ReturnSalePriceOnly_WhenNonMemberUsesValidCouponForProductAlreadyOnSale()
         {
             // Arrange
             _mockCoupon = CreateMockCoupon(false, 5);
             _mockProduct = CreateMockProduct(97M, true);
             _discountScheme = new NonMemberDiscountScheme();
-          
+
             // Act
             var price = _discountScheme.ComputePrice(_mockProduct, _mockCoupon);
 
