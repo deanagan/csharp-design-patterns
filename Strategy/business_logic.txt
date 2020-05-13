@@ -1,0 +1,16 @@
+
+User Story:
+As a store owner, I want to be able to compute for the correct
+discount per customer so that the dogmandu members get extra discounts.
+
+
+Business Logic:
+At the DogMandu Anniversary Sale shop, a discount coupon is provided
+to each customer (discount can be arbitrary). The discount has an added 
+5% if the customer is a dogmandu member.
+However, if a coupon is expired, despite
+being a member, no discount is given.
+Also, items already on sale are excluded
+from discounts for non members. Members however still get the
+discount on these items plus the base member discount of 5%. 
+
