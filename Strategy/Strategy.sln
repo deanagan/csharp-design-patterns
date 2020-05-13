@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "strategy_pattern", "strategy_pattern\strategy_pattern.csproj", "{E3BA7516-10F6-4635-B81C-11CD2B245762}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Strategy", "Source\Strategy.csproj", "{E3BA7516-10F6-4635-B81C-11CD2B245762}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "strategy_pattern_test", "strategy_pattern_test\strategy_pattern_test.csproj", "{0FF879C0-885F-4104-8C7E-1A8C6B913AB1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StrategyTest", "Test\StrategyTest.csproj", "{0FF879C0-885F-4104-8C7E-1A8C6B913AB1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
