@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\template_method\template_method.csproj" />
+    <ProjectReference Include="..\Source\TemplateMethod.csproj" />
   </ItemGroup>
 
 </Project>
