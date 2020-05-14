@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "template_method", "template_method\template_method.csproj", "{A1D09F5C-688D-4330-8C68-A9EBDD47741B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateMethod", "Source\TemplateMethod.csproj", "{A1D09F5C-688D-4330-8C68-A9EBDD47741B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "template_method_test", "template_method_test\template_method_test.csproj", "{741E3579-34B1-4502-9A68-0A5CF71413C3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateMethodTest", "Test\TemplateMethodTest.csproj", "{741E3579-34B1-4502-9A68-0A5CF71413C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
