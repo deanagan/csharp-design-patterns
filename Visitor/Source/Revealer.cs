@@ -1,5 +1,5 @@
 
-namespace visitor_lib
+namespace Visitor
 {
     public class Revealer : IVisitor
 	{

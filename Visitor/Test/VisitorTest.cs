@@ -1,9 +1,8 @@
 ﻿using NUnit.Framework;
 using Moq;
 using System;
-using visitor_lib;
 
-namespace visitor_test
+namespace Visitor
 {
     public class Tests
     {

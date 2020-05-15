@@ -1,7 +1,4 @@
-using System;
-
-
-namespace visitor_lib
+namespace Visitor
 {
     public interface IVisitor
 	{

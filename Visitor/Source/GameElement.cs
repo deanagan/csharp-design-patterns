@@ -1,6 +1,6 @@
 using System;
 
-namespace visitor_lib
+namespace Visitor
 {
     public abstract class GameElement
 	{
