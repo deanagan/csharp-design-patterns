@@ -1,64 +1,56 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 using Moq;
 using System;
+using FluentAssertions;
 
 namespace Visitor
 {
-    public class Tests
+    public class VisitorShould
     {
-        private Sprite _mario;
-        private Sprite _luigi;
-        private Instruction _instruction;
+        private GameElement _mario = new Sprite("Mario");
+        private GameElement _luigi = new Sprite("Luigi");
+        private TextElement _instruction = new Instruction();
 
-        [SetUp]
-        public void SetUp()
+        [Fact]
+        public void EnableMarioOnly_WhenRevealerAppliedToMario()
         {
-            _mario = new Sprite("Mario");
-            _luigi = new Sprite("Luigi");
-            _instruction = new Instruction();
-        }
-
-        [Test]
-        public void AddMarioAndLuigiAndInstruction_AllElementNamesInitialStateCorrect()
-        {
-            Assert.That("Mario", Is.EqualTo(_mario.Name));
-            Assert.That("Luigi", Is.EqualTo(_luigi.Name));
-
-            Assert.False(_mario.Active);
-            Assert.False(_luigi.Active);
-            Assert.False(_instruction.Active);
-        }
-
-        [Test]
-        public void EnableMario_AllElementStateCorrect()
-        {
+            // Arrange
             var revealMario = new Revealer();
-
+            // Act
             _mario.Accept(revealMario);
-
-            Assert.True(_mario.Active);
-            Assert.False(_luigi.Active);
-            Assert.False(_instruction.Active);
+            // Assert
+            using (new FluentAssertions.Execution.AssertionScope("sprite states"))
+            {
+                _mario.Active.Should().BeTrue();
+                _luigi.Active.Should().BeFalse();
+                _instruction.Active.Should().BeFalse();
+            }
         }
 
-        [Test]
-        public void EnableInstructionOnly_AllElementStateCorrect()
+        [Fact]
+        public void EnableInstructionOnly_WhenRevealerAppliedToInstruction()
         {
+            // Arrange
             var revealInstruction = new Revealer();
-
+            // Act
             _instruction.Accept(revealInstruction);
-
-            Assert.False(_mario.Active);
-            Assert.False(_luigi.Active);
-            Assert.True(_instruction.Active);
+            using (new FluentAssertions.Execution.AssertionScope("sprite states"))
+            {
+                _mario.Active.Should().BeFalse();
+                _luigi.Active.Should().BeFalse();
+                _instruction.Active.Should().BeTrue();
+            }
         }
 
-        [Test]
-        public void MockVisitorObjectGetsVisited_MockObjectGetsAccepted()
+        [Fact]
+        public void BeVisitedByMockObjectOnce_WhenAcceptionMockVisitor()
         {
+            // Arrange
             var mockVisitor = new Mock<IVisitor>();
+            // Act
             _mario.Accept(mockVisitor.Object);
-            mockVisitor.Verify(dummyVisitor => dummyVisitor.Visit(_mario), Times.Once());
+            // Assert
+            mockVisitor.Verify(dummyVisitor => dummyVisitor.Visit(_mario), Times.Once);
         }
 
     }
