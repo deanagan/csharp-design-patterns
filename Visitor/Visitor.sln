@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "visitor_lib", "visitor_lib\visitor_lib.csproj", "{7463B943-EA2D-497D-8CC8-5A04D5A1D819}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Visitor", "Source\Visitor.csproj", "{7463B943-EA2D-497D-8CC8-5A04D5A1D819}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "visitor_test", "visitor_test\visitor_test.csproj", "{D109CD04-4CA9-46D1-885A-D7C01B933B07}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisitorTest", "Test\VisitorTest.csproj", "{D109CD04-4CA9-46D1-885A-D7C01B933B07}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
