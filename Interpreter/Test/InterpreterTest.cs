@@ -17,7 +17,7 @@ namespace Interpreter.Test
             // Act
             var numericValue = interpreter.Interpret(romanNumerals);
             // Assert
-            numericValue.Should().Be(numericValue);
+            numericValue.Should().Be(expectedValue);
         }
     }
 }
