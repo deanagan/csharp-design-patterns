@@ -26,11 +26,25 @@ namespace Interpreter
             var expressionStack = new Stack<string>();
             var result = 0;
             var lastNumericValue = 0;
-            //var repetitionStack = new
+            var repetitionStack = new Stack<char>();
 
             foreach (var ch in expression)
             {
                 var numericValue = _lookup[ch.ToString()];
+
+                if (repetitionStack.Count == 0 || repetitionStack.Peek() != ch)
+                {
+                    repetitionStack.Clear();
+                    repetitionStack.Push(ch);
+                }
+                else if (repetitionStack.Count < 3)
+                {
+                    repetitionStack.Push(ch);
+                }
+                else
+                {
+                    return 0;
+                }
 
                 if (lastNumericValue == 0 || lastNumericValue >= numericValue)
                 {
@@ -40,9 +54,21 @@ namespace Interpreter
                 }
                 else
                 {
+                    if (expressionStack.Count == 0)
+                    {
+                        return 0;
+                    }
                     var lookUpStr = expressionStack.Pop().ToString() + ch.ToString();
-                    result += (_lookup[lookUpStr]) - lastNumericValue;
-                    lastNumericValue = _lookup[lookUpStr];
+
+                    if (_lookup.ContainsKey(lookUpStr))
+                    {
+                        result += (_lookup[lookUpStr]) - lastNumericValue;
+                        lastNumericValue = _lookup[lookUpStr];
+                    }
+                    else
+                    {
+                        return 0;
+                    }
                 }
 
                 if (result >= 4000)
