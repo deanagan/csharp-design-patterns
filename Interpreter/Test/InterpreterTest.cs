@@ -6,10 +6,9 @@ namespace Interpreter.Test
     public class InterpreterShould
     {
         [Theory]
-
-        //[InlineData(new object[] {"IV", 4})]
-       // [InlineData(new object[] {"V", 5})]
-        [InlineData(new object[] {"VI", 6})]
+        // [InlineData(new object[] {"IV", 4})]
+        // [InlineData(new object[] {"V", 5})]
+        // [InlineData(new object[] {"VI", 6})]
         // [InlineData(new object[] {"LXXVI", 76})]
         // [InlineData(new object[] {"CDXCIX", 499})]
         // [InlineData(new object[] {"MMMDCCCLXXXVIII", 3888})]
@@ -17,6 +16,12 @@ namespace Interpreter.Test
         // [InlineData(new object[] {"MMMCMXCIX", 3999})]
         // [InlineData(new object[] {"DCCCLXXXVIII", 888})]
         // [InlineData(new object[] {"MDCLXVI", 1666})]
+        // [InlineData(new object[] {"MMMM", 0})] // Roman Numerals are in range 0 < number < 4000
+        // [InlineData(new object[] {"CXCX", 0})] // Invalid
+        // [InlineData(new object[] {"IVV", 0})] // Invalid
+        [InlineData(new object[] {"IIII", 0})] // 4 consecutive numbers disallowed
+        //[InlineData(new object[] {"IIIIV", 0})] // 4 consecutive numbers disallowed
+        //[InlineData(new object[] {"XIIII", 0})] // 4 consecutive numbers disallowed
         public void ReturnNumericValue_WhenGivenRomanNumerals(string romanNumerals, int expectedValue)
         {
             // Arrange
@@ -24,7 +29,7 @@ namespace Interpreter.Test
             // Act
             var numericValue = interpreter.Interpret(romanNumerals);
             // Assert
-            //numericValue.Should().Be(expectedValue);
+            numericValue.Should().Be(expectedValue);
         }
     }
 }
