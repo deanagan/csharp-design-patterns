@@ -10,3 +10,9 @@ A bunch of demo codes for:
 1. Demos are divided into folders with the pattern. Cd to one of these folders.
 2. To build all, enter `dotnet build`
 3. To execute the tests, enter `dotnet test` or `dotnet test -l:"console;verbosity=detailed"` to be more verbose.
+
+
+
+# TODOs
+1. Interpreter Pattern
+2. Iterator Pattern
