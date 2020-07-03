@@ -1,8 +1,10 @@
+using System.Net.Mail;
+
 namespace Adapter
 {
     public interface IGoodReadsProfile
     {
         string Name { get; }
-        string Email { get; }
+        MailAddress Email { get; }
     }
 }

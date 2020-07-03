@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Mail;
 
 namespace Adapter
 {
@@ -6,6 +7,6 @@ namespace Adapter
     {
         string Name { get; }
         string UserName { get; }
-        string Email { get; }
+        MailAddress Email { get; }
     }
 }

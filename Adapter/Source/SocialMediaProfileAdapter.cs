@@ -1,4 +1,5 @@
 using System;
+using System.Net.Mail;
 
 namespace Adapter
 {
@@ -16,6 +17,6 @@ namespace Adapter
 
         public string Name { get { return _socialMediaProfile.Name; } }
 
-        public string Email { get { return _socialMediaProfile.Email; } }
+        public MailAddress Email { get { return _socialMediaProfile.Email; } }
     }
 }

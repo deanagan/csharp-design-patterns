@@ -2,18 +2,22 @@ using System;
 using Xunit;
 using Moq;
 using FluentAssertions;
+using AutoFixture;
+using System.Net.Mail;
 
 namespace Adapter.Tests
 {
     public class AdapterShould
     {
+        private Fixture _fixture = new Fixture();
+
         [Fact]
         public void Return_SocialMediaProfileContent_WhenAccessingViaAdapter()
         {
             // Arrange
-            var mockSocialMediaProfile = Mock.Of<ISocialMediaProfile>(msmp => msmp.Name == "John Smith" &&
-                                                                      msmp.UserName == "jsmith" &&
-                                                                      msmp.Email == "jsmith@google.com");
+            var mockSocialMediaProfile = Mock.Of<ISocialMediaProfile>(msmp => msmp.Name == _fixture.Create<string>() &&
+                                                                      msmp.UserName == _fixture.Create<string>() &&
+                                                                      msmp.Email == _fixture.Create<MailAddress>());
 
             // Act
             var goodReadsProfile = new SocialMediaProfileAdapter(mockSocialMediaProfile);
