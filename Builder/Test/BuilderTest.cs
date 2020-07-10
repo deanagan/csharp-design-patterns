@@ -1,33 +1,33 @@
-using System;
 using Xunit;
-using Moq;
 using FluentAssertions;
 using System.Collections.Generic;
 using System.Linq;
+using AutoFixture;
 
 namespace Builder.Test
 {
     public class BuilderShould
     {
         private List<Product> _groceryShoppingCart;
-
+        private Fixture _fixture = new Fixture();
         public BuilderShould()
         {
+
             _groceryShoppingCart = new List<Product>
             {
                 new Product {
-                    Name = "Heinz Baked Beans",
-                    StockKeepingUnit = "Food-1234-5385",
+                    Name = _fixture.Create<string>(),
+                    StockKeepingUnit = "Food-" + _fixture.Create<string>(),
                     RegularRetailPrice = 4.00M
                 },
                 new Product {
-                    Name = "Toothpaste",
-                    StockKeepingUnit = "Hygiene-1254-5283",
+                    Name = _fixture.Create<string>(),
+                    StockKeepingUnit = "Hygiene-" + _fixture.Create<string>(),
                     RegularRetailPrice = 1.50M
                 },
                 new Product {
-                    Name = "Organic Frozen Berries",
-                    StockKeepingUnit = "Food-3494-0534",
+                    Name = _fixture.Create<string>(),
+                    StockKeepingUnit = "Food-" + _fixture.Create<string>(),
                     RegularRetailPrice = 6.00M
                 }
 
