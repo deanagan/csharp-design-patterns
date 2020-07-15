@@ -1,19 +1,23 @@
 using Moq;
 using Xunit;
 using FluentAssertions;
+using AutoFixture;
 
 namespace Decorator.Test
 {
     public class DecoratorShould
     {
+        private Fixture _fixture = new Fixture();
         private IHtmlElement _htmlElement;
-        private string _DummyElement = "Dummy";
-        private string _DummyLink = "www.linkme.com";
+        private string _DummyElement;
+        private string _DummyLink;
 
         public DecoratorShould()
         {
             _htmlElement = Mock.Of<IHtmlElement>();
-            Mock.Get(_htmlElement).Setup(htmlElement => htmlElement.GetHtmlElement()).Returns(_DummyElement);
+            _DummyElement = _fixture.Create<string>();
+            _DummyLink = "www." + _fixture.Create<string>() + ".com";
+            Mock.Get(_htmlElement).Setup(htmlElement => htmlElement.GetHtmlElement()).Returns(_DummyElement);            
         }
 
         [Fact]
