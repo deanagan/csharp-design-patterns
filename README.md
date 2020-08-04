@@ -7,9 +7,9 @@ A bunch of demo codes for:
 5. Ninject is used for the demo on DI based singletons.
 
 # How To Run the Demos
-1. Demos are divided into folders with the pattern. Cd to one of these folders.
+1. Demos are divided into folders with the pattern.
 2. To build all, enter `dotnet build`
-3. To execute the tests, enter `dotnet test` or `dotnet test -l:"console;verbosity=detailed"` to be more verbose.
+3. To execute all the tests, enter `dotnet test` or `dotnet test -l:"console;verbosity=detailed"` to be more verbose.
 
 
 
