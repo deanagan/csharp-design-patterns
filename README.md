@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/deanagan/csharp-design-patterns.svg?branch=master)](https://travis-ci.com/github/deanagan/csharp-design-patterns)
+
 # csharp-design-patterns
 A bunch of demo codes for:
 1. GoF Design patterns written in C#
