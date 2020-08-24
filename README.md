@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.com/deanagan/csharp-design-patterns.svg?branch=master)](https://travis-ci.com/github/deanagan/csharp-design-patterns)
 
+[![Coverage Status](https://coveralls.io/repos/github/deanagan/csharp-design-patterns/badge.svg?branch=master)](https://coveralls.io/github/deanagan/csharp-design-patterns?branch=master)
+
 # csharp-design-patterns
 A bunch of demo codes for:
 1. GoF Design patterns written in C#
