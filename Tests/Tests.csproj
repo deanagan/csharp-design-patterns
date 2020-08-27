@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoFixture" Version="4.13.0" />
+    <PackageReference Include="FluentAssertions" Version="5.10.3" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
+    <PackageReference Include="Moq" Version="4.13.1" />
+    <PackageReference Include="Ninject" Version="3.3.4" />
+    <PackageReference Include="xunit" Version="2.4.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
+    <PackageReference Include="coverlet.collector" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+
+    <ProjectReference Include="..\Patterns\AbstractFactory\AbstractFactory.csproj" />
+    <ProjectReference Include="..\Patterns\Adapter\Adapter.csproj" />
+    <ProjectReference Include="..\Patterns\Bridge\Bridge.csproj" />
+    <ProjectReference Include="..\Patterns\Builder\Builder.csproj" />
+    <ProjectReference Include="..\Patterns\ChainOfResponsibility\ChainOfResponsibility.csproj" />
+    <ProjectReference Include="..\Patterns\Command\Command.csproj" />
+    <ProjectReference Include="..\Patterns\Composite\Composite.csproj" />
+    <ProjectReference Include="..\Patterns\Decorator\Decorator.csproj" />
+    <ProjectReference Include="..\Patterns\Facade\Facade.csproj" />
+    <ProjectReference Include="..\Patterns\FactoryMethod\FactoryMethod.csproj" />
+    <ProjectReference Include="..\Patterns\Flyweight\Flyweight.csproj" />
+    <ProjectReference Include="..\Patterns\Mediator\Mediator.csproj" />
+    <ProjectReference Include="..\Patterns\Memento\Memento.csproj" />
+    <ProjectReference Include="..\Patterns\Observer\Observer.csproj" />
+    <ProjectReference Include="..\Patterns\Prototype\Prototype.csproj" />
+    <ProjectReference Include="..\Patterns\Proxy\Proxy.csproj" />
+    <ProjectReference Include="..\Patterns\SingletonDependencyInjection\SingletonDI.csproj" />
+    <ProjectReference Include="..\Patterns\State\State.csproj" />
+    <ProjectReference Include="..\Patterns\Strategy\Strategy.csproj" />
+    <ProjectReference Include="..\Patterns\TemplateMethod\TemplateMethod.csproj" />
+    <ProjectReference Include="..\Patterns\Visitor\Visitor.csproj" />
+  </ItemGroup>
+
+</Project>
