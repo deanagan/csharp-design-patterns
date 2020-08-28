@@ -1,0 +1,1486 @@
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\AbstractFactory\AMDProcessor.cs
+FN:5,System.String Laptop.AmdProcessor::BrandName()
+FNDA:1,System.String Laptop.AmdProcessor::BrandName()
+DA:6,1
+DA:7,1
+DA:8,1
+FN:9,System.Double Laptop.AmdProcessor::SpeedInGigaHertz()
+FNDA:1,System.Double Laptop.AmdProcessor::SpeedInGigaHertz()
+DA:10,1
+DA:11,1
+DA:12,1
+LF:6
+LH:6
+BRF:0
+BRH:0
+FNF:2
+FNH:2
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\AbstractFactory\DellPartsFactory.cs
+FN:5,Laptop.IStorage Laptop.DellPartsFactory::CreateStorage()
+FNDA:2,Laptop.IStorage Laptop.DellPartsFactory::CreateStorage()
+DA:6,2
+DA:7,2
+DA:8,2
+FN:9,Laptop.IProcessor Laptop.DellPartsFactory::CreateProcessor()
+FNDA:2,Laptop.IProcessor Laptop.DellPartsFactory::CreateProcessor()
+DA:10,2
+DA:11,2
+DA:12,2
+LF:6
+LH:6
+BRF:0
+BRH:0
+FNF:2
+FNH:2
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\AbstractFactory\HardDrive.cs
+FN:6,System.String Laptop.HardDrive::HardwareType()
+FNDA:1,System.String Laptop.HardDrive::HardwareType()
+DA:7,1
+DA:8,1
+DA:9,1
+FN:10,System.Int32 Laptop.HardDrive::ReadSpeedInMBytesPerSec()
+FNDA:1,System.Int32 Laptop.HardDrive::ReadSpeedInMBytesPerSec()
+DA:11,1
+DA:12,1
+DA:13,1
+LF:6
+LH:6
+BRF:0
+BRH:0
+FNF:2
+FNH:2
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\AbstractFactory\IntelProcessor.cs
+FN:5,System.String Laptop.IntelProcessor::BrandName()
+FNDA:1,System.String Laptop.IntelProcessor::BrandName()
+DA:6,1
+DA:7,1
+DA:8,1
+FN:9,System.Double Laptop.IntelProcessor::SpeedInGigaHertz()
+FNDA:1,System.Double Laptop.IntelProcessor::SpeedInGigaHertz()
+DA:10,1
+DA:11,1
+DA:12,1
+LF:6
+LH:6
+BRF:0
+BRH:0
+FNF:2
+FNH:2
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\AbstractFactory\LenovoPartsFactory.cs
+FN:5,Laptop.IStorage Laptop.LenovoPartsFactory::CreateStorage()
+FNDA:2,Laptop.IStorage Laptop.LenovoPartsFactory::CreateStorage()
+DA:6,2
+DA:7,2
+DA:8,2
+FN:9,Laptop.IProcessor Laptop.LenovoPartsFactory::CreateProcessor()
+FNDA:2,Laptop.IProcessor Laptop.LenovoPartsFactory::CreateProcessor()
+DA:10,2
+DA:11,2
+DA:12,2
+LF:6
+LH:6
+BRF:0
+BRH:0
+FNF:2
+FNH:2
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\AbstractFactory\SolidStateDrive.cs
+FN:6,System.String Laptop.SolidStateDrive::HardwareType()
+FNDA:1,System.String Laptop.SolidStateDrive::HardwareType()
+DA:7,1
+DA:8,1
+DA:9,1
+FN:10,System.Int32 Laptop.SolidStateDrive::ReadSpeedInMBytesPerSec()
+FNDA:1,System.Int32 Laptop.SolidStateDrive::ReadSpeedInMBytesPerSec()
+DA:11,1
+DA:12,1
+DA:13,1
+LF:6
+LH:6
+BRF:0
+BRH:0
+FNF:2
+FNH:2
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Adapter\SocialMediaProfileAdapter.cs
+FN:17,System.String Adapter.SocialMediaProfileAdapter::get_Name()
+FNDA:3,System.String Adapter.SocialMediaProfileAdapter::get_Name()
+DA:18,3
+FN:19,System.Net.Mail.MailAddress Adapter.SocialMediaProfileAdapter::get_Email()
+FNDA:3,System.Net.Mail.MailAddress Adapter.SocialMediaProfileAdapter::get_Email()
+DA:20,3
+FN:8,System.Void Adapter.SocialMediaProfileAdapter::.ctor(Adapter.ISocialMediaProfile)
+FNDA:2,System.Void Adapter.SocialMediaProfileAdapter::.ctor(Adapter.ISocialMediaProfile)
+DA:9,2
+DA:10,2
+DA:11,2
+DA:12,1
+DA:13,1
+DA:15,1
+DA:16,1
+BRDA:11,14,0,1
+BRDA:11,14,1,1
+LF:9
+LH:9
+BRF:2
+BRH:2
+FNF:3
+FNH:3
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Bridge\CreditCardPayment.cs
+FN:13,System.Void Bridge.CreditCardPayment::SubmitPayment(System.Decimal)
+FNDA:1,System.Void Bridge.CreditCardPayment::SubmitPayment(System.Decimal)
+DA:14,1
+DA:15,1
+DA:16,1
+FN:8,System.Void Bridge.CreditCardPayment::.ctor(Bridge.IPaymentGateway)
+FNDA:1,System.Void Bridge.CreditCardPayment::.ctor(Bridge.IPaymentGateway)
+DA:9,1
+DA:10,1
+DA:11,1
+DA:12,1
+LF:7
+LH:7
+BRF:0
+BRH:0
+FNF:2
+FNH:2
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Bridge\Order.cs
+FN:6,Bridge.IPayment Bridge.Order::get_Payment()
+FNDA:2,Bridge.IPayment Bridge.Order::get_Payment()
+DA:7,2
+FN:7,System.Void Bridge.Order::.ctor(Bridge.IPayment)
+FNDA:2,System.Void Bridge.Order::.ctor(Bridge.IPayment)
+DA:8,2
+DA:9,2
+DA:10,2
+DA:11,2
+LF:5
+LH:5
+BRF:0
+BRH:0
+FNF:2
+FNH:2
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Bridge\PaypalPayment.cs
+FN:13,System.Void Bridge.PaypalPayment::SubmitPayment(System.Decimal)
+FNDA:1,System.Void Bridge.PaypalPayment::SubmitPayment(System.Decimal)
+DA:14,1
+DA:15,1
+DA:16,1
+FN:8,System.Void Bridge.PaypalPayment::.ctor(Bridge.IPaymentGateway)
+FNDA:1,System.Void Bridge.PaypalPayment::.ctor(Bridge.IPaymentGateway)
+DA:9,1
+DA:10,1
+DA:11,1
+DA:12,1
+LF:7
+LH:7
+BRF:0
+BRH:0
+FNF:2
+FNH:2
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Bridge\PurchaseOrder.cs
+FN:10,System.Void Bridge.PurchaseOrder::Checkout(System.Decimal)
+FNDA:2,System.Void Bridge.PurchaseOrder::Checkout(System.Decimal)
+DA:11,2
+DA:12,2
+DA:13,2
+FN:6,System.Void Bridge.PurchaseOrder::.ctor(Bridge.IPayment)
+FNDA:2,System.Void Bridge.PurchaseOrder::.ctor(Bridge.IPayment)
+DA:7,2
+DA:8,2
+DA:9,2
+LF:6
+LH:6
+BRF:0
+BRH:0
+FNF:2
+FNH:2
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Builder\DiscountStrategyBuilder.cs
+FN:13,Builder.DiscountStrategyBuilder Builder.DiscountStrategyBuilder::ApplicableToSKUCode(System.String)
+FNDA:1,Builder.DiscountStrategyBuilder Builder.DiscountStrategyBuilder::ApplicableToSKUCode(System.String)
+DA:14,1
+DA:15,1
+DA:16,1
+DA:17,1
+FN:19,Builder.DiscountStrategyBuilder Builder.DiscountStrategyBuilder::WithDiscountInPercentage(System.Int32)
+FNDA:1,Builder.DiscountStrategyBuilder Builder.DiscountStrategyBuilder::WithDiscountInPercentage(System.Int32)
+DA:20,1
+DA:21,1
+DA:22,1
+DA:23,1
+FN:24,Builder.IDiscountStrategy Builder.DiscountStrategyBuilder::Build()
+FNDA:1,Builder.IDiscountStrategy Builder.DiscountStrategyBuilder::Build()
+DA:25,1
+DA:26,1
+DA:27,1
+FN:7,System.Void Builder.DiscountStrategyBuilder::.ctor(Builder.IDiscountStrategy)
+FNDA:1,System.Void Builder.DiscountStrategyBuilder::.ctor(Builder.IDiscountStrategy)
+DA:8,1
+DA:9,1
+DA:10,1
+DA:11,1
+LF:15
+LH:15
+BRF:0
+BRH:0
+FNF:4
+FNH:4
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Builder\Product.cs
+FN:4,System.String Builder.Product::get_StockKeepingUnit()
+FNDA:6,System.String Builder.Product::get_StockKeepingUnit()
+DA:5,6
+FN:5,System.Decimal Builder.Product::get_RegularRetailPrice()
+FNDA:8,System.Decimal Builder.Product::get_RegularRetailPrice()
+DA:6,8
+FN:6,System.String Builder.Product::get_Name()
+FNDA:0,System.String Builder.Product::get_Name()
+DA:7,0
+LF:3
+LH:2
+BRF:0
+BRH:0
+FNF:3
+FNH:2
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Builder\SkuCodeStartDiscountStrategy.cs
+FN:4,System.Int32 Builder.SkuCodeStartDiscountStrategy::get_DiscountInPercentage()
+FNDA:3,System.Int32 Builder.SkuCodeStartDiscountStrategy::get_DiscountInPercentage()
+DA:5,3
+FN:5,System.String Builder.SkuCodeStartDiscountStrategy::get_SkuCode()
+FNDA:4,System.String Builder.SkuCodeStartDiscountStrategy::get_SkuCode()
+DA:6,4
+FN:7,System.Decimal Builder.SkuCodeStartDiscountStrategy::CalculateDiscountedRetailPrice(Builder.Product)
+FNDA:3,System.Decimal Builder.SkuCodeStartDiscountStrategy::CalculateDiscountedRetailPrice(Builder.Product)
+DA:8,3
+DA:9,3
+DA:10,1
+DA:11,1
+DA:14,2
+DA:15,3
+BRDA:9,23,0,1
+BRDA:9,23,1,2
+LF:8
+LH:8
+BRF:2
+BRH:2
+FNF:3
+FNH:3
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Builder\SkuCodeStartDiscountStrategyBuilder.cs
+FN:5,System.Void Builder.SkuCodeStartDiscountStrategyBuilder::.ctor()
+FNDA:1,System.Void Builder.SkuCodeStartDiscountStrategyBuilder::.ctor()
+DA:6,1
+DA:7,1
+DA:8,1
+LF:3
+LH:3
+BRF:0
+BRH:0
+FNF:1
+FNH:1
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\ChainOfResponsibility\AmexCardHandler.cs
+FN:13,System.Boolean ChainOfResponsibility.AmexCardHandler::IsCreditCardValid(ChainOfResponsibility.ICreditCard)
+FNDA:3,System.Boolean ChainOfResponsibility.AmexCardHandler::IsCreditCardValid(ChainOfResponsibility.ICreditCard)
+DA:14,3
+DA:15,3
+DA:16,1
+DA:17,1
+DA:20,2
+DA:21,3
+BRDA:15,19,0,1
+BRDA:15,19,1,2
+FN:7,System.Void ChainOfResponsibility.AmexCardHandler::.ctor(ChainOfResponsibility.IPaymentGateway)
+FNDA:5,System.Void ChainOfResponsibility.AmexCardHandler::.ctor(ChainOfResponsibility.IPaymentGateway)
+DA:8,5
+DA:9,5
+DA:10,5
+DA:11,5
+LF:10
+LH:10
+BRF:2
+BRH:2
+FNF:2
+FNH:2
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\ChainOfResponsibility\CreditCardHandlerBase.cs
+FN:6,ChainOfResponsibility.ICreditCardHandler ChainOfResponsibility.CreditCardHandlerBase::SetNext(ChainOfResponsibility.ICreditCardHandler)
+FNDA:8,ChainOfResponsibility.ICreditCardHandler ChainOfResponsibility.CreditCardHandlerBase::SetNext(ChainOfResponsibility.ICreditCardHandler)
+DA:7,8
+DA:8,8
+DA:9,8
+DA:10,8
+FN:12,System.Boolean ChainOfResponsibility.CreditCardHandlerBase::IsCreditCardValid(ChainOfResponsibility.ICreditCard)
+FNDA:6,System.Boolean ChainOfResponsibility.CreditCardHandlerBase::IsCreditCardValid(ChainOfResponsibility.ICreditCard)
+DA:13,6
+DA:14,6
+DA:15,5
+DA:16,5
+DA:19,1
+DA:20,6
+BRDA:14,12,0,5
+BRDA:14,12,1,1
+LF:10
+LH:10
+BRF:2
+BRH:2
+FNF:2
+FNH:2
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\ChainOfResponsibility\MastercardHandler.cs
+FN:13,System.Boolean ChainOfResponsibility.MastercardHandler::IsCreditCardValid(ChainOfResponsibility.ICreditCard)
+FNDA:2,System.Boolean ChainOfResponsibility.MastercardHandler::IsCreditCardValid(ChainOfResponsibility.ICreditCard)
+DA:14,2
+DA:15,2
+DA:16,1
+DA:17,1
+DA:20,1
+DA:21,2
+BRDA:15,19,0,1
+BRDA:15,19,1,1
+FN:7,System.Void ChainOfResponsibility.MastercardHandler::.ctor(ChainOfResponsibility.IPaymentGateway)
+FNDA:5,System.Void ChainOfResponsibility.MastercardHandler::.ctor(ChainOfResponsibility.IPaymentGateway)
+DA:8,5
+DA:9,5
+DA:10,5
+DA:11,5
+LF:10
+LH:10
+BRF:2
+BRH:2
+FNF:2
+FNH:2
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\ChainOfResponsibility\VisaCardHandler.cs
+FN:13,System.Boolean ChainOfResponsibility.VisaCardHandler::IsCreditCardValid(ChainOfResponsibility.ICreditCard)
+FNDA:4,System.Boolean ChainOfResponsibility.VisaCardHandler::IsCreditCardValid(ChainOfResponsibility.ICreditCard)
+DA:14,4
+DA:15,4
+DA:16,1
+DA:17,1
+DA:20,3
+DA:21,4
+BRDA:15,19,0,1
+BRDA:15,19,1,3
+FN:7,System.Void ChainOfResponsibility.VisaCardHandler::.ctor(ChainOfResponsibility.IPaymentGateway)
+FNDA:5,System.Void ChainOfResponsibility.VisaCardHandler::.ctor(ChainOfResponsibility.IPaymentGateway)
+DA:8,5
+DA:9,5
+DA:10,5
+DA:11,5
+LF:10
+LH:10
+BRF:2
+BRH:2
+FNF:2
+FNH:2
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Command\AddCommand.cs
+FN:14,System.Void Command.AddCommand::Execute()
+FNDA:6,System.Void Command.AddCommand::Execute()
+DA:15,6
+DA:16,6
+DA:17,6
+FN:7,System.Void Command.AddCommand::.ctor(Command.IProductList,Command.IProduct)
+FNDA:6,System.Void Command.AddCommand::.ctor(Command.IProductList,Command.IProduct)
+DA:8,6
+DA:9,6
+DA:10,6
+DA:11,6
+DA:12,6
+LF:8
+LH:8
+BRF:0
+BRH:0
+FNF:2
+FNH:2
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Command\ClearCommand.cs
+FN:10,System.Void Command.ClearCommand::Execute()
+FNDA:1,System.Void Command.ClearCommand::Execute()
+DA:11,1
+DA:12,1
+DA:13,1
+FN:5,System.Void Command.ClearCommand::.ctor(Command.IProductList)
+FNDA:1,System.Void Command.ClearCommand::.ctor(Command.IProductList)
+DA:6,1
+DA:7,1
+DA:8,1
+DA:9,1
+LF:7
+LH:7
+BRF:0
+BRH:0
+FNF:2
+FNH:2
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Command\ProductCommandInvoker.cs
+FN:14,System.Boolean Command.ProductCommandInvoker::AddCommand(System.String,Command.ICommand)
+FNDA:8,System.Boolean Command.ProductCommandInvoker::AddCommand(System.String,Command.ICommand)
+DA:15,8
+DA:16,8
+DA:17,0
+DA:18,0
+DA:20,8
+DA:21,8
+DA:22,8
+BRDA:16,15,0,0
+BRDA:16,15,1,8
+FN:24,System.Void Command.ProductCommandInvoker::InvokeCommand(System.String)
+FNDA:8,System.Void Command.ProductCommandInvoker::InvokeCommand(System.String)
+DA:25,8
+DA:26,8
+DA:27,8
+FN:8,System.Void Command.ProductCommandInvoker::.ctor()
+FNDA:3,System.Void Command.ProductCommandInvoker::.ctor()
+DA:9,3
+DA:10,3
+DA:11,3
+DA:12,3
+LF:14
+LH:12
+BRF:2
+BRH:1
+FNF:3
+FNH:3
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Command\RemoveCommand.cs
+FN:12,System.Void Command.RemoveCommand::Execute()
+FNDA:1,System.Void Command.RemoveCommand::Execute()
+DA:13,1
+DA:14,1
+DA:15,1
+FN:6,System.Void Command.RemoveCommand::.ctor(Command.IProductList,Command.IProduct)
+FNDA:1,System.Void Command.RemoveCommand::.ctor(Command.IProductList,Command.IProduct)
+DA:7,1
+DA:8,1
+DA:9,1
+DA:10,1
+DA:11,1
+LF:8
+LH:8
+BRF:0
+BRH:0
+FNF:2
+FNH:2
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Composite\Book.cs
+FN:6,System.Decimal Composite.Book::get_Price()
+FNDA:14,System.Decimal Composite.Book::get_Price()
+DA:7,14
+FN:7,System.String Composite.Book::get_Name()
+FNDA:0,System.String Composite.Book::get_Name()
+DA:8,0
+FN:9,System.Int32 Composite.Book::get_Discount()
+FNDA:8,System.Int32 Composite.Book::get_Discount()
+DA:10,8
+FN:11,System.Void Composite.Book::.ctor(System.String,System.Decimal,System.Int32)
+FNDA:7,System.Void Composite.Book::.ctor(System.String,System.Decimal,System.Int32)
+DA:12,7
+DA:13,7
+DA:14,7
+DA:15,7
+DA:16,7
+DA:17,7
+LF:9
+LH:8
+BRF:0
+BRH:0
+FNF:4
+FNH:3
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Composite\BookComposite.cs
+FN:9,System.Decimal Composite.BookComposite::get_Price()
+FNDA:12,System.Decimal Composite.BookComposite::get_Price()
+DA:10,12
+FN:10,System.String Composite.BookComposite::get_Name()
+FNDA:0,System.String Composite.BookComposite::get_Name()
+DA:11,0
+FN:11,System.Int32 Composite.BookComposite::get_Discount()
+FNDA:6,System.Int32 Composite.BookComposite::get_Discount()
+DA:12,6
+FN:20,System.Void Composite.BookComposite::Add(Composite.IBook)
+FNDA:8,System.Void Composite.BookComposite::Add(Composite.IBook)
+DA:21,8
+DA:22,8
+DA:23,8
+FN:12,System.Void Composite.BookComposite::.ctor(System.Int32,System.String)
+FNDA:4,System.Void Composite.BookComposite::.ctor(System.Int32,System.String)
+DA:13,4
+DA:14,4
+DA:15,4
+DA:16,4
+DA:17,4
+DA:18,4
+LF:12
+LH:11
+BRF:0
+BRH:0
+FNF:5
+FNH:4
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Decorator\BoldenHtmlElement.cs
+FN:11,System.String Decorator.BoldenHtmlElement::GetHtmlElement()
+FNDA:3,System.String Decorator.BoldenHtmlElement::GetHtmlElement()
+DA:12,3
+DA:13,3
+DA:14,3
+FN:6,System.Void Decorator.BoldenHtmlElement::.ctor(Decorator.IHtmlElement)
+FNDA:3,System.Void Decorator.BoldenHtmlElement::.ctor(Decorator.IHtmlElement)
+DA:7,3
+DA:8,3
+DA:9,3
+LF:6
+LH:6
+BRF:0
+BRH:0
+FNF:2
+FNH:2
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Decorator\HtmlElement.cs
+FN:14,System.String Decorator.HtmlElement::GetHtmlElement()
+FNDA:0,System.String Decorator.HtmlElement::GetHtmlElement()
+DA:15,0
+DA:16,0
+DA:17,0
+FN:8,System.Void Decorator.HtmlElement::.ctor(System.String)
+FNDA:0,System.Void Decorator.HtmlElement::.ctor(System.String)
+DA:9,0
+DA:10,0
+DA:11,0
+DA:12,0
+LF:7
+LH:0
+BRF:0
+BRH:0
+FNF:2
+FNH:0
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Decorator\HtmlElementDecorator.cs
+FN:12,System.String Decorator.HtmlElementDecorator::GetWrappedHtmlElement()
+FNDA:8,System.String Decorator.HtmlElementDecorator::GetWrappedHtmlElement()
+DA:13,8
+DA:14,8
+DA:15,8
+FN:7,System.Void Decorator.HtmlElementDecorator::.ctor(Decorator.IHtmlElement)
+FNDA:16,System.Void Decorator.HtmlElementDecorator::.ctor(Decorator.IHtmlElement)
+DA:8,16
+LF:4
+LH:4
+BRF:0
+BRH:0
+FNF:2
+FNH:2
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Decorator\HyperLinkifyHtmlElement.cs
+FN:13,System.String Decorator.HyperLinkifyHtmlElement::GetHtmlElement()
+FNDA:3,System.String Decorator.HyperLinkifyHtmlElement::GetHtmlElement()
+DA:14,3
+DA:15,3
+DA:16,3
+FN:7,System.Void Decorator.HyperLinkifyHtmlElement::.ctor(System.String,Decorator.IHtmlElement)
+FNDA:3,System.Void Decorator.HyperLinkifyHtmlElement::.ctor(System.String,Decorator.IHtmlElement)
+DA:8,3
+DA:9,3
+DA:10,3
+DA:11,3
+LF:7
+LH:7
+BRF:0
+BRH:0
+FNF:2
+FNH:2
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Decorator\ItalicizeHtmlElement.cs
+FN:12,System.String Decorator.ItalicizeHtmlElement::GetHtmlElement()
+FNDA:2,System.String Decorator.ItalicizeHtmlElement::GetHtmlElement()
+DA:13,2
+DA:14,2
+DA:15,2
+FN:6,System.Void Decorator.ItalicizeHtmlElement::.ctor(Decorator.IHtmlElement)
+FNDA:2,System.Void Decorator.ItalicizeHtmlElement::.ctor(Decorator.IHtmlElement)
+DA:7,2
+DA:8,2
+DA:10,2
+LF:6
+LH:6
+BRF:0
+BRH:0
+FNF:2
+FNH:2
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Facade\PaymentProcessor.cs
+FN:20,System.Void Facade.PaymentProcessor::InitializePaymentGatewayInterface()
+FNDA:4,System.Void Facade.PaymentProcessor::InitializePaymentGatewayInterface()
+DA:21,4
+DA:22,4
+DA:23,4
+DA:24,4
+DA:25,4
+FN:26,System.Boolean Facade.PaymentProcessor::SubmitPayment()
+FNDA:2,System.Boolean Facade.PaymentProcessor::SubmitPayment()
+DA:27,2
+DA:28,2
+DA:29,2
+DA:30,2
+DA:31,2
+FN:9,System.Void Facade.PaymentProcessor::.ctor(Facade.IEnvironment,Facade.IMerchantAuthenticationType,Facade.ITransactionController)
+FNDA:4,System.Void Facade.PaymentProcessor::.ctor(Facade.IEnvironment,Facade.IMerchantAuthenticationType,Facade.ITransactionController)
+DA:10,4
+DA:11,4
+DA:12,4
+DA:13,4
+DA:14,4
+DA:16,4
+DA:17,4
+DA:18,4
+DA:19,4
+LF:19
+LH:19
+BRF:0
+BRH:0
+FNF:3
+FNH:3
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\FactoryMethod\BasicPerks.cs
+FN:5,System.Double FactoryMethod.BasicPerks::EarningBonus()
+FNDA:1,System.Double FactoryMethod.BasicPerks::EarningBonus()
+DA:6,1
+DA:7,1
+DA:8,1
+LF:3
+LH:3
+BRF:0
+BRH:0
+FNF:1
+FNH:1
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\FactoryMethod\EarningBonusCalculatorLegacy.cs
+FN:7,System.Int32 FactoryMethod.EarningBonusCalculatorLegacy::UpdatedMiles(System.Int32,System.Int32)
+FNDA:0,System.Int32 FactoryMethod.EarningBonusCalculatorLegacy::UpdatedMiles(System.Int32,System.Int32)
+DA:8,0
+DA:9,0
+DA:10,0
+DA:11,0
+DA:13,0
+DA:14,0
+DA:15,0
+DA:18,0
+DA:19,0
+DA:21,0
+BRDA:9,14,0,0
+BRDA:9,14,1,0
+BRDA:13,59,0,0
+BRDA:13,59,1,0
+LF:10
+LH:0
+BRF:4
+BRH:0
+FNF:1
+FNH:0
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\FactoryMethod\EarningBonusCalculatorRefactored.cs
+FN:13,System.Int32 FactoryMethod.EarningBonusCalculator::UpdatedMiles(System.Int32,System.Int32)
+FNDA:3,System.Int32 FactoryMethod.EarningBonusCalculator::UpdatedMiles(System.Int32,System.Int32)
+DA:14,3
+DA:15,3
+DA:16,3
+DA:17,3
+FN:8,System.Void FactoryMethod.EarningBonusCalculator::.ctor(FactoryMethod.PerksFactory)
+FNDA:3,System.Void FactoryMethod.EarningBonusCalculator::.ctor(FactoryMethod.PerksFactory)
+DA:9,3
+DA:10,3
+DA:11,3
+DA:12,3
+LF:8
+LH:8
+BRF:0
+BRH:0
+FNF:2
+FNH:2
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\FactoryMethod\GoldPerks.cs
+FN:5,System.Double FactoryMethod.GoldPerks::EarningBonus()
+FNDA:1,System.Double FactoryMethod.GoldPerks::EarningBonus()
+DA:6,1
+DA:7,1
+DA:8,1
+LF:3
+LH:3
+BRF:0
+BRH:0
+FNF:1
+FNH:1
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\FactoryMethod\PerksFactory.cs
+FN:15,FactoryMethod.IPerks FactoryMethod.PerksFactory::GetPerks(System.Int32)
+FNDA:6,FactoryMethod.IPerks FactoryMethod.PerksFactory::GetPerks(System.Int32)
+DA:16,6
+DA:17,16
+DA:18,10
+DA:19,6
+DA:20,6
+DA:22,6
+DA:24,6
+DA:25,6
+DA:26,6
+FN:10,System.Void FactoryMethod.PerksFactory::.ctor(System.Collections.Generic.List`1<System.ValueTuple`2<System.Int32,System.String>>)
+FNDA:6,System.Void FactoryMethod.PerksFactory::.ctor(System.Collections.Generic.List`1<System.ValueTuple`2<System.Int32,System.String>>)
+DA:11,6
+DA:12,6
+DA:13,6
+DA:14,6
+LF:13
+LH:13
+BRF:0
+BRH:0
+FNF:2
+FNH:2
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\FactoryMethod\SilverPerks.cs
+FN:5,System.Double FactoryMethod.SilverPerks::EarningBonus()
+FNDA:1,System.Double FactoryMethod.SilverPerks::EarningBonus()
+DA:6,1
+DA:7,1
+DA:8,1
+LF:3
+LH:3
+BRF:0
+BRH:0
+FNF:1
+FNH:1
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Flyweight\XmlTextBlob.cs
+FN:13,System.Void Flyweight.XmlTextBlob::Download(System.Int32,System.String)
+FNDA:1,System.Void Flyweight.XmlTextBlob::Download(System.Int32,System.String)
+DA:14,1
+DA:15,1
+DA:16,1
+FN:8,System.Void Flyweight.XmlTextBlob::.ctor(Flyweight.TextDownloader)
+FNDA:2,System.Void Flyweight.XmlTextBlob::.ctor(Flyweight.TextDownloader)
+DA:9,2
+DA:10,2
+DA:11,2
+DA:12,2
+LF:7
+LH:7
+BRF:0
+BRH:0
+FNF:2
+FNH:2
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Flyweight\XmlTextBlobFactory.cs
+FN:15,Flyweight.TextBlob Flyweight.XmlTextBlobFactory::GetTextBlob(System.Int32)
+FNDA:3,Flyweight.TextBlob Flyweight.XmlTextBlobFactory::GetTextBlob(System.Int32)
+DA:16,3
+DA:17,3
+DA:18,1
+DA:19,1
+DA:22,2
+DA:23,2
+DA:24,2
+DA:25,3
+BRDA:17,15,0,1
+BRDA:17,15,1,2
+FN:7,System.Void Flyweight.XmlTextBlobFactory::.ctor(Flyweight.TextDownloader)
+FNDA:2,System.Void Flyweight.XmlTextBlobFactory::.ctor(Flyweight.TextDownloader)
+DA:8,2
+DA:10,2
+DA:11,2
+DA:12,2
+DA:13,2
+LF:13
+LH:13
+BRF:2
+BRH:2
+FNF:2
+FNH:2
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Mediator\Product.cs
+FN:4,System.String Mediator.Product::get_Item()
+FNDA:9,System.String Mediator.Product::get_Item()
+DA:5,9
+FN:5,System.String Mediator.Product::get_Location()
+FNDA:9,System.String Mediator.Product::get_Location()
+DA:6,9
+LF:2
+LH:2
+BRF:0
+BRH:0
+FNF:2
+FNH:2
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Mediator\PurchaseMediator.cs
+FN:15,System.Boolean Mediator.PurchaseMediator::BroadcastPurchaseCompletion(Mediator.IPurchaser)
+FNDA:3,System.Boolean Mediator.PurchaseMediator::BroadcastPurchaseCompletion(Mediator.IPurchaser)
+DA:16,3
+DA:17,3
+DA:19,3
+DA:20,2
+DA:21,3
+DA:22,2
+DA:24,3
+DA:25,3
+BRDA:19,35,0,2
+BRDA:19,35,1,3
+FN:26,System.Boolean Mediator.PurchaseMediator::AddPurchaser(Mediator.IPurchaser)
+FNDA:5,System.Boolean Mediator.PurchaseMediator::AddPurchaser(Mediator.IPurchaser)
+DA:27,5
+DA:28,5
+DA:29,4
+DA:30,4
+DA:31,4
+DA:34,1
+DA:35,5
+BRDA:28,18,0,4
+BRDA:28,18,1,1
+FN:10,System.Void Mediator.PurchaseMediator::.ctor()
+FNDA:6,System.Void Mediator.PurchaseMediator::.ctor()
+DA:11,6
+DA:12,6
+DA:13,6
+DA:14,6
+LF:19
+LH:19
+BRF:4
+BRH:4
+FNF:3
+FNH:3
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Mediator\Purchaser.cs
+FN:6,System.String Mediator.Purchaser::get_ItemBought()
+FNDA:0,System.String Mediator.Purchaser::get_ItemBought()
+DA:7,0
+FN:7,System.String Mediator.Purchaser::get_Location()
+FNDA:0,System.String Mediator.Purchaser::get_Location()
+DA:8,0
+FN:28,System.Void Mediator.Purchaser::Receive(Mediator.IPurchaser)
+FNDA:1,System.Void Mediator.Purchaser::Receive(Mediator.IPurchaser)
+DA:29,1
+DA:30,1
+DA:31,1
+DA:32,1
+FN:34,System.Void Mediator.Purchaser::Complete(Mediator.Product)
+FNDA:2,System.Void Mediator.Purchaser::Complete(Mediator.Product)
+DA:35,2
+DA:36,2
+DA:37,2
+DA:38,2
+FN:40,Mediator.Product Mediator.Purchaser::GetProduct()
+FNDA:1,Mediator.Product Mediator.Purchaser::GetProduct()
+DA:41,1
+DA:42,1
+DA:43,1
+FN:11,System.Void Mediator.Purchaser::.ctor(Mediator.IAlertScreen,Mediator.IMediator)
+FNDA:5,System.Void Mediator.Purchaser::.ctor(Mediator.IAlertScreen,Mediator.IMediator)
+DA:12,5
+DA:13,5
+DA:14,5
+DA:15,1
+DA:16,1
+DA:19,4
+DA:20,1
+DA:21,1
+DA:24,3
+DA:25,3
+DA:26,3
+BRDA:14,14,0,1
+BRDA:14,14,1,4
+BRDA:19,34,0,1
+BRDA:19,34,1,3
+LF:24
+LH:22
+BRF:4
+BRH:4
+FNF:6
+FNH:4
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Memento\Product.cs
+FN:4,System.String Memento.Product::get_Name()
+FNDA:0,System.String Memento.Product::get_Name()
+DA:5,0
+FN:5,System.Decimal Memento.Product::get_Price()
+FNDA:7,System.Decimal Memento.Product::get_Price()
+DA:6,7
+FN:8,Memento.Product Memento.Product::ShallowCopy()
+FNDA:3,Memento.Product Memento.Product::ShallowCopy()
+DA:9,3
+DA:10,3
+DA:11,3
+LF:5
+LH:4
+BRF:0
+BRH:0
+FNF:3
+FNH:2
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Memento\ProductCaretaker.cs
+FN:9,System.Void Memento.ProductCaretaker::AddProductMemento(Memento.Product)
+FNDA:3,System.Void Memento.ProductCaretaker::AddProductMemento(Memento.Product)
+DA:10,3
+DA:11,3
+DA:12,3
+FN:14,Memento.Product Memento.ProductCaretaker::GetLastMemento()
+FNDA:2,Memento.Product Memento.ProductCaretaker::GetLastMemento()
+DA:15,2
+DA:16,2
+DA:17,2
+FN:7,System.Void Memento.ProductCaretaker::.ctor()
+FNDA:2,System.Void Memento.ProductCaretaker::.ctor()
+DA:8,2
+LF:7
+LH:7
+BRF:0
+BRH:0
+FNF:3
+FNH:3
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Memento\ProductOriginator.cs
+FN:14,System.Void Memento.ProductOriginator::SetMemento(Memento.Product)
+FNDA:4,System.Void Memento.ProductOriginator::SetMemento(Memento.Product)
+DA:15,4
+DA:16,4
+DA:17,4
+FN:19,Memento.Product Memento.ProductOriginator::GetMemento()
+FNDA:4,Memento.Product Memento.ProductOriginator::GetMemento()
+DA:20,4
+DA:21,4
+DA:22,4
+FN:8,System.Void Memento.ProductOriginator::.ctor(Memento.Product)
+FNDA:2,System.Void Memento.ProductOriginator::.ctor(Memento.Product)
+DA:9,2
+DA:10,2
+DA:11,2
+DA:12,2
+LF:10
+LH:10
+BRF:0
+BRH:0
+FNF:3
+FNH:3
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Observer\Customer.cs
+FN:7,System.String Observer.Customer::Update(Observer.ISubject)
+FNDA:1,System.String Observer.Customer::Update(Observer.ISubject)
+DA:8,1
+DA:9,1
+DA:10,1
+LF:3
+LH:3
+BRF:0
+BRH:0
+FNF:1
+FNH:1
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Observer\SpecialsSubject.cs
+FN:7,System.String Observer.SpecialsSubject::get_SubjectState()
+FNDA:0,System.String Observer.SpecialsSubject::get_SubjectState()
+DA:8,0
+FN:12,System.Void Observer.SpecialsSubject::Attach(Observer.IObserver)
+FNDA:1,System.Void Observer.SpecialsSubject::Attach(Observer.IObserver)
+DA:13,1
+DA:14,1
+DA:15,1
+FN:17,System.Void Observer.SpecialsSubject::Detach(Observer.IObserver)
+FNDA:0,System.Void Observer.SpecialsSubject::Detach(Observer.IObserver)
+DA:18,0
+DA:19,0
+DA:20,0
+FN:22,System.Void Observer.SpecialsSubject::Notify()
+FNDA:2,System.Void Observer.SpecialsSubject::Notify()
+DA:23,2
+DA:24,3
+DA:25,2
+FN:9,System.Void Observer.SpecialsSubject::.ctor()
+FNDA:2,System.Void Observer.SpecialsSubject::.ctor()
+DA:10,2
+LF:11
+LH:7
+BRF:0
+BRH:0
+FNF:5
+FNH:3
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Prototype\Address.cs
+FN:6,System.String Prototype.Address::get_StreetAddress()
+FNDA:14,System.String Prototype.Address::get_StreetAddress()
+DA:7,14
+FN:7,System.String Prototype.Address::get_City()
+FNDA:13,System.String Prototype.Address::get_City()
+DA:8,13
+FN:8,System.String Prototype.Address::get_State()
+FNDA:13,System.String Prototype.Address::get_State()
+DA:9,13
+FN:9,System.String Prototype.Address::get_Country()
+FNDA:13,System.String Prototype.Address::get_Country()
+DA:10,13
+FN:10,System.String Prototype.Address::get_PostCode()
+FNDA:13,System.String Prototype.Address::get_PostCode()
+DA:11,13
+LF:5
+LH:5
+BRF:0
+BRH:0
+FNF:5
+FNH:5
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Prototype\BasicCustomer.cs
+FN:6,System.String Prototype.BasicCustomer::get_FirstName()
+FNDA:5,System.String Prototype.BasicCustomer::get_FirstName()
+DA:7,5
+FN:7,System.String Prototype.BasicCustomer::get_LastName()
+FNDA:0,System.String Prototype.BasicCustomer::get_LastName()
+DA:8,0
+FN:8,Prototype.Address Prototype.BasicCustomer::get_HomeAddress()
+FNDA:28,Prototype.Address Prototype.BasicCustomer::get_HomeAddress()
+DA:9,28
+FN:9,Prototype.Address Prototype.BasicCustomer::get_BillingAddress()
+FNDA:8,Prototype.Address Prototype.BasicCustomer::get_BillingAddress()
+DA:10,8
+LF:4
+LH:3
+BRF:0
+BRH:0
+FNF:4
+FNH:3
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Prototype\Customer.cs
+FN:7,System.Object Prototype.Customer::Clone()
+FNDA:3,System.Object Prototype.Customer::Clone()
+DA:8,3
+DA:9,3
+DA:10,3
+FN:11,Prototype.Customer Prototype.Customer::DeepClone()
+FNDA:1,Prototype.Customer Prototype.Customer::DeepClone()
+DA:12,1
+DA:13,1
+DA:15,1
+DA:16,1
+DA:17,1
+DA:18,1
+DA:19,1
+DA:20,1
+DA:21,1
+DA:22,1
+DA:24,1
+DA:25,1
+DA:26,1
+DA:27,1
+DA:28,1
+DA:29,1
+DA:30,1
+DA:31,1
+DA:33,1
+DA:34,1
+LF:23
+LH:23
+BRF:0
+BRH:0
+FNF:2
+FNH:2
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Proxy\AuthenticationController.cs
+FN:10,System.Boolean Proxy.AuthenticationController::IsAdmin()
+FNDA:2,System.Boolean Proxy.AuthenticationController::IsAdmin()
+DA:11,2
+DA:12,2
+DA:13,2
+FN:5,System.Void Proxy.AuthenticationController::.ctor(Proxy.IUser)
+FNDA:4,System.Void Proxy.AuthenticationController::.ctor(Proxy.IUser)
+DA:6,4
+DA:7,4
+DA:8,4
+DA:9,4
+LF:7
+LH:7
+BRF:0
+BRH:0
+FNF:2
+FNH:2
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Proxy\Entries.cs
+FN:13,System.Boolean Proxy.Entries::Delete(System.Int32)
+FNDA:1,System.Boolean Proxy.Entries::Delete(System.Int32)
+DA:14,1
+DA:15,1
+DA:16,1
+FN:17,Proxy.IProductInfo Proxy.Entries::Get(System.Int32)
+FNDA:4,Proxy.IProductInfo Proxy.Entries::Get(System.Int32)
+DA:18,4
+DA:19,4
+DA:20,1
+DA:21,1
+DA:24,3
+DA:25,4
+BRDA:19,18,0,1
+BRDA:19,18,1,3
+FN:7,System.Void Proxy.Entries::.ctor(System.Collections.Generic.Dictionary`2<System.Int32,Proxy.IProductInfo>)
+FNDA:4,System.Void Proxy.Entries::.ctor(System.Collections.Generic.Dictionary`2<System.Int32,Proxy.IProductInfo>)
+DA:8,4
+DA:9,4
+DA:10,4
+DA:11,4
+LF:13
+LH:13
+BRF:2
+BRH:2
+FNF:3
+FNH:3
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Proxy\EntriesProxy.cs
+FN:13,System.Boolean Proxy.EntriesProxy::Delete(System.Int32)
+FNDA:2,System.Boolean Proxy.EntriesProxy::Delete(System.Int32)
+DA:14,2
+DA:15,2
+DA:16,2
+DA:17,1
+DA:18,1
+DA:19,1
+DA:20,2
+DA:21,2
+BRDA:16,16,0,1
+BRDA:16,16,1,2
+FN:22,Proxy.IProductInfo Proxy.EntriesProxy::Get(System.Int32)
+FNDA:4,Proxy.IProductInfo Proxy.EntriesProxy::Get(System.Int32)
+DA:23,4
+DA:24,4
+DA:25,4
+FN:6,System.Void Proxy.EntriesProxy::.ctor(Proxy.IAuthenticationController,Proxy.IEntries)
+FNDA:4,System.Void Proxy.EntriesProxy::.ctor(Proxy.IAuthenticationController,Proxy.IEntries)
+DA:7,4
+DA:8,4
+DA:9,4
+DA:10,4
+DA:11,4
+LF:16
+LH:16
+BRF:2
+BRH:2
+FNF:3
+FNH:3
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\SingletonDependencyInjection\GoFLogger.cs
+FN:15,SingletonDI.GoFLogger SingletonDI.GoFLogger::get_Instance()
+FNDA:2,SingletonDI.GoFLogger SingletonDI.GoFLogger::get_Instance()
+DA:16,2
+DA:17,2
+DA:18,2
+FN:9,System.Void SingletonDI.GoFLogger::.cctor()
+FNDA:1,System.Void SingletonDI.GoFLogger::.cctor()
+DA:10,1
+DA:11,2
+DA:12,1
+LF:6
+LH:6
+BRF:0
+BRH:0
+FNF:2
+FNH:2
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\SingletonDependencyInjection\Logger.cs
+FN:7,System.Void SingletonDI.Logger::Log(System.String)
+FNDA:0,System.Void SingletonDI.Logger::Log(System.String)
+DA:8,0
+DA:9,0
+DA:10,0
+LF:3
+LH:0
+BRF:0
+BRH:0
+FNF:1
+FNH:0
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\State\Coupon.cs
+FN:27,System.Void State.Coupon::SetCouponState(State.ICouponState)
+FNDA:1,System.Void State.Coupon::SetCouponState(State.ICouponState)
+DA:28,1
+DA:29,1
+DA:30,1
+FN:32,System.Void State.Coupon::UpdateExpiryDate(System.DateTime)
+FNDA:1,System.Void State.Coupon::UpdateExpiryDate(System.DateTime)
+DA:33,1
+DA:34,1
+DA:35,1
+FN:37,System.Decimal State.Coupon::ApplyDiscountTo(State.IProduct)
+FNDA:2,System.Decimal State.Coupon::ApplyDiscountTo(State.IProduct)
+DA:38,2
+DA:39,2
+DA:40,2
+DA:41,2
+BRDA:40,19,0,1
+BRDA:40,19,1,1
+FN:11,System.Void State.Coupon::.ctor(System.Int32,System.DateTime)
+FNDA:3,System.Void State.Coupon::.ctor(System.Int32,System.DateTime)
+DA:12,3
+DA:13,3
+DA:14,3
+DA:15,1
+DA:16,1
+DA:18,2
+DA:19,2
+DA:24,2
+DA:25,2
+BRDA:14,21,0,1
+BRDA:14,21,1,2
+LF:19
+LH:19
+BRF:4
+BRH:4
+FNF:4
+FNH:4
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\State\InvalidCouponState.cs
+FN:7,System.Void State.InvalidCouponState::ChangeExpiryDate(System.DateTime,State.ICoupon)
+FNDA:0,System.Void State.InvalidCouponState::ChangeExpiryDate(System.DateTime,State.ICoupon)
+DA:8,0
+DA:9,0
+DA:10,0
+DA:11,0
+DA:12,0
+DA:13,0
+BRDA:9,14,0,0
+BRDA:9,14,1,0
+FN:15,System.Boolean State.InvalidCouponState::UseDiscount()
+FNDA:1,System.Boolean State.InvalidCouponState::UseDiscount()
+DA:16,1
+DA:17,1
+DA:18,1
+LF:9
+LH:3
+BRF:2
+BRH:0
+FNF:2
+FNH:1
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\State\ValidCouponState.cs
+FN:7,System.Void State.ValidCouponState::ChangeExpiryDate(System.DateTime,State.ICoupon)
+FNDA:1,System.Void State.ValidCouponState::ChangeExpiryDate(System.DateTime,State.ICoupon)
+DA:8,1
+DA:9,1
+DA:10,1
+DA:11,1
+DA:12,1
+DA:14,1
+BRDA:9,14,0,1
+BRDA:9,14,1,1
+FN:16,System.Boolean State.ValidCouponState::UseDiscount()
+FNDA:1,System.Boolean State.ValidCouponState::UseDiscount()
+DA:17,1
+DA:18,1
+DA:19,1
+LF:9
+LH:9
+BRF:2
+BRH:2
+FNF:2
+FNH:2
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Strategy\MemberDiscountScheme.cs
+FN:13,System.Decimal Strategy.MemberDiscountScheme::ComputePrice(Strategy.IProduct,Strategy.ICoupon)
+FNDA:3,System.Decimal Strategy.MemberDiscountScheme::ComputePrice(Strategy.IProduct,Strategy.ICoupon)
+DA:14,3
+DA:15,3
+DA:16,3
+DA:17,3
+DA:18,1
+DA:19,1
+DA:22,2
+DA:23,3
+BRDA:17,44,0,1
+BRDA:17,44,1,2
+LF:8
+LH:8
+BRF:2
+BRH:2
+FNF:1
+FNH:1
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Strategy\NonMemberDiscountScheme.cs
+FN:8,System.Decimal Strategy.NonMemberDiscountScheme::ComputePrice(Strategy.IProduct,Strategy.ICoupon)
+FNDA:3,System.Decimal Strategy.NonMemberDiscountScheme::ComputePrice(Strategy.IProduct,Strategy.ICoupon)
+DA:9,3
+DA:10,3
+DA:11,1
+DA:12,1
+DA:14,2
+DA:15,2
+DA:16,3
+BRDA:10,9,0,1
+BRDA:10,9,1,2
+BRDA:14,27,0,1
+BRDA:14,27,1,1
+LF:7
+LH:7
+BRF:4
+BRH:4
+FNF:1
+FNH:1
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\TemplateMethod\BookPriceCalculator.cs
+FN:10,System.Decimal TemplateMethod.BookPriceCalculator::CalculatePrice(TemplateMethod.IBook)
+FNDA:2,System.Decimal TemplateMethod.BookPriceCalculator::CalculatePrice(TemplateMethod.IBook)
+DA:11,2
+DA:12,2
+DA:13,2
+DA:14,2
+LF:4
+LH:4
+BRF:0
+BRH:0
+FNF:1
+FNH:1
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\TemplateMethod\HighIncomeBookPriceCalculator.cs
+FN:11,System.Decimal TemplateMethod.HighIncomeBookPriceCalculator::ComputeTotalPriceBeforeTax(TemplateMethod.IBook)
+FNDA:1,System.Decimal TemplateMethod.HighIncomeBookPriceCalculator::ComputeTotalPriceBeforeTax(TemplateMethod.IBook)
+DA:12,1
+DA:13,1
+DA:14,1
+FN:15,System.Decimal TemplateMethod.HighIncomeBookPriceCalculator::ApplyTax(System.Decimal)
+FNDA:1,System.Decimal TemplateMethod.HighIncomeBookPriceCalculator::ApplyTax(System.Decimal)
+DA:16,1
+DA:17,1
+DA:18,1
+FN:6,System.Void TemplateMethod.HighIncomeBookPriceCalculator::.ctor(System.Int32)
+FNDA:1,System.Void TemplateMethod.HighIncomeBookPriceCalculator::.ctor(System.Int32)
+DA:7,1
+DA:8,1
+DA:9,1
+DA:10,1
+FN:4,System.Void TemplateMethod.HighIncomeBookPriceCalculator::.cctor()
+FNDA:1,System.Void TemplateMethod.HighIncomeBookPriceCalculator::.cctor()
+DA:5,1
+LF:11
+LH:11
+BRF:0
+BRH:0
+FNF:4
+FNH:4
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\TemplateMethod\LowIncomeBookPriceCalculator.cs
+FN:10,System.Decimal TemplateMethod.LowIncomeBookPriceCalculator::ComputeTotalPriceBeforeTax(TemplateMethod.IBook)
+FNDA:1,System.Decimal TemplateMethod.LowIncomeBookPriceCalculator::ComputeTotalPriceBeforeTax(TemplateMethod.IBook)
+DA:11,1
+DA:12,1
+DA:13,1
+FN:14,System.Decimal TemplateMethod.LowIncomeBookPriceCalculator::ApplyTax(System.Decimal)
+FNDA:1,System.Decimal TemplateMethod.LowIncomeBookPriceCalculator::ApplyTax(System.Decimal)
+DA:15,1
+DA:16,1
+DA:17,1
+FN:5,System.Void TemplateMethod.LowIncomeBookPriceCalculator::.ctor(System.Int32)
+FNDA:1,System.Void TemplateMethod.LowIncomeBookPriceCalculator::.ctor(System.Int32)
+DA:6,1
+DA:7,1
+DA:8,1
+DA:9,1
+LF:10
+LH:10
+BRF:0
+BRH:0
+FNF:3
+FNH:3
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Visitor\Concealer.cs
+FN:6,System.Void Visitor.Concealer::Visit(Visitor.GameElement)
+FNDA:0,System.Void Visitor.Concealer::Visit(Visitor.GameElement)
+DA:7,0
+DA:8,0
+DA:9,0
+FN:11,System.Void Visitor.Concealer::Visit(Visitor.TextElement)
+FNDA:0,System.Void Visitor.Concealer::Visit(Visitor.TextElement)
+DA:12,0
+DA:13,0
+DA:14,0
+LF:6
+LH:0
+BRF:0
+BRH:0
+FNF:2
+FNH:0
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Visitor\GameElement.cs
+FN:6,System.Boolean Visitor.GameElement::get_Active()
+FNDA:11,System.Boolean Visitor.GameElement::get_Active()
+DA:7,11
+LF:1
+LH:1
+BRF:0
+BRH:0
+FNF:1
+FNH:1
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Visitor\Instruction.cs
+FN:6,System.Void Visitor.Instruction::Accept(Visitor.IVisitor)
+FNDA:1,System.Void Visitor.Instruction::Accept(Visitor.IVisitor)
+DA:7,1
+DA:8,1
+DA:9,1
+LF:3
+LH:3
+BRF:0
+BRH:0
+FNF:1
+FNH:1
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Visitor\Revealer.cs
+FN:6,System.Void Visitor.Revealer::Visit(Visitor.GameElement)
+FNDA:1,System.Void Visitor.Revealer::Visit(Visitor.GameElement)
+DA:7,1
+DA:8,1
+DA:9,1
+FN:11,System.Void Visitor.Revealer::Visit(Visitor.TextElement)
+FNDA:1,System.Void Visitor.Revealer::Visit(Visitor.TextElement)
+DA:12,1
+DA:13,1
+DA:14,1
+LF:6
+LH:6
+BRF:0
+BRH:0
+FNF:2
+FNH:2
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Visitor\Sprite.cs
+FN:5,System.String Visitor.Sprite::get_Name()
+FNDA:0,System.String Visitor.Sprite::get_Name()
+DA:6,0
+FN:8,System.Void Visitor.Sprite::Accept(Visitor.IVisitor)
+FNDA:2,System.Void Visitor.Sprite::Accept(Visitor.IVisitor)
+DA:9,2
+DA:10,2
+DA:11,2
+FN:6,System.Void Visitor.Sprite::.ctor(System.String)
+FNDA:24,System.Void Visitor.Sprite::.ctor(System.String)
+DA:7,24
+LF:5
+LH:4
+BRF:0
+BRH:0
+FNF:3
+FNH:2
+end_of_record
+SF:C:\Users\agand\Documents\Workspace\csharp-design-patterns\Patterns\Visitor\TextElement.cs
+FN:5,System.Boolean Visitor.TextElement::get_Active()
+FNDA:6,System.Boolean Visitor.TextElement::get_Active()
+DA:6,6
+FN:6,System.String Visitor.TextElement::get_Message()
+FNDA:0,System.String Visitor.TextElement::get_Message()
+DA:7,0
+LF:2
+LH:1
+BRF:0
+BRH:0
+FNF:2
+FNH:1
+end_of_record
