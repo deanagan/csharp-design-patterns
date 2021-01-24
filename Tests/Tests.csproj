@@ -44,6 +44,7 @@
     <ProjectReference Include="..\Patterns\Strategy\Strategy.csproj" />
     <ProjectReference Include="..\Patterns\TemplateMethod\TemplateMethod.csproj" />
     <ProjectReference Include="..\Patterns\Visitor\Visitor.csproj" />
+    <ProjectReference Include="..\Patterns\Iterator\Iterator.csproj" />
   </ItemGroup>
 
 </Project>
