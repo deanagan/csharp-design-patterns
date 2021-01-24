@@ -17,10 +17,6 @@ namespace Iterator.Test
         public void ReturnCorrectNumbers_WhenInvokedByRow()
         {
             _iterableObject = new Matrix(Matrix.Direction.ByRow, 3, 4);
-            _iterableObject[0,0] = 20;
-            _iterableObject[0,0] = 20;
-            _iterableObject[0,0] = 20;
-            _iterableObject[0,0] = 20;
         }
 
 
