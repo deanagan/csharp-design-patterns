@@ -14,10 +14,9 @@
         public MatrixIterator(Matrix matrix)
         {
             _matrix = matrix;
-            _rowNumber = _matrix.IteratorDirection == Matrix.Direction.ByColumn ? -1 : 0;
-            _colNumber = _matrix.IteratorDirection == Matrix.Direction.ByRow ? -1 : 0;
             _totalColumns = _matrix.TotalColumns();
             _totalRows = _matrix.TotalRows();
+            Reset();
         }
 
         private void Increment(ref int axis1, ref int axis2, int axis1Length, int axis2Length)
@@ -43,8 +42,8 @@
 
         public override void Reset()
         {
-            _colNumber = 0;
-            _rowNumber = 0;
+            _rowNumber = _matrix.IteratorDirection == Matrix.Direction.ByColumn ? -1 : 0;
+            _colNumber = _matrix.IteratorDirection == Matrix.Direction.ByRow ? -1 : 0;
         }
 
         public override bool MoveNext()
