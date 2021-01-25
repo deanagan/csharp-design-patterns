@@ -43,6 +43,9 @@ namespace Iterator.Test
             {
                 iterableObject[element.row, element.col] = element.value;
             }
+            // Iterable object data initialized to:
+            // [ 1, 2, 3 ]
+            // [ 4, 5, 6 ]
 
             return iterableObject;
         }
