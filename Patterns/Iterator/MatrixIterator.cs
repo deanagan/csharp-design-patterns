@@ -59,11 +59,11 @@
 
             return HasNext();
         }
+
         public override object Current()
         {
             return _matrix[_rowNumber, _colNumber];
         }
-
 
     }
  }

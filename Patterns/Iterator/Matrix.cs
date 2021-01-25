@@ -19,7 +19,6 @@ namespace Iterator
         public int TotalRows() => _data.GetLength(0);
         public int TotalColumns() => _data.GetLength(1);
 
-
         public Matrix(Direction iteratorDirection, int width, int height)
         {
             _data = new int[width, height];
@@ -36,6 +35,5 @@ namespace Iterator
         {
            return new MatrixIterator(this);
         }
-
     }
 }
