@@ -5,14 +5,20 @@
     {
         private Matrix _matrix;
 
-        // Stores the current traversal position. An iterator may have a lot of
-        // other fields for storing iteration state, especially when it is
-        // supposed to work with a particular kind of collection.
-        private int _rowNumber = 0;
-        private int _colNumber = 0;
+        private int _rowNumber;
+        private int _colNumber;
+        private readonly int _totalRows;
+        private readonly int _totalColumns;
 
 
-        public MatrixIterator(Matrix matrix) => _matrix = matrix;
+        public MatrixIterator(Matrix matrix)
+        {
+            _matrix = matrix;
+            _rowNumber = _matrix.IteratorDirection == Matrix.Direction.ByColumn ? -1 : 0;
+            _colNumber = _matrix.IteratorDirection == Matrix.Direction.ByRow ? -1 : 0;
+            _totalColumns = _matrix.TotalColumns();
+            _totalRows = _matrix.TotalRows();
+        }
 
         private void Increment(ref int axis1, ref int axis2, int axis1Length, int axis2Length)
         {
@@ -32,7 +38,7 @@
 
         public override bool HasNext()
         {
-            return _colNumber + 1 == _matrix.TotalColumns() && _rowNumber + 1 == _matrix.TotalRows();
+            return _colNumber < _matrix.TotalColumns() - 1 || _rowNumber < _matrix.TotalRows() - 1;
         }
 
         public override void Reset()
@@ -43,16 +49,13 @@
 
         public override bool MoveNext()
         {
-            var totalColumns = _matrix.TotalColumns();
-            var totalRows = _matrix.TotalRows();
-
-            if (_matrix.IteratorDirection == Matrix.Direction.ByRow)
+            if (_matrix.IteratorDirection == Matrix.Direction.ByColumn)
             {
-                Increment(ref _rowNumber, ref _colNumber, _matrix.TotalRows(), _matrix.TotalColumns());
+                Increment(ref _rowNumber, ref _colNumber, _totalRows, _totalColumns);
             }
             else
             {
-                Increment(ref _colNumber, ref _rowNumber, _matrix.TotalColumns(), _matrix.TotalRows());
+                Increment(ref _colNumber, ref _rowNumber, _totalColumns, _totalRows);
             }
 
             return HasNext();
