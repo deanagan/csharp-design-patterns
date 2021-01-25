@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Iterator
 {
-    public class Matrix : AggregateObject
+    public class Matrix : AggregateObject, IMatrix<int>
     {
         public enum Direction
         {
