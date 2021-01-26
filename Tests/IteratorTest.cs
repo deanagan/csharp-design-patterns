@@ -78,6 +78,7 @@ namespace Iterator.Test
             var iterableObject = SetupIterable(Matrix.Direction.ByColumn);
             var expected = new int[] { 1,4,2,5,3,6 };
             var index = 0;
+
             foreach(var num in iterableObject)
             {
                 num.Should().Be(expected[index++]);
@@ -90,6 +91,18 @@ namespace Iterator.Test
             }
         }
 
+        [Fact]
+        public void ReturnCorrectNumber_WhenInvokingManually()
+        {
+            var iterableObject = SetupIterable(Matrix.Direction.ByColumn);
+            var enumerator = iterableObject.GetEnumerator();
+            enumerator.Current.Should().BeNull();
+            enumerator.MoveNext().Should().BeTrue();
+            enumerator.MoveNext().Should().BeTrue();
+            enumerator.MoveNext().Should().BeTrue();
+            enumerator.Current.Should().Be(2);
+
+        }
 
     }
 }

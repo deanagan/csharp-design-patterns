@@ -62,6 +62,10 @@
 
         public override object Current()
         {
+            if (_rowNumber == -1 || _colNumber == -1)
+            {
+                return null;
+            }
             return _matrix[_rowNumber, _colNumber];
         }
 
