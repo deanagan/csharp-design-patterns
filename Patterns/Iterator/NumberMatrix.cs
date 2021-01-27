@@ -1,25 +1,16 @@
-using System.Text;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Iterator
 {
-    public class Matrix : AggregateObject, IMatrix<int>
+    public class NumberMatrix : AggregateObject, IMatrix<int>
     {
-        public enum Direction
-        {
-            ByRow,
-            ByColumn
-        }
-
         private int[,] _data;
-        public Direction IteratorDirection { get; set; }
+        public MatrixDirection IteratorDirection { get; set; }
 
         public int TotalRows() => _data.GetLength(0);
         public int TotalColumns() => _data.GetLength(1);
 
-        public Matrix(Direction iteratorDirection, int width, int height)
+        public NumberMatrix(MatrixDirection iteratorDirection, int width, int height)
         {
             _data = new int[width, height];
             IteratorDirection = iteratorDirection;
@@ -33,7 +24,7 @@ namespace Iterator
 
         public override IEnumerator GetEnumerator()
         {
-           return new MatrixIterator(this);
+           return new MatrixIterator<int>(this, IteratorDirection);
         }
     }
 }
