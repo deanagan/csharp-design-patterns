@@ -36,9 +36,9 @@ namespace Iterator.Test
 
         }
 
-        private Matrix SetupIterable(Matrix.Direction direction)
+        private NumberMatrix SetupIterable(MatrixDirection direction)
         {
-            var iterableObject = new Matrix(direction, ROWS, COLUMNS);
+            var iterableObject = new NumberMatrix(direction, ROWS, COLUMNS);
             foreach(var element in GetMatrixValues(ROWS, COLUMNS))
             {
                 iterableObject[element.row, element.col] = element.value;
@@ -58,7 +58,7 @@ namespace Iterator.Test
         [Fact]
         public void ReturnCorrectNumbers_WhenInvokedByRow()
         {
-            var iterableObject = SetupIterable(Matrix.Direction.ByRow);
+            var iterableObject = SetupIterable(MatrixDirection.ByRow);
             var expected = 1;
             foreach(var num in iterableObject)
             {
@@ -75,7 +75,7 @@ namespace Iterator.Test
         [Fact]
         public void ReturnCorrectNumbers_WhenInvokedByColumn()
         {
-            var iterableObject = SetupIterable(Matrix.Direction.ByColumn);
+            var iterableObject = SetupIterable(MatrixDirection.ByColumn);
             var expected = new int[] { 1,4,2,5,3,6 };
             var index = 0;
 
@@ -94,7 +94,7 @@ namespace Iterator.Test
         [Fact]
         public void ReturnCorrectNumber_WhenInvokingManually()
         {
-            var iterableObject = SetupIterable(Matrix.Direction.ByColumn);
+            var iterableObject = SetupIterable(MatrixDirection.ByColumn);
             var enumerator = iterableObject.GetEnumerator();
             enumerator.Current.Should().BeNull();
             enumerator.MoveNext().Should().BeTrue();
