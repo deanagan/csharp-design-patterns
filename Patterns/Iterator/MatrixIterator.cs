@@ -1,21 +1,23 @@
 
  namespace Iterator
  {
-    public class MatrixIterator : GenericIterator
+    public class MatrixIterator<T> : GenericIterator
     {
-        private Matrix _matrix;
+        private IMatrix<T> _matrix;
 
         private int _rowNumber;
         private int _colNumber;
         private readonly int _totalRows;
         private readonly int _totalColumns;
+        private readonly MatrixDirection _matrixDirection;
 
 
-        public MatrixIterator(Matrix matrix)
+        public MatrixIterator(IMatrix<T> matrix, MatrixDirection matrixDirection)
         {
             _matrix = matrix;
             _totalColumns = _matrix.TotalColumns();
             _totalRows = _matrix.TotalRows();
+            _matrixDirection = matrixDirection;
             Reset();
         }
 
@@ -42,13 +44,13 @@
 
         public override void Reset()
         {
-            _rowNumber = _matrix.IteratorDirection == Matrix.Direction.ByColumn ? -1 : 0;
-            _colNumber = _matrix.IteratorDirection == Matrix.Direction.ByRow ? -1 : 0;
+            _rowNumber = _matrixDirection == MatrixDirection.ByColumn ? -1 : 0;
+            _colNumber = _matrixDirection == MatrixDirection.ByRow ? -1 : 0;
         }
 
         public override bool MoveNext()
         {
-            if (_matrix.IteratorDirection == Matrix.Direction.ByColumn)
+            if (_matrixDirection == MatrixDirection.ByColumn)
             {
                 Increment(ref _rowNumber, ref _colNumber, _totalRows, _totalColumns);
             }
