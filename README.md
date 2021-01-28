@@ -17,6 +17,5 @@ A bunch of demo codes for:
 
 # TODOs
 1. Interpreter Pattern
-2. Iterator Pattern
-3. Unit of Work
-4. Repository Pattern
+2. Unit of Work
+3. Repository Pattern
