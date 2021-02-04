@@ -6,7 +6,7 @@ A bunch of demo codes for:
 2. Unit testing with Xunit
 3. Mocking with Moq
 4. Using FluentAssertions.
-5. Ninject is used for the demo on DI based singletons.
+5. Ninject is used for testing the demo on DI based singletons.
 
 # How To Run the Demos
 1. Demos are divided into folders with the pattern.
@@ -19,3 +19,13 @@ A bunch of demo codes for:
 1. Interpreter Pattern
 2. Unit of Work
 3. Repository Pattern
+
+
+# Adding a Pattern
+1. Under Patterns folder, create a new directory with the new pattern name. Example: `mkdir MediatRASPNet`
+2. Change directory to new folder.
+2. Create a new lib project. Example: `dotnet new classlib -n MediatRASPNet -o .`
+
+# Adding a package
+1. Change directory to the pattern you want to add a package for or to the test folder (if you want to add a test package).
+2. Add the package: Example: `dotnet add package MediatR`
