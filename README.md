@@ -19,6 +19,7 @@ A bunch of demo codes for:
 1. Interpreter Pattern
 2. Unit of Work
 3. Repository Pattern
+4. MediatR with ASP.net
 
 
 # Adding a Pattern
