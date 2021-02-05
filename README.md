@@ -25,7 +25,7 @@ A bunch of demo codes for:
 # Adding a Pattern
 1. Under Patterns folder, create a new directory with the new pattern name. Example: `mkdir MediatRASPNet`
 2. Change directory to new folder.
-2. Create a new lib project. Example: `dotnet new classlib -n MediatRASPNet -o .`
+2. Create a new project. Example: `dotnet new webapi -n MediatRASPNet -o .` or just `dotnet new webapi` if you like having the same project name as the current folder.
 
 # Adding a package
 1. Change directory to the pattern you want to add a package for or to the test folder (if you want to add a test package).
