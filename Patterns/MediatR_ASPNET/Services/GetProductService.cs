@@ -15,15 +15,17 @@ namespace Api.Services
             this.logger = logger;
         }
 
-        public Product GetProduct(string skuCode)
+        public Product GetProduct(ProductInfo productInfo)
         {
-            var result = productRepository.GetProducts().Where(product => product.SkuCode == skuCode)
+            var result = productRepository.GetProducts()
+                    .Where(product => productInfo.SkuCode == product.SkuCode)
                     .Select(matchingProduct => matchingProduct)
                     .DefaultIfEmpty(null)
                     .First();
+
             if (result == null)
             {
-                logger.LogWarning("Sku code {0} not found.", skuCode);
+                logger.LogWarning("Sku code {0} not found.", productInfo.SkuCode);
             }
             return result;
         }

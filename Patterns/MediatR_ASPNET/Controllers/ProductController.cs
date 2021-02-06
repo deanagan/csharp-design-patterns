@@ -1,12 +1,11 @@
 using System;
-using System.Net;
-using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
 
 using Api.Interfaces;
+using Api.Models;
 
 namespace Api.Controllers
 {
@@ -24,11 +23,11 @@ namespace Api.Controllers
         }
 
         [HttpGet("[action]/{sku}")]
-        public IActionResult GetProduct(string sku)
+        public IActionResult GetProduct(ProductInfo productInfo)
         {
             try
             {
-                var product = productService.GetProduct(sku);
+                var product = productService.GetProduct(productInfo);
                 this._logger.LogTrace("Status Code {0}", product != null ? StatusCodes.Status200OK : StatusCodes.Status404NotFound);
                 return StatusCode(
                     product != null ? StatusCodes.Status200OK : StatusCodes.Status404NotFound,
