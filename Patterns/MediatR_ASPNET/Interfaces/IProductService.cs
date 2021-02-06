@@ -5,6 +5,7 @@ namespace Api.Interfaces
 {
     public interface IProductService
     {
-        Product GetProduct(ProductInfo product);
+        Product GetProduct(int id);
+        List<Product> GetProducts();
     }
 }

@@ -13,21 +13,35 @@ namespace Api.Controllers
     [Route("v1/api")]
     public class ProductController : ControllerBase
     {
-        private readonly IProductService productService;
-        private readonly ILogger _logger;
+        private readonly IProductService _productService;
+        private readonly ILogger<ProductController> _logger;
 
         public ProductController(IProductService productService, ILogger<ProductController> logger)
         {
-            this.productService = productService;
+            this._productService = productService;
             this._logger = logger;
         }
 
-        [HttpGet("[action]/{sku}")]
-        public IActionResult GetProduct(ProductInfo productInfo)
+        [HttpGet("[action]")]
+        public IActionResult Products()
         {
             try
             {
-                var product = productService.GetProduct(productInfo);
+                this._logger.LogInformation("Get Products received");
+                var productSkuCodes = _productService.GetProducts();
+                return Ok(productSkuCodes);
+            } catch(Exception ex) {
+                this._logger.LogError("Bad request received");
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("[action]/{id}")]
+        public IActionResult Products(int id)
+        {
+            try
+            {
+                var product = _productService.GetProduct(id);
                 this._logger.LogTrace("Status Code {0}", product != null ? StatusCodes.Status200OK : StatusCodes.Status404NotFound);
                 return StatusCode(
                     product != null ? StatusCodes.Status200OK : StatusCodes.Status404NotFound,

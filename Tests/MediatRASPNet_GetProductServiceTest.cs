@@ -12,7 +12,7 @@ using Api.Interfaces;
 
 namespace Test.Service
 {
-    public class GetProductServiceTest
+    public class ProductServiceTest
     {
         private readonly List<Product> _products = new List<Product>
         {
@@ -28,37 +28,44 @@ namespace Test.Service
         private readonly IProductService _productService;
         private readonly Mock<IProductRepository> _productRepositoryMock = new Mock<IProductRepository>();
         private readonly ILogger<IProductService> _logger;
-        private ProductInfo _productInfo = new ProductInfo();
-        public GetProductServiceTest(ITestOutputHelper testOutputHelper)
+
+        public ProductServiceTest(ITestOutputHelper testOutputHelper)
         {
             _productRepositoryMock.Setup(pr => pr.GetProducts()).Returns(_products);
             var loggerFactory = new LoggerFactory();
             loggerFactory.AddProvider(new XunitLoggerProvider(testOutputHelper));
             _logger = loggerFactory.CreateLogger<IProductService>();
-            _productService = new GetProductService(_productRepositoryMock.Object, _logger);
+            _productService = new ProductService(_productRepositoryMock.Object, _logger);
         }
 
         [Fact]
-        public void CorrectProductReturned_WhenGetProductRetrievedThruSkuCode()
+        public void AllProductsReturned_WhenGetProductsInvoked()
         {
             // Arrange
-            _productInfo.SkuCode = "PROD_001";
 
             // Act
-            var product = _productService.GetProduct(_productInfo);
+            var product = _productService.GetProducts();
+
+            // Assert
+            product.Should().Equal(_products);
+        }
+
+        [Fact]
+        public void CorrectProductReturned_WhenGetProductRetrievedThruId()
+        {
+
+            // Act
+            var product = _productService.GetProduct(1);
 
             // Assert
             product.Should().Be(_products.First());
         }
 
         [Fact]
-        public void NullProductReturned_WhenSkuCodeDoesNotExist()
+        public void NullProductReturned_WhenIdDoesNotExist()
         {
-            // Arrange
-            _productInfo.SkuCode = "PROD_003";
-
             // Act
-            var product = _productService.GetProduct(_productInfo);
+            var product = _productService.GetProduct(4);
 
             // Assert
             product.Should().BeNull();
