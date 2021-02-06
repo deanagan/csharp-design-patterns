@@ -8,18 +8,42 @@ A bunch of demo codes for:
 4. Using FluentAssertions.
 5. Ninject is used for testing the demo on DI based singletons.
 
+# What Design Patterns can I find in this repository?
+- Patterns\AbstractFactory\AbstractFactory
+- Patterns\Adapter\Adapter
+- Patterns\Bridge\Bridge
+- Patterns\Builder\Builder
+- Patterns\ChainOfResponsibility\ChainOfResponsibility
+- Patterns\Command\Command
+- Patterns\Composite\Composite
+- Patterns\Decorator\Decorator
+- Patterns\Facade\Facade
+- Patterns\FactoryMethod\FactoryMethod
+- Patterns\Flyweight\Flyweight
+- Patterns\Mediator\Mediator
+- Patterns\Memento\Memento
+- Patterns\Observer\Observer
+- Patterns\Prototype\Prototype
+- Patterns\Proxy\Proxy
+- Patterns\SingletonDependencyInjection\SingletonDI
+- Patterns\State\State
+- Patterns\Strategy\Strategy
+- Patterns\TemplateMethod\TemplateMethod
+- Patterns\Visitor\Visitor
+- Patterns\Iterator\Iterator
+- Patterns\MediatR_ASPNET\MediatR_ASPNET (in progress)
+
 # How To Run the Demos
 1. Demos are divided into folders with the pattern.
 2. To build all, enter `dotnet build`
 3. To execute all the tests, enter `dotnet test` or `dotnet test -l:"console;verbosity=detailed"` to be more verbose.
 
 
-
 # TODOs
 1. Interpreter Pattern
 2. Unit of Work
 3. Repository Pattern
-4. MediatR with ASP.net
+4. MediatR with ASP.net (in progress)
 
 
 # Adding a Pattern
