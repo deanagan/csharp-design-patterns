@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.Logging;
 using Api.Models;
@@ -6,20 +5,14 @@ using Api.Interfaces;
 
 namespace Api.Services
 {
-    public class ProductService : IProductService
+    public class GetProductService : IProductService
     {
         private IProductRepository productRepository;
         private ILogger logger;
-        public ProductService(IProductRepository productRepository, ILogger logger)
+        public GetProductService(IProductRepository productRepository, ILogger logger)
         {
             this.productRepository = productRepository;
             this.logger = logger;
-        }
-
-        public List<string> GetAllSkuCodes()
-        {
-            logger.LogTrace("Service Get All Sku Codes Invoked.");
-            return productRepository.GetProducts().Select(product => product.SkuCode).ToList();
         }
 
         public Product GetProduct(string skuCode)

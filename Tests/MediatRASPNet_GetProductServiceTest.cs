@@ -12,7 +12,7 @@ using Api.Interfaces;
 
 namespace Test.Service
 {
-    public class ProductServiceTest
+    public class GetProductServiceTest
     {
         private readonly List<Product> _products = new List<Product>
         {
@@ -27,24 +27,14 @@ namespace Test.Service
         };
         private readonly IProductService _productService;
         private readonly Mock<IProductRepository> _productRepositoryMock = new Mock<IProductRepository>();
-        private readonly ILogger<ProductService> _logger;
-        public ProductServiceTest(ITestOutputHelper testOutputHelper)
+        private readonly ILogger<IProductService> _logger;
+        public GetProductServiceTest(ITestOutputHelper testOutputHelper)
         {
             _productRepositoryMock.Setup(pr => pr.GetProducts()).Returns(_products);
             var loggerFactory = new LoggerFactory();
             loggerFactory.AddProvider(new XunitLoggerProvider(testOutputHelper));
-            _logger = loggerFactory.CreateLogger<ProductService>();
-            _productService = new ProductService(_productRepositoryMock.Object, _logger);
-        }
-
-        [Fact]
-        public void AllCodesReturned_WhenGetAllSkuCodesInvoked()
-        {
-            // Act
-            var skuCodes = _productService.GetAllSkuCodes();
-
-            // Assert
-            skuCodes.Should().HaveCount(2).And.ContainInOrder("PROD_001", "PROD_002");
+            _logger = loggerFactory.CreateLogger<IProductService>();
+            _productService = new GetProductService(_productRepositoryMock.Object, _logger);
         }
 
         [Fact]

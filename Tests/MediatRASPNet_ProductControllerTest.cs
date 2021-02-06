@@ -47,22 +47,6 @@ namespace Test.Controller
             response.Value.Should().Be(_product);
         }
 
-        [Fact]
-        public void ProductListShouldBeReturned_WhenGetProductCodesInvoked()
-        {
-            // Arrange
-            var productService = new Mock<IProductService>();
-            productService.Setup(s => s.GetAllSkuCodes()).Returns(_productSkuCodes);
-            var controller = new ProductController(productService.Object, _logger);
-
-            // Act
-            var response = controller.GetAllSkuCodes() as ObjectResult;
-
-            // Assert
-            response.Should().NotBeNull();
-            response.StatusCode.Should().Be(StatusCodes.Status200OK);
-            response.Value.Should().Be(_productSkuCodes);
-        }
 
         [Fact]
         public void Error404Returned_WhenGettingNonExistentProduct()

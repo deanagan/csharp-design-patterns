@@ -23,20 +23,6 @@ namespace Api.Controllers
             this._logger = logger;
         }
 
-        [HttpGet("[action]")]
-        public IActionResult GetAllSkuCodes()
-        {
-            try
-            {
-                this._logger.LogInformation("Get Sku code received");
-                var productSkuCodes = productService.GetAllSkuCodes();
-                return Ok(productSkuCodes);
-            } catch(Exception ex) {
-                this._logger.LogError("Bad request received");
-                return BadRequest(ex.Message);
-            }
-        }
-
         [HttpGet("[action]/{sku}")]
         public IActionResult GetProduct(string sku)
         {
