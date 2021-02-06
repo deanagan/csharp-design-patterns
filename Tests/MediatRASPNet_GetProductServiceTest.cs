@@ -28,6 +28,7 @@ namespace Test.Service
         private readonly IProductService _productService;
         private readonly Mock<IProductRepository> _productRepositoryMock = new Mock<IProductRepository>();
         private readonly ILogger<IProductService> _logger;
+        private ProductInfo _productInfo = new ProductInfo();
         public GetProductServiceTest(ITestOutputHelper testOutputHelper)
         {
             _productRepositoryMock.Setup(pr => pr.GetProducts()).Returns(_products);
@@ -40,8 +41,11 @@ namespace Test.Service
         [Fact]
         public void CorrectProductReturned_WhenGetProductRetrievedThruSkuCode()
         {
+            // Arrange
+            _productInfo.SkuCode = "PROD_001";
+
             // Act
-            var product = _productService.GetProduct("PROD_001");
+            var product = _productService.GetProduct(_productInfo);
 
             // Assert
             product.Should().Be(_products.First());
@@ -50,8 +54,11 @@ namespace Test.Service
         [Fact]
         public void NullProductReturned_WhenSkuCodeDoesNotExist()
         {
+            // Arrange
+            _productInfo.SkuCode = "PROD_003";
+
             // Act
-            var product = _productService.GetProduct("PROD_003");
+            var product = _productService.GetProduct(_productInfo);
 
             // Assert
             product.Should().BeNull();

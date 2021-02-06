@@ -35,11 +35,11 @@ namespace Test.Controller
         {
             // Arrange
             var productService = new Mock<IProductService>();
-            productService.Setup(s => s.GetProduct("PROD_001")).Returns(_product);
+            productService.Setup(s => s.GetProduct(It.IsAny<ProductInfo>())).Returns(_product);
             var controller = new ProductController(productService.Object, _logger);
 
             // Act
-            var response = controller.GetProduct("PROD_001") as ObjectResult;
+            var response = controller.GetProduct(It.IsAny<ProductInfo>()) as ObjectResult;
 
             // Assert
             response.Should().NotBeNull();
@@ -52,10 +52,10 @@ namespace Test.Controller
         public void Error404Returned_WhenGettingNonExistentProduct()
         {
             var productService = new Mock<IProductService>();
-            productService.Setup(s => s.GetProduct("PROD_999")).Returns(null as Product);
+            productService.Setup(s => s.GetProduct(It.IsAny<ProductInfo>())).Returns(null as Product);
             var controller = new ProductController(productService.Object, _logger);
 
-            var response = controller.GetProduct("PROD_999") as ObjectResult;
+            var response = controller.GetProduct(It.IsAny<ProductInfo>()) as ObjectResult;
 
             response.Should().NotBeNull();
             response.StatusCode.Should().Be(StatusCodes.Status404NotFound);
