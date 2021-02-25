@@ -45,7 +45,6 @@
     <ProjectReference Include="..\Patterns\TemplateMethod\TemplateMethod.csproj" />
     <ProjectReference Include="..\Patterns\Visitor\Visitor.csproj" />
     <ProjectReference Include="..\Patterns\Iterator\Iterator.csproj" />
-    <ProjectReference Include="..\Patterns\MediatR_ASPNET\MediatR_ASPNET.csproj" />
   </ItemGroup>
 
 </Project>
