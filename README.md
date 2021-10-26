@@ -7,7 +7,7 @@ A bunch of demo codes for:
 3. Mocking with Moq
 4. Using FluentAssertions.
 5. Ninject is used for testing the demo on DI based singletons.
-6. Asp.net core sample
+
 
 # What Design Patterns can I find in this repository?
 - Patterns\AbstractFactory\AbstractFactory
