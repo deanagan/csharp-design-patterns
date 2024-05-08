@@ -12,9 +12,9 @@ namespace SingletonDI.Test
         public void ReturnSameInstance_WhenComparingLazyLoggerSingleton()
         {
             // Arrange
-            var logger1 = Logger.Instance;
+            var logger1 = LazyLogger.Instance;
             // Act
-            var logger2 = Logger.Instance;
+            var logger2 = LazyLogger.Instance;
             // Assert
             logger1.Should().BeSameAs(logger2);
         }
