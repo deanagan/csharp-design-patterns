@@ -4,21 +4,23 @@ namespace Memento
 {
     public class ProductOriginator : IProductOriginator
     {
-        private Product product;
+        private Product? _product;
 
         public ProductOriginator(Product product)
         {
+            ArgumentNullException.ThrowIfNull(product);
             SetMemento(product);
         }
 
         public void SetMemento(Product product)
         {
-            this.product = product;
+            _product = product;
         }
 
         public Product GetMemento()
         {
-            return this.product;
+            ArgumentNullException.ThrowIfNull(_product);
+            return _product;
         }
     }
 }

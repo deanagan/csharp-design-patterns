@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,7 +14,11 @@ namespace Memento
 
         public Product GetLastMemento()
         {
-            return productMementos.DefaultIfEmpty(null).Last();
+            var product = productMementos.DefaultIfEmpty(null).Last();
+
+            ArgumentNullException.ThrowIfNull(product);
+
+            return product;
         }
     }
 }
