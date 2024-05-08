@@ -2,7 +2,7 @@ namespace ChainOfResponsibility
 {
     public abstract class CreditCardHandlerBase : ICreditCardHandler
     {
-        private ICreditCardHandler nextCreditCardHandler;
+        private ICreditCardHandler? nextCreditCardHandler;
         public ICreditCardHandler SetNext(ICreditCardHandler creditCardHandler)
         {
             nextCreditCardHandler = creditCardHandler;

@@ -2,9 +2,9 @@ namespace FactoryMethod
 {
     public class SilverPerks : IPerks
     {
-        public double EarningBonus()
+        public decimal EarningBonus()
         {
-            return 0.5;
+            return 0.5m;
         }
     }
 }

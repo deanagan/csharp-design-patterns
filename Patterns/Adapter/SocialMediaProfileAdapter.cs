@@ -5,13 +5,10 @@ namespace Adapter
 {
     public class SocialMediaProfileAdapter : IGoodReadsProfile
     {
-        private ISocialMediaProfile _socialMediaProfile;
-        public SocialMediaProfileAdapter(ISocialMediaProfile socialMediaProfile)
+        private readonly ISocialMediaProfile _socialMediaProfile;
+        public SocialMediaProfileAdapter(ISocialMediaProfile? socialMediaProfile)
         {
-            if (socialMediaProfile == null)
-            {
-                throw new ArgumentNullException();
-            }
+            ArgumentNullException.ThrowIfNull(socialMediaProfile);
             _socialMediaProfile = socialMediaProfile;
         }
 

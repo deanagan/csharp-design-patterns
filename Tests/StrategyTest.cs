@@ -7,9 +7,9 @@ namespace Strategy.Test
     public class StrategyShould
     {
         private delegate decimal PriceCalc(IProduct product);
-        private ICoupon _mockCoupon;
-        private IProduct _mockProduct;
-        private IDiscountScheme _discountScheme;
+        private ICoupon? _mockCoupon;
+        private IProduct? _mockProduct;
+        private IDiscountScheme? _discountScheme;
 
         ICoupon CreateMockCoupon(bool isExpired, int discountPercentage)
         {
@@ -50,9 +50,9 @@ namespace Strategy.Test
         public void ReturnNonMemberDiscountedPrice_WhenNonMemberWithValidCouponForRegularItem()
         {
             // Arrange
-           _mockCoupon = CreateMockCoupon(false, 5);
-           _mockProduct = CreateMockProduct(100M, false);
-           _discountScheme = new NonMemberDiscountScheme();
+            _mockCoupon = CreateMockCoupon(false, 5);
+            _mockProduct = CreateMockProduct(100M, false);
+            _discountScheme = new NonMemberDiscountScheme();
 
             // Act
             var price = _discountScheme.ComputePrice(_mockProduct, _mockCoupon);

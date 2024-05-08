@@ -6,6 +6,6 @@ namespace Mediator
     {
         void Receive(IPurchaser purchaser);
         void Complete(Product product);
-        Product GetProduct();
+        Product? GetProduct();
     }
 }

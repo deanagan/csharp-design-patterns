@@ -2,9 +2,9 @@ namespace FactoryMethod
 {
     public class GoldPerks : IPerks
     {
-        public double EarningBonus()
+        public decimal EarningBonus()
         {
-            return 1.0;
+            return 1.0m;
         }
     }
 }

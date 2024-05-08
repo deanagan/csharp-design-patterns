@@ -2,6 +2,6 @@ namespace FactoryMethod
 {
     public interface IPerks
     {
-        double EarningBonus();
+        decimal EarningBonus();
     }
 }

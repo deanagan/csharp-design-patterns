@@ -7,10 +7,10 @@ namespace Facade.Test
 {
     public class FacadeShould
     {
-        private IEnvironment _environment = FacadeTestData.CreateMockEnvironment();
-        private IMerchantAuthenticationType _merchantAuthenticationType = FacadeTestData.CreateMockMerchantAuthenticationType();
-        private IBillingAddress _billingAddress = FacadeTestData.CreateMockBillingAddress();
-        private ITransactionController _transactionController;
+        private readonly IEnvironment _environment = FacadeTestData.CreateMockEnvironment();
+        private readonly IMerchantAuthenticationType _merchantAuthenticationType = FacadeTestData.CreateMockMerchantAuthenticationType();
+        private readonly IBillingAddress _billingAddress = FacadeTestData.CreateMockBillingAddress();
+        private ITransactionController? _transactionController;
 
         private IPaymentProcessor CreatePaymentProcessor(DateTime creditCardExpiryDate)
         {
@@ -56,9 +56,12 @@ namespace Facade.Test
             paymentProcessor.SubmitPayment().Should().BeTrue();
             using (new FluentAssertions.Execution.AssertionScope("transaction controller"))
             {
-                var txnCtrl = Mock.Get(_transactionController);
-                txnCtrl.Verify(tc => tc.Execute(), Times.Once);
-                txnCtrl.Verify(ar => ar.GetApiResponse(), Times.Once);
+                if (_transactionController != null)
+                {
+                    var txnCtrl = Mock.Get(_transactionController);
+                    txnCtrl.Verify(tc => tc.Execute(), Times.Once);
+                    txnCtrl.Verify(ar => ar.GetApiResponse(), Times.Once);
+                }
             }
         }
 
