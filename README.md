@@ -1,6 +1,6 @@
 # C# Design Patterns
 
-![.NET Core](https://github.com/deanagan/csharp-design-patterns/workflows/.NET%20Core/badge.svg)   [![Build Status](https://travis-ci.com/deanagan/csharp-design-patterns.svg?branch=master)](https://travis-ci.com/github/deanagan/csharp-design-patterns)   [![Coverage Status](https://coveralls.io/repos/github/deanagan/csharp-design-patterns/badge.svg?branch=master)](https://coveralls.io/github/deanagan/csharp-design-patterns?branch=master)
+[![.NET](https://github.com/deanagan/csharp-design-patterns/actions/workflows/dotnet.yml/badge.svg)](https://github.com/deanagan/csharp-design-patterns/actions/workflows/dotnet.yml)
 
 ## csharp-design-patterns
 
