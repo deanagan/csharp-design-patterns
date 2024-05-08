@@ -2,15 +2,15 @@ using System;
 
 namespace SingletonDI
 {
-    public sealed class GoFLogger
+    public sealed class LazyLogger
     {
         // Reference: CSharpInDepth using .Net4 Lazy
         // Implicitly uses LazyThreadSafetyMode.ExecutionAndPublication as the
         // thread safety mode for the Lazy<GoFLogger>
-        private static readonly Lazy<GoFLogger> _lazyLogger = new Lazy<GoFLogger> (
-            () => new GoFLogger()
+        private static readonly Lazy<Logger> _lazyLogger = new Lazy<Logger>(
+            () => new Logger()
         );
-        public static GoFLogger Instance
+        public static Logger Instance
         {
             get
             {

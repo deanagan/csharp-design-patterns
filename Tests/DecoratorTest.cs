@@ -7,7 +7,7 @@ namespace Decorator.Test
 {
     public class DecoratorShould
     {
-        private Fixture _fixture = new Fixture();
+        private readonly Fixture _fixture = new();
         private IHtmlElement _htmlElement;
         private string _DummyElement;
         private string _DummyLink;
@@ -17,7 +17,7 @@ namespace Decorator.Test
             _htmlElement = Mock.Of<IHtmlElement>();
             _DummyElement = _fixture.Create<string>();
             _DummyLink = "www." + _fixture.Create<string>() + ".com";
-            Mock.Get(_htmlElement).Setup(htmlElement => htmlElement.GetHtmlElement()).Returns(_DummyElement);            
+            Mock.Get(_htmlElement).Setup(htmlElement => htmlElement.GetHtmlElement()).Returns(_DummyElement);
         }
 
         [Fact]

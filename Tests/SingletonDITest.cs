@@ -9,12 +9,12 @@ namespace SingletonDI.Test
     {
 
         [Fact]
-        public void ReturnSameInstance_WhenComparingGoFSingleton()
+        public void ReturnSameInstance_WhenComparingLazyLoggerSingleton()
         {
             // Arrange
-            var logger1 = GoFLogger.Instance;
+            var logger1 = Logger.Instance;
             // Act
-            var logger2 = GoFLogger.Instance;
+            var logger2 = Logger.Instance;
             // Assert
             logger1.Should().BeSameAs(logger2);
         }
