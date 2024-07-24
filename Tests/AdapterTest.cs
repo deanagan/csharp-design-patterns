@@ -9,7 +9,7 @@ namespace Adapter.Tests
 {
     public class AdapterShould
     {
-        private Fixture _fixture = new Fixture();
+        private readonly Fixture _fixture = new();
 
         [Fact]
         public void Return_SocialMediaProfileContent_WhenAccessingViaAdapter()
