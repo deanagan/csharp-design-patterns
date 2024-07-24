@@ -24,7 +24,7 @@ namespace Laptop.Test
             var processor = factory.CreateProcessor();
 
             // Assert
-            using (new FluentAssertions.Execution.AssertionScope("processor") )
+            using (new FluentAssertions.Execution.AssertionScope("processor"))
             {
                 processor.BrandName().Should().Be(name);
                 processor.SpeedInGigaHertz().Should().Be(speed);
@@ -72,7 +72,7 @@ namespace Laptop.Test
             var storage = factory.CreateStorage();
 
             // Assert
-           storage.GetType().Should().Implement<IStorage>();
+            storage.GetType().Should().Implement<IStorage>();
         }
 
         [Theory]
@@ -83,7 +83,7 @@ namespace Laptop.Test
             var processor = factory.CreateProcessor();
 
             // Assert
-           processor.GetType().Should().Implement<IProcessor>();
+            processor.GetType().Should().Implement<IProcessor>();
         }
     }
 }
