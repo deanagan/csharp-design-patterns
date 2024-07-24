@@ -1,4 +1,4 @@
-namespace Laptop
+namespace AbstractFactory
 {
     public class LenovoPartsFactory : ILaptopPartsFactory
     {

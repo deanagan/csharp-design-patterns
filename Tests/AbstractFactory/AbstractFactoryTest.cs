@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Xunit;
 using FluentAssertions;
 
-namespace Laptop.Test
+namespace AbstractFactory.Test
 {
     public class AbstractFactoryShould
     {

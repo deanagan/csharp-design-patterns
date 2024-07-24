@@ -1,4 +1,4 @@
-namespace Laptop
+namespace AbstractFactory
 {
     //TODO: Use Generic Constraints
     public interface IProcessor

@@ -7,7 +7,7 @@ namespace Bridge.Test
 {
     public class BridgeShould
     {
-        private IPaymentGateway _mPaymentGateway;
+        private readonly IPaymentGateway _mPaymentGateway;
 
         public BridgeShould()
         {

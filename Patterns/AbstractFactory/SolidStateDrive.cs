@@ -1,6 +1,6 @@
-namespace Laptop
+namespace AbstractFactory
 {
-    
+
     public class SolidStateDrive : IStorage
     {
         public string HardwareType()
