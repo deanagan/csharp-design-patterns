@@ -11,11 +11,13 @@ namespace Observer.Test
         public void UpdateObserverOnce_WhenSubjectHasSpecials()
         {
             // Arrange
-            var subject = new SpecialsSubject();
+            var subject = new SpecialsSubject
+            {
+                SubjectState = "Footwear Sale"
+            };
             var mockObserver = new Mock<IObserver>();
             // Act
             subject.Attach(mockObserver.Object);
-            subject.SubjectState = "Footwear Sale";
             subject.Notify();
             // Assert
             mockObserver.Verify(observer => observer.Update(subject), Times.Once());
@@ -25,7 +27,10 @@ namespace Observer.Test
         public void NotCallUpdate_WhenObserverNotAttachedToSubject()
         {
             // Arrange
-            var subject = new SpecialsSubject();
+            var subject = new SpecialsSubject
+            {
+                SubjectState = "Footwear Sale"
+            };
             var mockObserver = new Mock<IObserver>();
             // Act
             subject.SubjectState = "Footwear Sale";

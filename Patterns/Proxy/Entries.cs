@@ -14,7 +14,7 @@ namespace Proxy
         {
             return _products.Remove(id);
         }
-        public IProductInfo Get(int id)
+        public IProductInfo? Get(int id)
         {
             if (!_products.ContainsKey(id))
             {

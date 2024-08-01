@@ -4,10 +4,10 @@ namespace Observer
 {
     public class SpecialsSubject : ISubject
     {
-        public delegate void Callback (string s);
-        public string SubjectState {get; set;}
+        public delegate void Callback(string s);
+        public required string SubjectState { get; set; }
 
-        private List<IObserver> _observers = new List<IObserver>();
+        private readonly List<IObserver> _observers = [];
 
         public void Attach(IObserver observer)
         {
