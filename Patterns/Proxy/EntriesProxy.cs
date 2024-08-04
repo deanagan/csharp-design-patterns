@@ -19,9 +19,9 @@ namespace Proxy
             }
             return result;
         }
-        public IProductInfo Get(int id)
+        public IProductInfo? Get(int id)
         {
-            return _realEntries.Get(id);
+            return _realEntries?.Get(id) ?? null;
         }
 
     }

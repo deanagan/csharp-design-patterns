@@ -1,6 +1,5 @@
 using Xunit;
 using FluentAssertions;
-using Moq;
 
 namespace Prototype.Test
 {
@@ -41,7 +40,7 @@ namespace Prototype.Test
             var newStreetAddress = "26 York Street";
             var relatedCustomer = (Customer)customer.Clone();
             relatedCustomer.FirstName = "Jane";
-            relatedCustomer.HomeAddress.StreetAddress = newStreetAddress;
+            relatedCustomer.HomeAddress!.StreetAddress = newStreetAddress;
 
             // Assert
             customer.HomeAddress.Should().Be(relatedCustomer.HomeAddress);
@@ -57,7 +56,7 @@ namespace Prototype.Test
             var diffCustomer = customer.DeepClone();
             diffCustomer.FirstName = "Peter";
             diffCustomer.LastName = "Wick";
-            diffCustomer.HomeAddress.StreetAddress = "57 Hassall Ridge";
+            diffCustomer.HomeAddress!.StreetAddress = "57 Hassall Ridge";
             diffCustomer.HomeAddress.City = "Lexington";
             diffCustomer.HomeAddress.State = "Kentucky";
             diffCustomer.HomeAddress.Country = "United States Of America";
