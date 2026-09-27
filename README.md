@@ -48,8 +48,8 @@ A bunch of demo codes for:
 
 1. Interpreter Pattern
 2. Unit of Work
-3. Repository Pattern
-4. CQRS with MediatR
+3. Pipeline pattern
+4. Workflow pattern
 
 ## Adding a Pattern
 
