@@ -14,8 +14,8 @@ public class AbstractFactoryShould
         {
             var data = new TheoryData<string, string, decimal>
             {
-                { "Corporate", "Corporate", 1000000m },
-                { "Small Business", "Small Business", 50000m }
+                { "Corporate", "Corporate Bank Guarantee", 1000000m },
+                { "Small Business", "Small Business Bank Guarantee", 50000m }
             };
             
             return data;

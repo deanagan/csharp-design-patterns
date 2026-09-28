@@ -9,7 +9,7 @@ public class SmallBusinessGuarantee : IBankGuarantee
 
     public string GetDescription()
     {
-        return "Small Business banking guarantee";
+        return "Small Business Bank Guarantee";
     }
 
     public string GetBeneficiary()
