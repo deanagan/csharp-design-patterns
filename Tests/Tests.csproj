@@ -25,7 +25,6 @@
 
   <ItemGroup>
 
-    <ProjectReference Include="..\Patterns\AbstractFactory\AbstractFactory.csproj" />
     <ProjectReference Include="..\Patterns\Adapter\Adapter.csproj" />
     <ProjectReference Include="..\Patterns\Bridge\Bridge.csproj" />
     <ProjectReference Include="..\Patterns\Builder\Builder.csproj" />
