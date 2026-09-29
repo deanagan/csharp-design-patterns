@@ -53,7 +53,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AbstractFactory", "Abstract
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{91F11587-435A-D1EA-4F83-99631B41692E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractFactoryTest", "Patterns\AbstractFactory\Test\AbstractFactoryTest.csproj", "{39CA009F-645D-4F26-B621-44C4D33557DE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractFactoryTest", "Patterns\AbstractFactory\test\AbstractFactoryTest.csproj", "{39CA009F-645D-4F26-B621-44C4D33557DE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AbstractFactory", "AbstractFactory", "{D2CF1B92-289B-A36D-FD8B-47A8F530448B}"
 EndProject
