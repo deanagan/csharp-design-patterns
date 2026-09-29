@@ -28,6 +28,11 @@ msbuild.log
 msbuild.err
 msbuild.wrn
 
+# Coverage reports and local tools
+/coverage-results/
+/coverage-report/
+/.tools/
+
 # Visual Studio 2015
 .vs/
 .idea/
