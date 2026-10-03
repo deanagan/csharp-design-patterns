@@ -5,4 +5,7 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="test\**" />
+  </ItemGroup>
 </Project>
