@@ -61,3 +61,7 @@ A bunch of demo codes for:
 
 1. Change directory to the pattern you want to add a package for or to the test folder (if you want to add a test package).
 2. Add the package: Example: `dotnet add package FluentAssertions`
+
+## Generate Coverage locally
+
+`dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura`

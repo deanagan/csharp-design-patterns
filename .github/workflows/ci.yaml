@@ -23,9 +23,9 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build *.sln --no-restore
     - name: Test with coverage
-      run: dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage-results
+      run: dotnet test *.sln --no-build --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage-results
     - name: Install ReportGenerator
       run: dotnet tool install dotnet-reportgenerator-globaltool --tool-path ./.tools
     - name: Generate coverage summary
