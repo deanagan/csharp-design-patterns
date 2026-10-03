@@ -32,6 +32,7 @@ msbuild.wrn
 /coverage-results/
 /coverage-report/
 /.tools/
+/coveragereport/
 
 # Visual Studio 2015
 .vs/
