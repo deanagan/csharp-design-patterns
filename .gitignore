@@ -33,6 +33,9 @@ msbuild.wrn
 /coverage-report/
 /.tools/
 /coveragereport/
+**/coverage-results/
+**/*.cobertura.xml
+coverlet.runsettings
 
 # Visual Studio 2015
 .vs/
