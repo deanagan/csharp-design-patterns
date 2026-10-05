@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Observer.csproj" />
+    <ProjectReference Include="..\src\Observer.csproj" />
   </ItemGroup>
 
 </Project>

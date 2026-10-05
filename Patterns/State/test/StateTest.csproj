@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\State.csproj" />
+    <ProjectReference Include="..\src\State.csproj" />
   </ItemGroup>
 
 </Project>

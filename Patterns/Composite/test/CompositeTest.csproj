@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Composite.csproj" />
+    <ProjectReference Include="..\src\Composite.csproj" />
   </ItemGroup>
 
 </Project>

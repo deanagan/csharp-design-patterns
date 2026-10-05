@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FactoryMethod.csproj" />
+    <ProjectReference Include="..\src\FactoryMethod.csproj" />
   </ItemGroup>
 
 </Project>

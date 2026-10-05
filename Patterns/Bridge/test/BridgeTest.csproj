@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Bridge.csproj" />
+    <ProjectReference Include="..\src\Bridge.csproj" />
   </ItemGroup>
 
 </Project>

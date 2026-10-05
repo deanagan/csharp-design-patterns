@@ -1,0 +1,157 @@
+<Solution>
+  <Folder Name="/Patterns/" />
+  <Folder Name="/Patterns/AbstractFactory/" />
+  <Folder Name="/Patterns/AbstractFactory/src/">
+    <Project Path="Patterns/AbstractFactory/src/AbstractFactory.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/AbstractFactory/test/">
+    <Project Path="Patterns/AbstractFactory/test/AbstractFactoryTest.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/Adapter/" />
+  <Folder Name="/Patterns/Adapter/src/">
+    <Project Path="Patterns/Adapter/src/Adapter.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/Adapter/test/">
+    <Project Path="Patterns/Adapter/test/AdapterTest.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/Bridge/" />
+  <Folder Name="/Patterns/Bridge/src/">
+    <Project Path="Patterns/Bridge/src/Bridge.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/Bridge/test/">
+    <Project Path="Patterns/Bridge/test/BridgeTest.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/Builder/" />
+  <Folder Name="/Patterns/Builder/src/">
+    <Project Path="Patterns/Builder/src/Builder.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/Builder/test/">
+    <Project Path="Patterns/Builder/test/BuilderTest.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/ChainOfResponsibility/" />
+  <Folder Name="/Patterns/ChainOfResponsibility/src/">
+    <Project Path="Patterns/ChainOfResponsibility/src/ChainOfResponsibility.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/ChainOfResponsibility/test/">
+    <Project Path="Patterns/ChainOfResponsibility/test/ChainOfResponsibilityTest.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/Command/" />
+  <Folder Name="/Patterns/Command/src/">
+    <Project Path="Patterns/Command/src/Command.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/Command/test/">
+    <Project Path="Patterns/Command/test/CommandTest.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/Composite/" />
+  <Folder Name="/Patterns/Composite/src/">
+    <Project Path="Patterns/Composite/src/Composite.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/Composite/test/">
+    <Project Path="Patterns/Composite/test/CompositeTest.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/Decorator/" />
+  <Folder Name="/Patterns/Decorator/src/">
+    <Project Path="Patterns/Decorator/src/Decorator.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/Decorator/test/">
+    <Project Path="Patterns/Decorator/test/DecoratorTest.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/Facade/" />
+  <Folder Name="/Patterns/Facade/src/">
+    <Project Path="Patterns/Facade/src/Facade.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/Facade/test/">
+    <Project Path="Patterns/Facade/test/FacadeTest.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/FactoryMethod/" />
+  <Folder Name="/Patterns/FactoryMethod/src/">
+    <Project Path="Patterns/FactoryMethod/src/FactoryMethod.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/FactoryMethod/test/">
+    <Project Path="Patterns/FactoryMethod/test/FactoryMethodTest.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/Flyweight/" />
+  <Folder Name="/Patterns/Flyweight/src/">
+    <Project Path="Patterns/Flyweight/src/Flyweight.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/Flyweight/test/">
+    <Project Path="Patterns/Flyweight/test/FlyweightTest.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/Iterator/" />
+  <Folder Name="/Patterns/Iterator/src/">
+    <Project Path="Patterns/Iterator/src/Iterator.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/Iterator/test/">
+    <Project Path="Patterns/Iterator/test/IteratorTest.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/Mediator/" />
+  <Folder Name="/Patterns/Mediator/src/">
+    <Project Path="Patterns/Mediator/src/Mediator.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/Mediator/test/">
+    <Project Path="Patterns/Mediator/test/MediatorTest.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/Memento/" />
+  <Folder Name="/Patterns/Memento/src/">
+    <Project Path="Patterns/Memento/src/Memento.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/Memento/test/">
+    <Project Path="Patterns/Memento/test/MementoTest.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/Observer/" />
+  <Folder Name="/Patterns/Observer/src/">
+    <Project Path="Patterns/Observer/src/Observer.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/Observer/test/">
+    <Project Path="Patterns/Observer/test/ObserverTest.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/Prototype/" />
+  <Folder Name="/Patterns/Prototype/src/">
+    <Project Path="Patterns/Prototype/src/Prototype.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/Prototype/test/">
+    <Project Path="Patterns/Prototype/test/PrototypeTest.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/Proxy/" />
+  <Folder Name="/Patterns/Proxy/src/">
+    <Project Path="Patterns/Proxy/src/Proxy.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/Proxy/test/">
+    <Project Path="Patterns/Proxy/test/ProxyTest.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/SingletonDependencyInjection/" />
+  <Folder Name="/Patterns/SingletonDependencyInjection/src/">
+    <Project Path="Patterns/SingletonDependencyInjection/src/SingletonDI.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/SingletonDependencyInjection/test/">
+    <Project Path="Patterns/SingletonDependencyInjection/test/SingletonDITest.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/State/" />
+  <Folder Name="/Patterns/State/src/">
+    <Project Path="Patterns/State/src/State.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/State/test/">
+    <Project Path="Patterns/State/test/StateTest.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/Strategy/" />
+  <Folder Name="/Patterns/Strategy/src/">
+    <Project Path="Patterns/Strategy/src/Strategy.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/Strategy/test/">
+    <Project Path="Patterns/Strategy/test/StrategyTest.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/TemplateMethod/" />
+  <Folder Name="/Patterns/TemplateMethod/src/">
+    <Project Path="Patterns/TemplateMethod/src/TemplateMethod.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/TemplateMethod/test/">
+    <Project Path="Patterns/TemplateMethod/test/TemplateMethodTest.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/Visitor/" />
+  <Folder Name="/Patterns/Visitor/src/">
+    <Project Path="Patterns/Visitor/src/Visitor.csproj" />
+  </Folder>
+  <Folder Name="/Patterns/Visitor/test/">
+    <Project Path="Patterns/Visitor/test/VisitorTest.csproj" />
+  </Folder>
+</Solution>

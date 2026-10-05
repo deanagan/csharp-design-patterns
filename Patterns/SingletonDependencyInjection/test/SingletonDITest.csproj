@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SingletonDI.csproj" />
+    <ProjectReference Include="..\src\SingletonDI.csproj" />
   </ItemGroup>
 
 </Project>

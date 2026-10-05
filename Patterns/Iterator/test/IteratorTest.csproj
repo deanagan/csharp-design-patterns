@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Iterator.csproj" />
+    <ProjectReference Include="..\src\Iterator.csproj" />
   </ItemGroup>
 
 </Project>

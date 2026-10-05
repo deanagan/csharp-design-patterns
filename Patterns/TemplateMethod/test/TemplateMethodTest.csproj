@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TemplateMethod.csproj" />
+    <ProjectReference Include="..\src\TemplateMethod.csproj" />
   </ItemGroup>
 
 </Project>

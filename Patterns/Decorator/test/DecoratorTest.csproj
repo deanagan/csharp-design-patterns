@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Decorator.csproj" />
+    <ProjectReference Include="..\src\Decorator.csproj" />
   </ItemGroup>
 
 </Project>

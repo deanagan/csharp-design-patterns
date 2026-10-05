@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Memento.csproj" />
+    <ProjectReference Include="..\src\Memento.csproj" />
   </ItemGroup>
 
 </Project>

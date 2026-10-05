@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Facade.csproj" />
+    <ProjectReference Include="..\src\Facade.csproj" />
   </ItemGroup>
 
 </Project>

@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Flyweight.csproj" />
+    <ProjectReference Include="..\src\Flyweight.csproj" />
   </ItemGroup>
 
 </Project>

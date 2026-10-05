@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Proxy.csproj" />
+    <ProjectReference Include="..\src\Proxy.csproj" />
   </ItemGroup>
 
 </Project>
