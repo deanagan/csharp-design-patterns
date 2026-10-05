@@ -1,7 +1,5 @@
-using System;
 using AbstractFactory;
 using Shouldly;
-using Xunit;
 
 namespace AbstractFactoryTest;
 

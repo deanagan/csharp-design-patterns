@@ -1,10 +1,8 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using Adapter;
+﻿using Adapter;
 using NSubstitute;
 using Shouldly;
-using Xunit;
 
+namespace AdapterTest;
 
 public class CreditBureauAdapterTests
 {

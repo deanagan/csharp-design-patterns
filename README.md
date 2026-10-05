@@ -66,4 +66,4 @@ A bunch of demo codes for:
 
 `dotnet tool install -g dotnet-reportgenerator-globaltool`
 `dotnet test *.sln /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./coverage-results/`
-`reportgenerator -reports:"coverage-results/**/coverage.cobertura.xml" -targetdir:"coveragereport" -reporttypes:"Html;MarkdownSummaryGithub"`
+`reportgenerator -reports:'**/coverage-results/**/*.cobertura.xml' -targetdir:'coveragereport' -reporttypes:'Html;MarkdownSummaryGithub'`
