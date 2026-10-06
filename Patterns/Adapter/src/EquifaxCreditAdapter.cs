@@ -1,6 +1,3 @@
-using System.Threading;
-using System.Threading.Tasks;
-
 namespace Adapter;
 
 public class EquifaxCreditAdapter(IEquifaxApiClient equifaxClient) : ICreditBureauService
@@ -8,15 +5,15 @@ public class EquifaxCreditAdapter(IEquifaxApiClient equifaxClient) : ICreditBure
     public async Task<CreditReport> GetCreditReportAsync(string applicantId, CancellationToken cancellationToken)
     {
         // Translate domain request to vendor format
-        string rawXml = await equifaxClient.FetchXmlReportAsync(applicantId);
+        var rawXml = await equifaxClient.FetchXmlReportAsync(applicantId);
         
         // (Parsing logic for Equifax XML structure...)
-        int equifaxScore = 720; // Extracted from XML
-        bool defaults = false;   // Extracted from XML
+        var equifaxScore = 720; // Extracted from XML
+        var defaults = false;   // Extracted from XML
 
         // Adapt Equifax's 850 scale to your system's unified scale, map properties
-        int normalizedScore = (int)(equifaxScore * (1000.0 / 850.0));
-        string tier = normalizedScore > 750 ? "Prime" : "Standard";
+        var normalizedScore = (int)(equifaxScore * (1000.0 / 850.0));
+        var tier = normalizedScore > 750 ? "Prime" : "Standard";
 
         return new CreditReport
         {

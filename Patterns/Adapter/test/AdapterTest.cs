@@ -11,7 +11,7 @@ public class CreditBureauAdapterTests
     {
         // Arrange
         var mockClient = Substitute.For<IEquifaxApiClient>();
-        string sampleXml = "<EquifaxResponse><Score>720</Score><Defaults>false</Defaults></EquifaxResponse>";
+        var sampleXml = "<EquifaxResponse><Score>720</Score><Defaults>false</Defaults></EquifaxResponse>";
         
         mockClient.FetchXmlReportAsync("APP-123").Returns(Task.FromResult(sampleXml));
 
