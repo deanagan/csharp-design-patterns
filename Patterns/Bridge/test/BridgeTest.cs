@@ -1,6 +1,5 @@
 using Bridge;
 using NSubstitute;
-using Shouldly;
 using Xunit;
 
 namespace BridgeTest;
