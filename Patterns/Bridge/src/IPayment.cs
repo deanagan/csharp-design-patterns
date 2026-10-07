@@ -1,9 +1,6 @@
-﻿using System;
+﻿namespace Bridge;
 
-namespace Bridge
+public interface IPayment
 {
-    public interface IPayment
-    {
-        void SubmitPayment(decimal amount);
-    }
+    void SubmitPayment(decimal amount);
 }

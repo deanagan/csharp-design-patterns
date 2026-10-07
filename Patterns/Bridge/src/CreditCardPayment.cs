@@ -1,18 +1,11 @@
 
 
-namespace Bridge
-{
-    public class CreditCardPayment : IPayment
-    {
-        private IPaymentGateway _mPaymentGateway;
+namespace Bridge;
 
-        public CreditCardPayment(IPaymentGateway paymentGateway)
-        {
-            _mPaymentGateway = paymentGateway;
-        }
-        public void SubmitPayment(decimal amount)
-        {
-            _mPaymentGateway.ProcessPayment(amount, this);
-        }
+public class CreditCardPayment(IPaymentGateway paymentGateway) : IPayment
+{
+    public void SubmitPayment(decimal amount)
+    {
+        paymentGateway.ProcessPayment(amount, this);
     }
 }

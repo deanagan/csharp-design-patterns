@@ -1,15 +1,11 @@
 using System;
 
-namespace Bridge
+namespace Bridge;
+
+public class PurchaseOrder(IPayment payment) : Order(payment)
 {
-    public class PurchaseOrder : Order
+    public override void Checkout(decimal amount)
     {
-        public PurchaseOrder(IPayment payment) : base(payment)
-        {
-        }
-        public override void Checkout(decimal amount)
-        {
-            Payment.SubmitPayment(amount);
-        }
+        Payment.SubmitPayment(amount);
     }
 }

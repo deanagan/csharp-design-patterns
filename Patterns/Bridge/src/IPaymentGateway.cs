@@ -1,9 +1,8 @@
 using System;
 
-namespace Bridge
+namespace Bridge;
+
+public interface IPaymentGateway
 {
-    public interface IPaymentGateway
-    {
-        void ProcessPayment(decimal amount, IPayment payment);
-    }
+    void ProcessPayment(decimal amount, IPayment payment);
 }

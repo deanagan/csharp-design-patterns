@@ -4,7 +4,7 @@ using Shouldly;
 
 namespace AdapterTest;
 
-public class CreditBureauAdapterTests
+public class AdapterShould
 {
     [Fact]
     public async Task EquifaxCreditAdapter_Should_NormalizeScoreAndMapFields_Correctly()

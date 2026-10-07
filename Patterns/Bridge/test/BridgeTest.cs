@@ -1,51 +1,40 @@
-using System.Collections.Generic;
+using Bridge;
+using NSubstitute;
+using Shouldly;
 using Xunit;
-using Moq;
-using FluentAssertions;
 
-namespace Bridge.Test
+namespace BridgeTest;
+
+public class BridgeShould
 {
-    public class BridgeShould
+    private readonly IPaymentGateway _paymentGateway;
+
+    public BridgeShould()
     {
-        private readonly IPaymentGateway _mPaymentGateway;
+        _paymentGateway = Substitute.For<IPaymentGateway>();
+    }
 
-        public BridgeShould()
-        {
-            _mPaymentGateway = Mock.Of<IPaymentGateway>();
-        }
+    public delegate IPayment PaymentMethodCreator(IPaymentGateway gateway);
 
-        public delegate IPayment PaymentMethodCreator(IPaymentGateway gateway);
+    public static TheoryData<PaymentMethodCreator> PaymentMethodCreators => new()
+    {
+        new PaymentMethodCreator(gateway => new CreditCardPayment(gateway)),
+        new PaymentMethodCreator(gateway => new PaypalPayment(gateway))
+    };
 
-        public static IEnumerable<object[]> PaymentMethodCreators
-        {
-            get
-            {
-                yield return new object[] { new PaymentMethodCreator((gateway) => new CreditCardPayment(gateway)) };
-                yield return new object[] { new PaymentMethodCreator((gateway) => new PaypalPayment(gateway)) };
-            }
-        }
+    [Theory]
+    [MemberData(nameof(PaymentMethodCreators))]
+    public void SubmitPaymentToGateway_WhenCheckingOut(PaymentMethodCreator paymentMethodCreator)
+    {
+        // Arrange
+        var paymentMethod = paymentMethodCreator(_paymentGateway);
+        var order = new PurchaseOrder(paymentMethod);
+        const decimal amount = 20.0M;
 
-        [Theory]
-        [MemberData(nameof(PaymentMethodCreators))]
-        public void UseCorrectPaymentMethod_WhenCheckingOut(PaymentMethodCreator paymentMethodCreator)
-        {
-            // Arrange
-            var paymentMethod = paymentMethodCreator(_mPaymentGateway);
-            var order = new PurchaseOrder(paymentMethod);
+        // Act
+        order.Checkout(amount);
 
-            // Act
-            order.Checkout(20.0M);
-
-            // Assert
-            using (new FluentAssertions.Execution.AssertionScope("payments"))
-            {
-                Mock.Get(_mPaymentGateway).Verify(
-                    pp => pp.ProcessPayment(20.0M,
-                    It.Is<IPayment>(p => p.GetType() == paymentMethod.GetType())), Times.Once);
-
-                paymentMethod.GetType().Should().Implement<IPayment>();
-            }
-        }
-
+        // Assert
+        _paymentGateway.Received(1).ProcessPayment(amount, paymentMethod);
     }
 }

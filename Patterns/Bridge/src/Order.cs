@@ -1,14 +1,13 @@
 using System;
 
-namespace Bridge
+namespace Bridge;
+
+public abstract class Order
 {
-    public abstract class Order
+    protected IPayment Payment { get; }
+    public Order(IPayment payment)
     {
-        protected IPayment Payment { get; }
-        public Order(IPayment payment)
-        {
-            Payment = payment;
-        }
-        public abstract void Checkout(decimal amount);
+        Payment = payment;
     }
+    public abstract void Checkout(decimal amount);
 }
