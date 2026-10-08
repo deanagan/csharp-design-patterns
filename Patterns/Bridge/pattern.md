@@ -14,7 +14,7 @@ In this implementation, the Bridge pattern separates **LoanProduct** (the domain
 
 ## Real-World Analogy: Loan Products & General Ledger Systems
 
-Imagine a fintech lending institution offering various credit facilities:
+Imagine a commercial lending institution offering various credit facilities:
 
 - **Abstraction Hierarchy (Loan Products):**
   Different loan products have distinct accounting portfolio structures and lifecycle behaviors:
@@ -149,7 +149,7 @@ classDiagram
 
 ## Scenarios: When to Use the Bridge Pattern
 
-### 1. Dual General Ledger / Multi-ERP Integration (Banking & Fintech)
+### 1. Dual General Ledger / Multi-ERP Integration
 **Scenario:** A lending or treasury microservice processes financial events and must post balanced double-entry accounting records into different General Ledger (GL) systems (e.g., a legacy SAP ERP and a modern cloud-native event-driven ledger).
 
 - **Abstraction Hierarchy (Loan Products):**
