@@ -1,22 +1,21 @@
-namespace ChainOfResponsibility
+namespace ChainOfResponsibility;
+
+public abstract class CreditCardHandlerBase : ICreditCardHandler
 {
-    public abstract class CreditCardHandlerBase : ICreditCardHandler
+    private ICreditCardHandler? nextCreditCardHandler;
+    public ICreditCardHandler SetNext(ICreditCardHandler creditCardHandler)
     {
-        private ICreditCardHandler? nextCreditCardHandler;
-        public ICreditCardHandler SetNext(ICreditCardHandler creditCardHandler)
+        nextCreditCardHandler = creditCardHandler;
+        return creditCardHandler;
+    }
+
+    public virtual bool IsCreditCardValid(ICreditCard card)
+    {
+        if (nextCreditCardHandler != null)
         {
-            nextCreditCardHandler = creditCardHandler;
-            return creditCardHandler;
+            return nextCreditCardHandler.IsCreditCardValid(card);
         }
 
-        public virtual bool IsCreditCardValid(ICreditCard card)
-        {
-            if (nextCreditCardHandler != null)
-            {
-                return nextCreditCardHandler.IsCreditCardValid(card);
-            }
-
-            return false;
-        }
+        return false;
     }
 }

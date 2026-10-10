@@ -1,7 +1,6 @@
-namespace ChainOfResponsibility
+namespace ChainOfResponsibility;
+
+public interface IPaymentGateway
 {
-    public interface IPaymentGateway
-    {
-        bool SubmitVerification(ICreditCardHandler creditCardHandler, ICreditCard card);
-    }
+    bool SubmitVerification(ICreditCardHandler creditCardHandler, ICreditCard card);
 }

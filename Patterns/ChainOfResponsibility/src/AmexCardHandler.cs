@@ -1,24 +1,17 @@
 
-namespace ChainOfResponsibility
+namespace ChainOfResponsibility;
+
+public class AmexCardHandler(IPaymentGateway paymentGateway) : CreditCardHandlerBase
 {
-    public class AmexCardHandler : CreditCardHandlerBase
+    private const string AmexCardStartingNumber = "3";
+
+    public override bool IsCreditCardValid(ICreditCard card)
     {
-        private IPaymentGateway paymentGateway;
-        private const string AmexCardStartingNumber = "3";
-        public AmexCardHandler(IPaymentGateway paymentGateway)
+        if (card.Number.StartsWith(AmexCardStartingNumber))
         {
-            this.paymentGateway = paymentGateway;
+            return paymentGateway.SubmitVerification(this, card);
         }
 
-        public override bool IsCreditCardValid(ICreditCard card)
-        {
-            if (card.Number.StartsWith(AmexCardStartingNumber))
-            {
-                return paymentGateway.SubmitVerification(this, card);
-            }
-
-            return base.IsCreditCardValid(card);
-        }
-
+        return base.IsCreditCardValid(card);
     }
 }

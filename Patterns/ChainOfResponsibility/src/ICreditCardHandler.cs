@@ -1,9 +1,8 @@
 
-namespace ChainOfResponsibility
+namespace ChainOfResponsibility;
+
+public interface ICreditCardHandler
 {
-    public interface ICreditCardHandler
-    {
-        ICreditCardHandler SetNext(ICreditCardHandler creditCardHandler);
-        bool IsCreditCardValid(ICreditCard card);
-    }
+    ICreditCardHandler SetNext(ICreditCardHandler creditCardHandler);
+    bool IsCreditCardValid(ICreditCard card);
 }
