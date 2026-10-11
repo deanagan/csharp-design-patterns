@@ -1,15 +1,9 @@
-namespace Command
+namespace Command;
+
+public class ClearCommand(IProductList productList) : ICommand
 {
-    public class ClearCommand : ICommand
+    public void Execute()
     {
-        private IProductList _productList;
-        public ClearCommand(IProductList productList)
-        {
-            _productList = productList;
-        }
-        public void Execute()
-        {
-            _productList.Products.Clear();
-        }
+        productList.Products.Clear();
     }
 }

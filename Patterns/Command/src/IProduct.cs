@@ -1,8 +1,7 @@
-namespace Command
+namespace Command;
+
+public interface IProduct
 {
-    public interface IProduct
-    {
-        string Name { get; set; }
-        decimal Price { get; set; }
-    }
+    string Name { get; set; }
+    decimal Price { get; set; }
 }

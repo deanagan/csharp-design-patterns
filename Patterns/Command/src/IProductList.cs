@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 
-namespace Command
+namespace Command;
+
+public interface IProductList
 {
-    public interface IProductList
-    {
-        string Name { get; set; }
-        List<IProduct> Products { get; set;}
-    }
+    string Name { get; set; }
+    List<IProduct> Products { get; set;}
 }

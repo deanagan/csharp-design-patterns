@@ -1,8 +1,7 @@
-namespace Command
+namespace Command;
+
+public interface IInvoker
 {
-    public interface IInvoker
-    {
-        bool AddCommand(string key, ICommand command);
-        void InvokeCommand(string key);
-    }
+    bool AddCommand(string key, ICommand command);
+    void InvokeCommand(string key);
 }

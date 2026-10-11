@@ -1,19 +1,9 @@
-namespace Command
+namespace Command;
+
+public class AddCommand(IProductList productList, IProduct product) : ICommand
 {
-    public class AddCommand : ICommand
+    public void Execute()
     {
-        private IProduct _product;
-        private IProductList _productList;
-
-        public AddCommand(IProductList productList, IProduct product)
-        {
-            _productList = productList;
-            _product = product;
-        }
-
-        public void Execute()
-        {
-            _productList.Products.Add(_product);
-        }
+        productList.Products.Add(product);
     }
 }
