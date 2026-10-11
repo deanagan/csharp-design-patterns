@@ -62,7 +62,9 @@ public class ChainOfResponsibilityShould
 
     [Theory]
     [MemberData(nameof(ValidCreditCardNumbers))]
-    public void BeValidWithCorrectCardType_WhenCreditCardSubmittedForVerification(CreditCardHandlerCreator creditCardHandlerCreator, string cardNumber)
+    public void BeValidWithCorrectCardType_WhenCreditCardSubmittedForVerification(
+        CreditCardHandlerCreator creditCardHandlerCreator, 
+        string cardNumber)
     {
         // Arrange
         var creditCard = PrepareCreditCardPayment(cardNumber);

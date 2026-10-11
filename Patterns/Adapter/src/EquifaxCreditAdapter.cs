@@ -1,3 +1,6 @@
+using System.Threading;
+using System.Threading.Tasks;
+
 namespace Adapter;
 
 public class EquifaxCreditAdapter(IEquifaxApiClient equifaxClient) : ICreditBureauService
