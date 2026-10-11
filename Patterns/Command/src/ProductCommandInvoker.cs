@@ -4,11 +4,11 @@ namespace Command;
 
 public class ProductCommandInvoker : IInvoker
 {
-    private Dictionary<string, ICommand> _commands;
+    private readonly Dictionary<string, ICommand> _commands;
 
     public ProductCommandInvoker()
     {
-        _commands = new Dictionary<string, ICommand>();
+        _commands = [];
     }
 
     public bool AddCommand(string key, ICommand command)

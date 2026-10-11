@@ -1,125 +1,121 @@
+using Command;
 using System;
 using System.Collections.Generic;
 using Xunit;
-using Moq;
-using FluentAssertions;
+using Shouldly;
+using System.Linq;
+using NSubstitute;
 
-namespace Command.Test
+
+namespace CommandTest;
+
+public class CommandShould
 {
-    public class CommandShould
+    private readonly IProductList _productList;
+    private readonly IInvoker _productInvoker;
+
+    public CommandShould()
     {
-        private IProductList _ProductList;
-        private IInvoker _productInvoker;
+        _productList = Substitute.For<IProductList>();
+        _productList.Name.Returns("WishList");
+        _productList.Products.Returns([]);
 
-        public CommandShould()
-        {
-            _ProductList = Mock.Of<IProductList>
-            (
-                productList =>
-                    productList.Name == "WishList" &&
-                    productList.Products == (new List<IProduct>())
-            );
+        _productInvoker = new ProductCommandInvoker();
+    }
 
-            _productInvoker = new ProductCommandInvoker();
-        }
+    public static IEnumerable<object[]> GetProducts()
+    {
+        var product1 = Substitute.For<IProduct>();
+        product1.Name.Returns("Product 1");
+        product1.Price.Returns(45.00M);
 
-        public static IEnumerable<object[]> GetProducts()
-        {
-            yield return new object[] {
-                Mock.Of<IProduct>
-                (
-                    product =>
-                        product.Name == "Product 1" &&
-                        product.Price == 45.00M
-                ),
-                Mock.Of<IProduct>
-                (
-                    product =>
-                        product.Name == "Product 2" &&
-                        product.Price == 55.00M
-                )
-            };
-        }
+        var product2 = Substitute.For<IProduct>();
+        product2.Name.Returns("Product 2");
+        product2.Price.Returns(55.00M);
 
+        yield return new object[] {
+            product1,
+            product2
+        };
+    }
 
-        [Theory]
-        [MemberData(nameof(GetProducts))]
-        public void AddItems_WhenUsingAddCommand(IProduct product1, IProduct product2)
-        {
-            // Arrange
-            var addProduct1Command = new AddCommand(_ProductList, product1);
-            var addProduct2Command = new AddCommand(_ProductList, product2);
+    [Theory]
+    [MemberData(nameof(GetProducts))]
+    public void AddItems_WhenUsingAddCommand(IProduct product1, IProduct product2)
+    {
+        // Arrange
+        var addProduct1Command = new AddCommand(_productList, product1);
+        var addProduct2Command = new AddCommand(_productList, product2);
 
-            // Act
-            _productInvoker.AddCommand("addproduct1", addProduct1Command);
-            _productInvoker.AddCommand("addproduct2", addProduct2Command);
-            _productInvoker.InvokeCommand("addproduct1");
-            _productInvoker.InvokeCommand("addproduct2");
+        // Act
+        _productInvoker.AddCommand("addproduct1", addProduct1Command);
+        _productInvoker.AddCommand("addproduct2", addProduct2Command);
+        _productInvoker.InvokeCommand("addproduct1");
+        _productInvoker.InvokeCommand("addproduct2");
 
-            // Assert
-            _ProductList.Products.Should().NotBeNullOrEmpty()
-                                          .And
-                                          .HaveCount(2)
-                                          .And
-                                          .OnlyHaveUniqueItems()
-                                          .And
-                                          .Contain(product1)
-                                          .And
-                                          .Contain(product2);
-        }
+        // Assert
+        var products = _productList.Products;
 
-        [Theory]
-        [MemberData(nameof(GetProducts))]
-        public void AddTwoRemoveOneCorrectly_WhenUsingRemoveCommand(IProduct product1, IProduct product2)
-        {
-            // Arrange
-            var addProduct1Command = new AddCommand(_ProductList, product1);
-            _productInvoker.AddCommand("addproduct1", addProduct1Command);
+        products.ShouldSatisfyAllConditions(
+            "product list",
+            () => products.ShouldNotBeEmpty(),
+            () => products.Distinct().Count().ShouldBe(2),
+            () => products.ShouldContain(product1),
+            () => products.ShouldContain(product2)
+        );
+    }
 
-            var addProduct2Command = new AddCommand(_ProductList, product2);
-            _productInvoker.AddCommand("addproduct2", addProduct2Command);
+    [Theory]
+    [MemberData(nameof(GetProducts))]
+    public void AddTwoRemoveOneCorrectly_WhenUsingRemoveCommand(IProduct product1, IProduct product2)
+    {
+        // Arrange
+        var addProduct1Command = new AddCommand(_productList, product1);
+        _productInvoker.AddCommand("addproduct1", addProduct1Command);
 
-            var removeProduct2Command = new RemoveCommand(_ProductList, product2);
-            _productInvoker.AddCommand("removeproduct2", removeProduct2Command);
+        var addProduct2Command = new AddCommand(_productList, product2);
+        _productInvoker.AddCommand("addproduct2", addProduct2Command);
 
-            // Act
-            _productInvoker.InvokeCommand("addproduct1");
-            _productInvoker.InvokeCommand("addproduct2");
-            _productInvoker.InvokeCommand("removeproduct2");
+        var removeProduct2Command = new RemoveCommand(_productList, product2);
+        _productInvoker.AddCommand("removeproduct2", removeProduct2Command);
 
-            // Assert
-            _ProductList.Products.Should().NotBeNullOrEmpty()
-                                          .And
-                                          .HaveCount(1)
-                                          .And
-                                          .OnlyHaveUniqueItems()
-                                          .And
-                                          .NotContain(product2)
-                                          .And
-                                          .Contain(product1);
-        }
+        // Act
+        _productInvoker.InvokeCommand("addproduct1");
+        _productInvoker.InvokeCommand("addproduct2");
+        _productInvoker.InvokeCommand("removeproduct2");
 
-        [Theory]
-        [MemberData(nameof(GetProducts))]
-        public void ClearItems_WhenUsingClearCommand(IProduct product1, IProduct product2)
-        {
-            // Arrange
-            var addProduct1Command = new AddCommand(_ProductList, product1);
-            _productInvoker.AddCommand("addproduct1", addProduct1Command);
+        // Assert
+        var products = _productList.Products;
 
-            var addProduct2Command = new AddCommand(_ProductList, product2);
-            _productInvoker.AddCommand("addproduct2", addProduct2Command);
+        products.ShouldSatisfyAllConditions(
+            "product list",
+            () => products.ShouldNotBeEmpty(),
+            () => products.ShouldHaveSingleItem(),
+            () => products.ShouldNotContain(product2),
+            () => products.ShouldContain(product1)
+        );
+    }
 
-            var clearCommand = new ClearCommand(_ProductList);
-            _productInvoker.AddCommand("clearall", clearCommand);
+    [Theory]
+    [MemberData(nameof(GetProducts))]
+    public void ClearItems_WhenUsingClearCommand(IProduct product1, IProduct product2)
+    {
+        // Arrange
+        var addProduct1Command = new AddCommand(_productList, product1);
+        _productInvoker.AddCommand("addproduct1", addProduct1Command);
 
-            // Act
-            _productInvoker.InvokeCommand("addproduct1");
-            _productInvoker.InvokeCommand("addproduct2");
-            _productInvoker.InvokeCommand("clearall");
+        var addProduct2Command = new AddCommand(_productList, product2);
+        _productInvoker.AddCommand("addproduct2", addProduct2Command);
 
-            // Assert
-            _ProductList.Products.Should().BeEmpty();
-        }
+        var clearCommand = new ClearCommand(_productList);
+        _productInvoker.AddCommand("clearall", clearCommand);
+
+        // Act
+        _productInvoker.InvokeCommand("addproduct1");
+        _productInvoker.InvokeCommand("addproduct2");
+        _productInvoker.InvokeCommand("clearall");
+
+        // Assert
+        _productList.Products.ShouldBeEmpty();
     }
 }
