@@ -1,10 +1,9 @@
-namespace Composite
+namespace Composite;
+
+public interface ICreditFacilityComponent
 {
-    public interface ICreditFacilityComponent
-    {
-        string Name { get; }
-        decimal GetTotalPrincipalBalance();
-        decimal GetTotalAccruedInterest();
-        decimal GetTotalAvailableCreditLimit();
-    }
+    string Name { get; }
+    decimal GetTotalPrincipalBalance();
+    decimal GetTotalAccruedInterest();
+    decimal GetTotalAvailableCreditLimit();
 }
