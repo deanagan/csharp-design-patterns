@@ -1,74 +1,58 @@
-using Xunit;
-using Moq;
 using FluentAssertions;
+using Xunit;
 
 namespace Composite.Test
 {
     public class CompositeShould
     {
-
-        private decimal ComputeDiscount(int discount, decimal price)
+        [Fact]
+        public void ReturnBalancesAndAvailableCredit_WhenComponentIsDrawdownLoan()
         {
-            return price - (price * (discount / 100M));
+            // Arrange
+            var drawdown = new CreditFacilityLeaf("Term Loan drawdown 1", 400m, 300m, 12m);
+
+            drawdown.GetTotalPrincipalBalance().Should().Be(300m);
+            drawdown.GetTotalAccruedInterest().Should().Be(12m);
+            drawdown.GetTotalAvailableCreditLimit().Should().Be(100m);
         }
 
         [Fact]
-        public void HaveCorrectBookPrice_WhenBookIsPurchasedByItself()
+        public void RollUpBalancesAndAvailableCredit_AcrossNestedFacilityComponents()
         {
             // Arrange
-            var book = new Book("Python Cookbook", 50.0M);
+            var termLoanTranche = new CreditFacilityComposite("Tranche A - Term Loan");
+            termLoanTranche.Add(new CreditFacilityLeaf("Term Loan drawdown 1", 400m, 300m, 12m));
+            termLoanTranche.Add(new CreditFacilityLeaf("Term Loan drawdown 2", 100m, 50m, 3m));
+
+            var revolvingTranche = new CreditFacilityLeaf("Tranche B - Revolver", 300m, 120m, 4m);
+            var mezzanineTranche = new CreditFacilityLeaf("Tranche C - Mezzanine", 200m, 200m, 10m);
+
+            var masterFacility = new CreditFacilityComposite("Syndicated Credit Facility");
+            masterFacility.Add(termLoanTranche);
+            masterFacility.Add(revolvingTranche);
+            masterFacility.Add(mezzanineTranche);
 
             // Act
-            var price = ComputeDiscount(book.Discount, book.Price);
+            var principalBalance = masterFacility.GetTotalPrincipalBalance();
+            var accruedInterest = masterFacility.GetTotalAccruedInterest();
+            var availableCredit = masterFacility.GetTotalAvailableCreditLimit();
 
             // Assert
-            price.Should().Be(50.0M);
+            principalBalance.Should().Be(670m);
+            accruedInterest.Should().Be(29m);
+            availableCredit.Should().Be(330m);
         }
 
         [Fact]
-        public void DiscountBookPriceAsSet_WhenBooksArePurchasedUnderBookComposite()
+        public void ReturnZeroTotals_WhenFacilityHasNoComponents()
         {
             // Arrange
-            var book1 = new Book("Effective C++", 65.0M);
-            var book2 = new Book("More Effective C++", 35.0M);
-            var bookComposite = new BookComposite(5, "Effective C++ Series");
-            bookComposite.Add(book1);
-            bookComposite.Add(book2);
-
-            // Act
-            var compositePrice = ComputeDiscount(bookComposite.Discount, bookComposite.Price);
+            var facility = new CreditFacilityComposite("Empty Facility");
 
             // Assert
-            compositePrice.Should().Be(95.0M);
-        }
-
-        [Fact]
-        public void DiscountBookPricesWithTopSet_WhenBooksArePurchasedUnderBookCompositeWithAnotherComposite()
-        {
-            // Arrange
-            var book1 = new Book("Effective C++", 65.0M);
-            var book2 = new Book("More Effective C++", 35.0M);
-            var bookCompositeCpp = new BookComposite(5, "Effective C++ Series");
-            bookCompositeCpp.Add(book1);
-            bookCompositeCpp.Add(book2);
-
-            var bookCompositeCSharp = new BookComposite(10, "Effective C# Series");
-            var book3 = new Book("Effective C#", 70.0M);
-            var book4 = new Book("Pro C# Coding", 30.0M);
-
-            bookCompositeCSharp.Add(book3);
-            bookCompositeCSharp.Add(book4);
-
-            var effectiveSeries = new BookComposite(15, "Effective Coding Series");
-            effectiveSeries.Add(bookCompositeCpp);
-            effectiveSeries.Add(bookCompositeCSharp);
-
-            // Act
-            var effectiveSeriesPrice = ComputeDiscount(effectiveSeries.Discount, effectiveSeries.Price);
-
-            // Assert
-            effectiveSeriesPrice.Should().Be(170.0M);
-
+            facility.GetTotalPrincipalBalance().Should().Be(0m);
+            facility.GetTotalAccruedInterest().Should().Be(0m);
+            facility.GetTotalAvailableCreditLimit().Should().Be(0m);
         }
     }
 }
