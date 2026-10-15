@@ -1,19 +1,9 @@
-using System;
+namespace Decorator;
 
-namespace Decorator
+public class HyperLinkifyHtmlElement(string link, IHtmlElement htmlElement) : HtmlElementDecorator(htmlElement)
 {
-    public class HyperLinkifyHtmlElement : HtmlElementDecorator
+    public override string GetHtmlElement()
     {
-        private string _link;
-        public HyperLinkifyHtmlElement(string link, IHtmlElement htmlElement) : base(htmlElement)
-        {
-            _link = link;
-        }
-
-        public override string GetHtmlElement()
-        {
-            return $"<a href=\"{_link}\">{base.GetWrappedHtmlElement()}</a>";
-        }
+        return $"<a href=\"{link}\">{base.GetWrappedHtmlElement()}</a>";
     }
-
 }

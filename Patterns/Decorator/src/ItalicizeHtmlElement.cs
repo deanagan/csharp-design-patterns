@@ -1,18 +1,10 @@
-using System;
+namespace Decorator;
 
-namespace Decorator
+public class ItalicizeHtmlElement(IHtmlElement htmlElement) : HtmlElementDecorator(htmlElement)
 {
-    public class ItalicizeHtmlElement : HtmlElementDecorator
+    public override string GetHtmlElement()
     {
-        public ItalicizeHtmlElement(IHtmlElement htmlElement) : base(htmlElement)
-        {
-
-        }
-
-        public override string GetHtmlElement()
-        {
-            return $"<em>{base.GetWrappedHtmlElement()}</em>";
-        }
-
+        return $"<em>{base.GetWrappedHtmlElement()}</em>";
     }
+
 }

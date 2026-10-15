@@ -1,16 +1,9 @@
-using System;
+namespace Decorator;
 
-namespace Decorator
+public class BoldenHtmlElement(IHtmlElement htmlElement) : HtmlElementDecorator(htmlElement)
 {
-    public class BoldenHtmlElement : HtmlElementDecorator
+    public override string GetHtmlElement()
     {
-        public BoldenHtmlElement(IHtmlElement htmlElement) : base(htmlElement)
-        {
-        }
-
-        public override string GetHtmlElement()
-        {
-            return $"<b>{base.GetWrappedHtmlElement()}</b>";
-        }
+        return $"<b>{base.GetWrappedHtmlElement()}</b>";
     }
 }

@@ -1,9 +1,6 @@
-﻿using System;
+﻿namespace Decorator;
 
-namespace Decorator
+public interface IHtmlElement
 {
-    public interface IHtmlElement
-    {
-        string GetHtmlElement();
-    }
+    string GetHtmlElement();
 }

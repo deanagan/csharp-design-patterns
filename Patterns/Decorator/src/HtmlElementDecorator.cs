@@ -1,17 +1,13 @@
-using System;
+namespace Decorator;
 
-namespace Decorator
+public abstract class HtmlElementDecorator(IHtmlElement htmlElement) : IHtmlElement
 {
-    public abstract class HtmlElementDecorator : IHtmlElement
+    IHtmlElement _htmlElement = htmlElement;
+
+    public abstract string GetHtmlElement();
+
+    protected string GetWrappedHtmlElement()
     {
-        IHtmlElement _htmlElement;
-        public HtmlElementDecorator(IHtmlElement htmlElement) => _htmlElement = htmlElement;
-
-        public abstract string GetHtmlElement();
-
-        protected string GetWrappedHtmlElement()
-        {
-            return _htmlElement.GetHtmlElement();
-        }
+        return _htmlElement.GetHtmlElement();
     }
 }
