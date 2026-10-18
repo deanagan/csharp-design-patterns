@@ -23,18 +23,6 @@ public class FacadeShould
             _notificationService);
     }
 
-    private static PaymentRequest CreateSampleRequest(decimal amount = 150.00m)
-    {
-        return new PaymentRequest(
-            OrderId: "ORD-9876",
-            CustomerEmail: "customer@example.com",
-            Amount: amount,
-            Currency: "USD",
-            CardNumber: "4111222233334444",
-            CardExpiry: "12/28",
-            CardCvc: "123");
-    }
-
     [Fact]
     public void ProcessPayment_ShouldSucceed_WhenAllSubsystemsPass()
     {
@@ -150,4 +138,17 @@ public class FacadeShould
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => _facade.ProcessPayment(null!));
     }
+
+    private static PaymentRequest CreateSampleRequest(decimal amount = 150.00m)
+    {
+        return new PaymentRequest(
+            OrderId: "ORD-9876",
+            CustomerEmail: "customer@example.com",
+            Amount: amount,
+            Currency: "USD",
+            CardNumber: "4111222233334444",
+            CardExpiry: "12/28",
+            CardCvc: "123");
+    }
+
 }
