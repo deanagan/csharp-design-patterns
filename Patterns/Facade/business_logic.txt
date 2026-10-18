@@ -1,19 +1,17 @@
-User Story: As a customer, I want to be able to pay for my purchases in a secure way.
+User Story: As a customer, I want to be able to complete my purchase checkout seamlessly through a secure, coordinated payment settlement process.
 
-We are integrating a payment gateway into our site. The task for this is to implement
-a way to pay securely using an SDK. 
+When processing customer checkout payments, the checkout system must coordinate multiple independent subsystems in a strict business sequence:
 
-In using the payment gateway SDK, these are the following steps:
+1. IFraudService - Evaluates transaction risk score using customer email, card details, and amount.
+   - If risk validation fails, the transaction is immediately aborted (card is never charged, ledger is never recorded), and a failure alert is dispatched.
 
-1. IEnvironment - Set the environment. Assume step to either be SANDBOX or PRODUCTION. 
-2. IMerchantAuthenticationType - Assume interface requires login id and transaction key.
-3. IBillingAddress - A billing address type. Require first name, last name, address, city and zip code.
-3. ICreditCard - Can be a visa, mastercard or amex credit card. Must implement typename, account number, cvc and expiry date.
-4. ITransactionRequest - Requires amount in decimal, IBillingAddress and ICreditCardType supplied.
-5. ITransactionController - Requires an ITransactionRequest, an Execute function and a GetApiResponse function.
-    The GetApiResponse function returns either OK or Declined.
-    - Decline if
-        + Environment not Set
-        + Merchant authentication not set.
-        + ICreditCardType has expired date.
-    - Otherwise, returns OK.
+2. IPaymentGateway - Interacts with card acquirer networks to authorize and capture funds.
+   - If gateway declines authorization (e.g., insufficient funds, expired card), the transaction stops, ledger is not recorded, and a failure alert is dispatched.
+
+3. ILedgerService - Posts balanced double-entry accounting records for successful payments and generates an immutable ledger reference code.
+
+4. INotificationService - Dispatches customer receipts and real-time alerts:
+   - On success: sends confirmation receipt with order ID, amount, and authorization code.
+   - On failure: sends decline notification with failure reason.
+
+IPaymentSettlementFacade coordinates this multi-service pipeline, shielding checkout callers from the complexity of orchestrating and error-handling across all 4 subsystems.
