@@ -1,6 +1,0 @@
-﻿namespace Decorator;
-
-public interface IHtmlElement
-{
-    string GetHtmlElement();
-}

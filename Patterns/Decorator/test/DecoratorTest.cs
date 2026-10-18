@@ -1,103 +1,90 @@
-using Moq;
-using Xunit;
-using FluentAssertions;
-using AutoFixture;
 using Decorator;
+using NSubstitute;
+using Shouldly;
+using Xunit;
 
 namespace DecoratorTest;
 
 public class DecoratorShould
 {
-    private readonly Fixture _fixture = new();
-    private IHtmlElement _htmlElement;
-    private string _DummyElement;
-    private string _DummyLink;
+    private const decimal BaseInterestRate = 0.08m;
+    private const decimal CollateralDiscount = 0.01m;
+    private const decimal TierDiscount = 0.005m;
+    private const decimal VolumeDiscount = 0.0025m;
+    private const decimal VolumeThreshold = 250_000m;
 
-    public DecoratorShould()
+    [Fact]
+    public void ReturnBaseTerms_ForStandardLoan()
     {
-        _htmlElement = Mock.Of<IHtmlElement>();
-        _DummyElement = _fixture.Create<string>();
-        _DummyLink = "www." + _fixture.Create<string>() + ".com";
-        Mock.Get(_htmlElement).Setup(htmlElement => htmlElement.GetHtmlElement()).Returns(_DummyElement);
+        var loan = new BaseLoan(120_000m, BaseInterestRate);
+
+        loan.GetInterestRate().ShouldBe(BaseInterestRate);
+        loan.GetMonthlyPayment().ShouldBeInRange(799.99m, 800.01m);
+        loan.GetDescription().ShouldBe("Standard Base Loan");
     }
 
     [Fact]
-    public void BoldenHtmlElement_WhenUsingBoldenDecorator()
+    public void ApplyCollateralDiscount_ForSecuredLoan()
     {
-        // Arrange
-        var bolden = new BoldenHtmlElement(_htmlElement);
-        // Act
-        var result = bolden.GetHtmlElement();
-        // Assert
-        using (new FluentAssertions.Execution.AssertionScope("boldened html element"))
-        {
-            result.Should().Be($"<b>{_DummyElement}</b>");
-            Mock.Get(_htmlElement).Verify(htmlElement => htmlElement.GetHtmlElement(), Times.Once);
-        }
+        var loan = BuildLoan(hasCollateral: true);
+
+        loan.GetInterestRate().ShouldBe(BaseInterestRate - CollateralDiscount);
+        loan.GetMonthlyPayment().ShouldBeInRange(799.99m, 800.01m);
+        loan.GetDescription().ShouldContain("Secured Property Discount");
     }
 
     [Fact]
-    public void ItalicizeHtmlElement_WhenUsingItalicizeDecorator()
+    public void ApplyTierDiscount_ForTierOneCustomer()
     {
-        // Arrange
-        var italicized = new ItalicizeHtmlElement(_htmlElement);
-        // Act
-        var result = italicized.GetHtmlElement();
-        // Assert
-        using (new FluentAssertions.Execution.AssertionScope("italicized html element"))
-        {
-            result.Should().Be($"<em>{_DummyElement}</em>");
-            Mock.Get(_htmlElement).Verify(htmlElement => htmlElement.GetHtmlElement(), Times.Once);
-        }
+        var loan = BuildLoan(customerTier: 1);
+
+        loan.GetInterestRate().ShouldBe(BaseInterestRate - TierDiscount);
+        loan.GetDescription().ShouldContain("Tier 1 VIP Discount");
     }
 
     [Fact]
-    public void HyperlinkHtmlElement_WhenUsingHyperlinkifyDecorator()
+    public void ApplyVolumeDiscount_WhenPrincipalMeetsThreshold()
     {
-        // Arrange
-        var hyperlinked = new HyperLinkifyHtmlElement(_DummyLink, _htmlElement);
-        // Act
-        var result = hyperlinked.GetHtmlElement();
-        // Assert
-        using (new FluentAssertions.Execution.AssertionScope("hyperlinked html element"))
-        {
-            result.Should().Be($"<a href=\"{_DummyLink}\">{_DummyElement}</a>");
-            Mock.Get(_htmlElement).Verify(htmlElement => htmlElement.GetHtmlElement(), Times.Once);
-        }
+        var loan = BuildLoan(principal: VolumeThreshold);
+
+        loan.GetInterestRate().ShouldBe(BaseInterestRate - VolumeDiscount);
+        loan.GetDescription().ShouldContain("Large Volume Discount");
     }
 
     [Fact]
-    public void HyperlinkAndBoldenHtmlElement_WhenUsingBoldenHyperlinkifyDecorator()
+    public void StackEligibleDiscounts_WhenLoanIsSecuredTierOneAndHighVolume()
     {
-        // Arrange
-        var hyperlinked = new HyperLinkifyHtmlElement(_DummyLink, _htmlElement);
-        var boldenedHyperlinked = new BoldenHtmlElement(hyperlinked);
-        // Act
-        var result = boldenedHyperlinked.GetHtmlElement();
-        // Assert
-        using (new FluentAssertions.Execution.AssertionScope("hyperlinked and boldened html element"))
-        {
-            result.Should().Be($"<b><a href=\"{_DummyLink}\">{_DummyElement}</a></b>");
-            Mock.Get(_htmlElement).Verify(htmlElement => htmlElement.GetHtmlElement(), Times.Once);
-        }
+        var loan = BuildLoan(
+            principal: VolumeThreshold,
+            hasCollateral: true,
+            customerTier: 1);
+
+        loan.GetInterestRate().ShouldBe(
+            BaseInterestRate - CollateralDiscount - TierDiscount - VolumeDiscount);
+        loan.GetMonthlyPayment().ShouldBeInRange(1_666.66m, 1_666.68m);
+        loan.GetDescription().ShouldContain("Secured Property Discount");
+        loan.GetDescription().ShouldContain("Tier 1 VIP Discount");
+        loan.GetDescription().ShouldContain("Large Volume Discount");
     }
 
-
-    [Fact]
-    public void HyperlinkItalicizeAndBoldenHtmlElement_WhenUsingHyperlinkifyItalicizeBoldenDecorator()
+    private static ILoan BuildLoan(
+        decimal principal = 120_000m,
+        bool hasCollateral = false,
+        int customerTier = 0)
     {
-        // Arrange
-        var hyperlinked = new HyperLinkifyHtmlElement(_DummyLink, _htmlElement);
-        var italicizedHyperlinked = new ItalicizeHtmlElement(hyperlinked);
-        var boldenedItalicizedHyperlinked = new BoldenHtmlElement(italicizedHyperlinked);
+        ILoan loan = Substitute.For<ILoan>();
+        loan.GetInterestRate().Returns(BaseInterestRate);
+        loan.GetMonthlyPayment().Returns(principal * (BaseInterestRate / 12m));
+        loan.GetDescription().Returns("Standard Base Loan");
 
-        // Act
-        var result = boldenedItalicizedHyperlinked.GetHtmlElement();
-        // Assert
-        using (new FluentAssertions.Execution.AssertionScope("hyperlinked and boldened html element"))
+        if (hasCollateral)
         {
-            result.Should().Be($"<b><em><a href=\"{_DummyLink}\">{_DummyElement}</a></em></b>");
-            Mock.Get(_htmlElement).Verify(htmlElement => htmlElement.GetHtmlElement(), Times.Once);
+            loan = new CollateralDiscountDecorator(loan, true, CollateralDiscount);
         }
+
+        loan = new TierDiscountDecorator(loan, customerTier, TierDiscount);
+        loan = new VolumeDiscountDecorator(loan, principal, VolumeThreshold, VolumeDiscount);
+
+        return loan;
     }
 }

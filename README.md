@@ -50,6 +50,7 @@ A bunch of demo codes for:
 2. Unit of Work
 3. Pipeline pattern
 4. Workflow pattern
+5. Rules Engine Pattern
 
 ## Adding a Pattern
 
