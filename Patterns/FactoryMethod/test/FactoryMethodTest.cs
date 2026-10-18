@@ -1,99 +1,79 @@
+using FactoryMethod;
+using Shouldly;
 using System;
 using Xunit;
-using System.Collections.Generic;
-using Moq;
-using FluentAssertions;
 
-namespace FactoryMethod.Test
+namespace FactoryMethodTest;
+
+public class BusinessLoanProcessorFactoryTests
 {
-    public class FactoryMethodShould
+    [Theory]
+    [InlineData(BusinessLoanType.MerchantCashAdvance, typeof(MerchantCashAdvanceProcessor))]
+    [InlineData(BusinessLoanType.InvoiceFactoring, typeof(InvoiceFactoringProcessor))]
+    [InlineData(BusinessLoanType.EquipmentTermLoan, typeof(EquipmentTermLoanProcessor))]
+    public void Create_ReturnsExpectedProcessor_ForGivenLoanType(BusinessLoanType loanType, Type expectedProcessorType)
     {
-        private const int GoldPerksThreshold = 20000;
-        private const int SilverPerksThreshold = 10000;
-        private List<(int, string)> _thresholds = new List<(int, string)> {
-                ( GoldPerksThreshold, "GoldPerks"),
-                ( SilverPerksThreshold, "SilverPerks")
-            };
+        // Act
+        var processor = BusinessLoanProcessorFactory.Create(loanType);
 
-        [Fact]
-        public void ReturnBasicPerksType_WhenMilesEarnedIsLessThanSilver()
-        {
-            // Arrange
-            var perksFactory = new PerksFactory(_thresholds);
+        // Assert
+        processor.ShouldNotBeNull();
+        processor.ShouldBeOfType(expectedProcessorType);
+    }
 
-            // Act
-            var perks = perksFactory.GetPerks(8000);
+    [Fact]
+    public void Create_ThrowsNotSupportedException_ForInvalidLoanType()
+    {
+        // Act & Assert
+        Should.Throw<NotSupportedException>(() => 
+            BusinessLoanProcessorFactory.Create((BusinessLoanType)999));
+    }
 
-            // Assert
-            perks.Should().BeOfType<BasicPerks>();
-        }
+    [Fact]
+    public void MerchantCashAdvanceProcessor_CalculatesCorrectLimitAndDescription()
+    {
+        // Arrange
+        var processor = new MerchantCashAdvanceProcessor();
+        var profile = new BusinessProfile { AverageMonthlyCardSales = 10000M };
 
-        [Fact]
-        public void HaveCorrectTotalMiles_WhenUsingBasicPerks()
-        {
-            // Arrange
-            var perksFactory = new PerksFactory(_thresholds);
-            var calc = new EarningBonusCalculator(perksFactory);
+        // Act
+        var limit = processor.CalculateMaxCreditLimit(profile);
+        var description = processor.GetRepaymentStructureDescription();
 
-            // Act
-            var totalMiles = calc.UpdatedMiles(8000, 100);
+        // Assert
+        limit.ShouldBe(15000M); // 10,000 * 1.5
+        description.ShouldNotBeNullOrWhiteSpace();
+    }
 
-            // Assert
-            totalMiles.Should().Be(8100);
-        }
+    [Fact]
+    public void InvoiceFactoringProcessor_CalculatesCorrectLimitAndDescription()
+    {
+        // Arrange
+        var processor = new InvoiceFactoringProcessor();
+        var profile = new BusinessProfile { TotalOutstandingInvoices = 50000M };
 
-        [Fact]
-        public void GetSilverPerks_WhenMilesEarnedIsAtSilverThreshold()
-        {
-            // Arrange
-            var perksFactory = new PerksFactory(_thresholds);
+        // Act
+        var limit = processor.CalculateMaxCreditLimit(profile);
+        var description = processor.GetRepaymentStructureDescription();
 
-            // Act
-            var perks = perksFactory.GetPerks(10000);
+        // Assert
+        limit.ShouldBe(40000M); // 50,000 * 0.80
+        description.ShouldNotBeNullOrWhiteSpace();
+    }
 
-            // Assert
-            perks.Should().BeOfType<SilverPerks>();
-        }
+    [Fact]
+    public void EquipmentTermLoanProcessor_CalculatesCorrectLimitAndDescription()
+    {
+        // Arrange
+        var processor = new EquipmentTermLoanProcessor();
+        var profile = new BusinessProfile { AppraisedEquipmentValue = 100000M };
 
-        [Fact]
-        public void AddingMilesAtSilverPerks_AddsSilverPerkMilesEarned()
-        {
-            // Arrange
-            var perksFactory = new PerksFactory(_thresholds);
-            var calc = new EarningBonusCalculator(perksFactory);
+        // Act
+        var limit = processor.CalculateMaxCreditLimit(profile);
+        var description = processor.GetRepaymentStructureDescription();
 
-            // Act
-            var totalMiles = calc.UpdatedMiles(10000, 2000);
-
-            // Assert
-            totalMiles.Should().Be(13000);
-        }
-
-        [Fact]
-        public void GetGoldPerks_WhenMilesEarnedIsAtGoldThreshold()
-        {
-            // Arrange
-            var perksFactory = new PerksFactory(_thresholds);
-
-            // Act
-            var perks = perksFactory.GetPerks(20001);
-
-            // Assert
-            perks.Should().BeOfType<GoldPerks>();
-        }
-
-        [Fact]
-        public void AddingMilesAtGoldPerks_AddsGoldPerkMilesEarned()
-        {
-           // Arrange
-            var perksFactory = new PerksFactory(_thresholds);
-            var calc = new EarningBonusCalculator(perksFactory);
-
-            // Act
-            var totalMiles = calc.UpdatedMiles(20000, 2000);
-
-            // Assert
-            totalMiles.Should().Be(24000);
-        }
+        // Assert
+        limit.ShouldBe(90000M); // 100,000 * 0.90
+        description.ShouldNotBeNullOrWhiteSpace();
     }
 }
