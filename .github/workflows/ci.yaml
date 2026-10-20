@@ -21,11 +21,11 @@ jobs:
       with:
         dotnet-version: 10.0.x
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore DesignPatterns.slnx
     - name: Build
-      run: dotnet build *.sln --no-restore
+      run: dotnet build DesignPatterns.slnx --no-restore
     - name: Test with coverage
-      run: dotnet test *.sln --no-build --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage-results
+      run: dotnet test DesignPatterns.slnx --no-build --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage-results
     - name: Install ReportGenerator
       run: dotnet tool install dotnet-reportgenerator-globaltool --tool-path ./.tools
     - name: Generate coverage summary
