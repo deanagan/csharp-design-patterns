@@ -3,68 +3,91 @@
 [![.NET](https://github.com/deanagan/csharp-design-patterns/actions/workflows/ci.yaml/badge.svg)](https://github.com/deanagan/csharp-design-patterns/actions/workflows/ci.yaml)
 [![Coverage Status](https://coveralls.io/repos/github/deanagan/csharp-design-patterns/badge.svg?branch=master)](https://coveralls.io/github/deanagan/csharp-design-patterns?branch=master)
 
-## csharp-design-patterns
+A collection of GoF design pattern examples written in C#. Each pattern has a
+source project and, where applicable, a corresponding test project under
+`Patterns/`.
 
-A bunch of demo codes for:
+## Requirements
 
-1. GoF Design patterns written in C#
-2. Unit testing with Xunit
-3. Mocking with Moq
-4. Using FluentAssertions.
-5. Ninject is used for testing the demo on DI based singletons.
+- .NET 10 SDK
 
-## What Design Patterns can I find in this repository?
+## Design patterns
 
-- Patterns\AbstractFactory\AbstractFactory
-- Patterns\Adapter\Adapter
-- Patterns\Bridge\Bridge
-- Patterns\Builder\Builder
-- Patterns\ChainOfResponsibility\ChainOfResponsibility
-- Patterns\Command\Command
-- Patterns\Composite\Composite
-- Patterns\Decorator\Decorator
-- Patterns\Facade\Facade
-- Patterns\FactoryMethod\FactoryMethod
-- Patterns\Flyweight\Flyweight
-- Patterns\Mediator\Mediator
-- Patterns\Memento\Memento
-- Patterns\Observer\Observer
-- Patterns\Prototype\Prototype
-- Patterns\Proxy\Proxy
-- Patterns\SingletonDependencyInjection\SingletonDI
-- Patterns\State\State
-- Patterns\Strategy\Strategy
-- Patterns\TemplateMethod\TemplateMethod
-- Patterns\Visitor\Visitor
-- Patterns\Iterator\Iterator
+- Abstract Factory
+- Adapter
+- Bridge
+- Builder
+- Chain of Responsibility
+- Command
+- Composite
+- Decorator
+- Facade
+- Factory Method
+- Flyweight
+- Iterator
+- Mediator
+- Memento
+- Observer
+- Prototype
+- Proxy
+- Singleton with Dependency Injection
+- State
+- Strategy
+- Template Method
+- Visitor
 
-## How To Run the Demos
+## Build and test
 
-1. Demos are divided into folders with the pattern.
-2. To build all, enter `dotnet build`
-3. To execute all the tests, enter `dotnet test` or `dotnet test -l:"console;verbosity=detailed"` to be more verbose.
+Run these commands from the repository root:
 
-## TODOs
+```sh
+dotnet restore DesignPatterns.slnx
+dotnet build DesignPatterns.slnx --no-restore
+dotnet test DesignPatterns.slnx --no-build
+```
 
-1. Interpreter Pattern
-2. Unit of Work
-3. Pipeline pattern
-4. Workflow pattern
-5. Rules Engine Pattern
+The test projects use xUnit. The repository is migrating to NSubstitute for
+mocking and Shouldly for assertions; use these for new and updated tests.
 
-## Adding a Pattern
+## Code coverage
 
-1. Under Patterns folder, create a new directory with the new pattern name. Example: `mkdir RepositoryPattern`
-2. Change directory to new folder.
-3. Create a new project. Example: `dotnet new classlib -n RepositoryPattern -o .` or just `dotnet new webapi` if you like having the same project name as the current folder.
+Collect coverage for all test projects with Coverlet:
 
-## Adding a package
+```sh
+dotnet test DesignPatterns.slnx \
+  --collect:"XPlat Code Coverage" \
+  --results-directory ./coverage-results
+```
 
-1. Change directory to the pattern you want to add a package for or to the test folder (if you want to add a test package).
-2. Add the package: Example: `dotnet add package FluentAssertions`
+Install ReportGenerator once, then create an HTML report and coverage summary:
 
-## Generate Coverage locally
+```sh
+dotnet tool install dotnet-reportgenerator-globaltool --tool-path ./.tools
+./.tools/reportgenerator \
+  "-reports:coverage-results/**/coverage.cobertura.xml" \
+  "-targetdir:coverage-report" \
+  "-reporttypes:Html;Cobertura;lcov;MarkdownSummaryGithub"
+```
 
-`dotnet tool install -g dotnet-reportgenerator-globaltool`
-`dotnet test *.sln /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./coverage-results/`
-`reportgenerator -reports:'**/coverage-results/**/*.cobertura.xml' -targetdir:'coveragereport' -reporttypes:'Html;MarkdownSummaryGithub'`
+## Adding a pattern
+
+1. Create a source project under `Patterns/<PatternName>/src/` and a test
+   project under `Patterns/<PatternName>/test/`.
+2. Add both projects to `DesignPatterns.slnx`:
+
+   ```sh
+   dotnet sln DesignPatterns.slnx add \
+     Patterns/<PatternName>/src/<PatternName>.csproj \
+     Patterns/<PatternName>/test/<PatternName>Test.csproj
+   ```
+
+3. Add a project reference from the test project to the source project, then
+   build and run the tests using the commands above.
+
+## Planned patterns
+
+- Interpreter
+- Unit of Work
+- Pipeline
+- Workflow
+- Rules Engine
