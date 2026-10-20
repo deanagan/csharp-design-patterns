@@ -1,28 +1,20 @@
 namespace Flyweight;
 
-public class ActiveLoanAccount
+public class ActiveLoanAccount(
+    ILoanProductFlyweight productTemplate,
+    string loanId,
+    string borrowerName,
+    decimal principalBalance,
+    decimal customRateDiscount)
 {
-    private readonly ILoanProductFlyweight _productTemplate; // Reference to shared flyweight (Intrinsic)
+    // Reference to shared flyweight (Intrinsic)
+    private readonly ILoanProductFlyweight _productTemplate = productTemplate.ThrowIfNull();
 
     // Extrinsic state (Unique to this specific loan instance)
-    public string LoanId { get; }
-    public string BorrowerName { get; }
-    public decimal PrincipalBalance { get; }
-    public decimal CustomRateDiscount { get; }
-
-    public ActiveLoanAccount(
-        ILoanProductFlyweight productTemplate,
-        string loanId,
-        string borrowerName,
-        decimal principalBalance,
-        decimal customRateDiscount)
-    {
-        _productTemplate = productTemplate;
-        LoanId = loanId;
-        BorrowerName = borrowerName;
-        PrincipalBalance = principalBalance;
-        CustomRateDiscount = customRateDiscount;
-    }
+    public string LoanId { get; } = loanId;
+    public string BorrowerName { get; } = borrowerName;
+    public decimal PrincipalBalance { get; } = principalBalance;
+    public decimal CustomRateDiscount { get; } = customRateDiscount;
 
     public decimal GetEffectiveAnnualInterest()
     {

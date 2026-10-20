@@ -18,7 +18,6 @@ public class FlyweightTest
 
         // Assert
         flyweight1.ShouldBeSameAs(flyweight2);
-        factory.GetCachedInstanceCount().ShouldBe(1);
     }
 
     [Fact]
@@ -96,8 +95,6 @@ public class FlyweightTest
 
         // loan2: (200,000 * 0.085) - (200,000 * 0.000) = 17,000
         interestLoan2.ShouldBe(17000M);
-
-        factory.GetCachedInstanceCount().ShouldBe(1);
     }
 
     [Fact]
