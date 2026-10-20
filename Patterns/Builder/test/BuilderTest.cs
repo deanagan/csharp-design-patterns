@@ -1,4 +1,5 @@
 using System;
+using System.Text.RegularExpressions;
 using Builder;
 using Shouldly;
 using Xunit;
@@ -193,6 +194,6 @@ public class BuilderShould
 
         // Act & Assert
         var ex = Should.Throw<InvalidOperationException>(() => builder.Build());
-        ex.Message.ShouldContain("does not satisfy the 75% coverage requirement");
+        Regex.IsMatch(ex.Message, @"does not satisfy the 75\s*% coverage requirement").ShouldBeTrue();
     }
 }
