@@ -2,10 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Iterator;
 using Shouldly;
 using Xunit;
 
-namespace Iterator.Test;
+namespace IteratorTest;
 
 public class AmortizationScheduleTest
 {
