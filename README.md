@@ -91,3 +91,5 @@ dotnet tool install dotnet-reportgenerator-globaltool --tool-path ./.tools
 - Pipeline
 - Workflow
 - Rules Engine
+- Transactional Outbox Pattern
+- Polymorphic Request Payloads
