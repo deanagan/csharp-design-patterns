@@ -1,51 +1,83 @@
+using System;
+using Memento;
+using Shouldly;
 using Xunit;
-using Moq;
-using FluentAssertions;
 
-namespace Memento.Test
+namespace MementoTest;
+
+public class MementoTest
 {
-    public class MementoShould
+    [Fact]
+    public void RestoresTheSavedLoanTermsAfterARevision()
     {
-        private ProductCaretaker _productCaretaker = new ProductCaretaker();
-        private Product _product = Mock.Of<Product>(product => product.Name == "Rice" && product.Price == 4.99M);
-        private IProductOriginator _productOriginator;
-        private Product _memento;
+        var scenario = CreateScenario();
+        var history = new LoanScenarioHistory();
+        history.Save(scenario.Save());
 
-        public MementoShould()
-        {
-            _productOriginator = new ProductOriginator(_product);
-            _memento = _productOriginator.GetMemento();
-        }
-        [Fact]
-        public void RetrieveCorrectMemento_WhenRetrievingFromCaretaker()
-        {
-            // Arrange
-            _productCaretaker.AddProductMemento(_memento);
+        scenario.ReviseTerms(80_000m, 0.0725m, 48);
+        scenario.Restore(history.GetLatest());
 
-            // Act
-            _memento.Price = 2.99M;
-            _productOriginator.SetMemento(_productCaretaker.GetLastMemento());
-            _memento = _productOriginator.GetMemento();
-
-            // Assert
-            _memento.Price.Should().Be(4.99M);
-        }
-
-        [Fact]
-        public void RetrieveCorrectMemento_WhenRetrievingFromCaretakerAfterMultipleSet()
-        {
-            // Arrange
-            _productCaretaker.AddProductMemento(_memento);
-
-            // Act
-            _memento.Price = 2.99M;
-            _productCaretaker.AddProductMemento(_memento);
-            _memento.Price = 7.99M;
-            _productOriginator.SetMemento(_productCaretaker.GetLastMemento());
-            _memento = _productOriginator.GetMemento();
-
-            // Assert
-            _memento.Price.Should().Be(2.99M);
-        }
+        scenario.RequestedAmount.ShouldBe(100_000m);
+        scenario.AnnualInterestRate.ShouldBe(0.065m);
+        scenario.TermInMonths.ShouldBe(60);
     }
+
+    [Fact]
+    public void RestoresTheSelectedScenarioFromMultipleSnapshots()
+    {
+        var scenario = CreateScenario();
+        var history = new LoanScenarioHistory();
+        history.Save(scenario.Save());
+
+        scenario.ReviseTerms(80_000m, 0.0725m, 48);
+        history.Save(scenario.Save());
+
+        scenario.ReviseTerms(60_000m, 0.08m, 36);
+        scenario.Restore(history.Get(1));
+
+        scenario.RequestedAmount.ShouldBe(80_000m);
+        scenario.AnnualInterestRate.ShouldBe(0.0725m);
+        scenario.TermInMonths.ShouldBe(48);
+    }
+
+    [Fact]
+    public void KeepsSnapshotsIndependentFromLaterScenarioChanges()
+    {
+        var scenario = CreateScenario();
+        var snapshot = scenario.Save();
+
+        scenario.ReviseTerms(50_000m, 0.09m, 24);
+        scenario.Restore(snapshot);
+
+        scenario.RequestedAmount.ShouldBe(100_000m);
+        scenario.AnnualInterestRate.ShouldBe(0.065m);
+        scenario.TermInMonths.ShouldBe(60);
+    }
+
+    [Fact]
+    public void DoesNotRestoreSnapshotFromAnotherLoanApplication()
+    {
+        var scenario = CreateScenario();
+        var otherScenario = new LoanApplicationScenario("LN-2002", 25_000m, 0.08m, 24);
+
+        Should.Throw<ArgumentException>(() => scenario.Restore(otherScenario.Save()));
+    }
+
+    [Fact]
+    public void ThrowsWhenNoScenarioHasBeenSaved()
+    {
+        var history = new LoanScenarioHistory();
+
+        Should.Throw<InvalidOperationException>(() => history.GetLatest());
+    }
+
+    [Fact]
+    public void RejectsInvalidLoanTerms()
+    {
+        Should.Throw<ArgumentOutOfRangeException>(() =>
+            new LoanApplicationScenario("LN-1001", 0m, 0.065m, 60));
+    }
+
+    private static LoanApplicationScenario CreateScenario() =>
+        new("LN-1001", 100_000m, 0.065m, 60);
 }
