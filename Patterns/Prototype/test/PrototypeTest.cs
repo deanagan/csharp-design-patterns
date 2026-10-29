@@ -1,70 +1,68 @@
+using System;
+using Prototype;
+using Shouldly;
 using Xunit;
-using FluentAssertions;
 
-namespace Prototype.Test
+namespace PrototypeTest;
+
+public class PrototypeTest
 {
-    public class PrototypeShould
+    [Fact]
+    public void ShallowClonePreservesProductConfigurationAndSharesNestedTerms()
     {
-        private BasicCustomer _basicCustomer;
+        var prototype = CreatePrototype();
 
-        public PrototypeShould()
-        {
-            _basicCustomer = new Customer();
-            _basicCustomer.FirstName = "John";
-            _basicCustomer.LastName = "Smith";
-            _basicCustomer.HomeAddress = new Address
-            {
-                StreetAddress = "1 Kent Street",
-                City = "Sydney",
-                State = "New South Wales",
-                Country = "Australia",
-                PostCode = "2000"
-            };
-            _basicCustomer.BillingAddress = new Address
-            {
-                StreetAddress = _basicCustomer.HomeAddress.StreetAddress,
-                City = _basicCustomer.HomeAddress.City,
-                State = _basicCustomer.HomeAddress.State,
-                Country = _basicCustomer.HomeAddress.Country,
-                PostCode = _basicCustomer.HomeAddress.PostCode
-            };
-        }
-
-        [Fact]
-        public void ShallowCloneCustomerWithSameAddress_WhenAddressObjectsAreShared()
-        {
-            // Arrange
-            var customer = (Customer)_basicCustomer.Clone();
-
-            // Act
-            var newStreetAddress = "26 York Street";
-            var relatedCustomer = (Customer)customer.Clone();
-            relatedCustomer.FirstName = "Jane";
-            relatedCustomer.HomeAddress!.StreetAddress = newStreetAddress;
-
-            // Assert
-            customer.HomeAddress.Should().Be(relatedCustomer.HomeAddress);
-        }
-
-        [Fact]
-        public void DeepCloneCustomerWithDifferentAddressButWithSameFirstName_WhenAddressObjectsAreDifferent()
-        {
-            // Arrange
-            var customer = (Customer)_basicCustomer.Clone();
-
-            // Act
-            var diffCustomer = customer.DeepClone();
-            diffCustomer.FirstName = "Peter";
-            diffCustomer.LastName = "Wick";
-            diffCustomer.HomeAddress!.StreetAddress = "57 Hassall Ridge";
-            diffCustomer.HomeAddress.City = "Lexington";
-            diffCustomer.HomeAddress.State = "Kentucky";
-            diffCustomer.HomeAddress.Country = "United States Of America";
-            diffCustomer.HomeAddress.PostCode = "40511";
-
-            // Assert
-            customer.HomeAddress.Should().NotBeEquivalentTo(diffCustomer.HomeAddress);
-            customer.FirstName.Should().BeEquivalentTo("John");
-        }
+        var offer = (LoanProductPrototype)prototype.Clone();
+        offer.ProductCode.ShouldBe(prototype.ProductCode);
+        offer.ProductName.ShouldBe(prototype.ProductName);
+        offer.Terms.ShouldBeSameAs(prototype.Terms);
     }
+
+    [Fact]
+    public void DeepCloneCreatesIndependentLoanTermsForBorrowerOffer()
+    {
+        var prototype = CreatePrototype();
+
+        var offer = prototype.DeepClone();
+        offer.Terms.Revise(75_000m, 0.079m, 48, 750m);
+
+        offer.Terms.ShouldNotBeSameAs(prototype.Terms);
+        offer.Terms.RequestedAmount.ShouldBe(75_000m);
+        offer.Terms.AnnualInterestRate.ShouldBe(0.079m);
+        offer.Terms.TermInMonths.ShouldBe(48);
+        offer.Terms.OriginationFee.ShouldBe(750m);
+
+        prototype.Terms.RequestedAmount.ShouldBe(100_000m);
+        prototype.Terms.AnnualInterestRate.ShouldBe(0.065m);
+        prototype.Terms.TermInMonths.ShouldBe(60);
+        prototype.Terms.OriginationFee.ShouldBe(1_000m);
+    }
+
+    [Fact]
+    public void ShallowCloneSharesChangesToNestedTerms()
+    {
+        var prototype = CreatePrototype();
+
+        var offer = (LoanProductPrototype)prototype.Clone();
+        offer.Terms.Revise(75_000m, 0.079m, 48, 750m);
+
+        prototype.Terms.RequestedAmount.ShouldBe(75_000m);
+    }
+
+    [Fact]
+    public void RejectsInvalidLoanTerms()
+    {
+        Should.Throw<ArgumentOutOfRangeException>(() =>
+            new LoanProductTerms(0m, 0.065m, 60, 1_000m));
+    }
+
+    private static LoanProductPrototype CreatePrototype() =>
+        new(
+            "SME-WORKING-CAPITAL",
+            "SME Working Capital Loan",
+            new LoanProductTerms(
+                requestedAmount: 100_000m,
+                annualInterestRate: 0.065m,
+                termInMonths: 60,
+                originationFee: 1_000m));
 }
