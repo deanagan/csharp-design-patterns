@@ -1,95 +1,128 @@
 using System;
-using System.Collections.Generic;
+using Proxy;
+using Shouldly;
 using Xunit;
-using Moq;
-using FluentAssertions;
 
-namespace Proxy.Test
+namespace ProxyTest;
+
+public class ProxyTest
 {
-    public class ProxyShould
+    private const string LoanId = "LN-1001";
+    private const string BorrowerId = "BORROWER-1";
+
+    [Fact]
+    public void AllowsBorrowerToViewTheirOwnLoan()
     {
-        Dictionary<int, IProductInfo> _products;
-        IEntries _entries;
-        IUser _adminUser;
-        IUser _regularUser;
-        delegate IAuthenticationController CreateAuthController(IUser user);
-        CreateAuthController _createAuthController;
+        var proxy = CreateProxy(LoanUserRole.Borrower, BorrowerId, out _);
 
-        public ProxyShould()
-        {
-            _products = new Dictionary<int, IProductInfo>
-            {
-                {1, Mock.Of<IProductInfo>(
-                    productInfo =>
-                        productInfo.Name == "Xbox360" &&
-                        productInfo.Id == 1)
-                }
-            };
-            _adminUser = Mock.Of<IUser> (user => user.IsAdmin == true);
-            _regularUser = Mock.Of<IUser> (user => user.IsAdmin == false);
+        var account = proxy.GetAccount(LoanId);
 
-            _createAuthController = (user) => new AuthenticationController(user);
-            _entries = new Entries(_products);
-        }
-
-        [Fact]
-        public void GetProductInfoSuccessfully_WhenReadingAsRegularUser()
-        {
-            // Arrange
-            var authCtrl = _createAuthController(_regularUser);
-            var entries = new EntriesProxy(authCtrl, _entries);
-
-            // Act
-            var productInfo = entries.Get(1);
-
-            //Assert
-            productInfo.Id.Should().Be(1);
-            productInfo.Name.Should().Be("Xbox360");
-        }
-
-        [Fact]
-        public void GetProductInfoSuccessfully_WhenReadingAsAdminUser()
-        {
-            // Arrange
-            var authCtrl = _createAuthController(_adminUser);
-            var entries = new EntriesProxy(authCtrl, _entries);
-
-            // Act
-            var productInfo = entries.Get(1);
-
-            //Assert
-            productInfo.Id.Should().Be(1);
-            productInfo.Name.Should().Be("Xbox360");
-        }
-
-        [Fact]
-        public void DeleteProductInfoSuccessfully_WhenDeletingAsAdminUser()
-        {
-            // Arrange
-            var authCtrl = _createAuthController(_adminUser);
-            var entries = new EntriesProxy(authCtrl, _entries);
-
-            // Act
-            var isDeleted = entries.Delete(1);
-
-            //Assert
-            isDeleted.Should().Be(true);
-            entries.Get(1).Should().Be(null);
-        }
-
-        [Fact]
-        public void BeUnableToDeleteProductInfo_WhenDeletingAsRegularUser()
-        {
-            // Arrange
-            var authCtrl = _createAuthController(_regularUser);
-            var entries = new EntriesProxy(authCtrl, _entries);
-
-            // Act
-            var isDeleted = entries.Delete(1);
-
-            //Assert
-            isDeleted.Should().Be(false);
-            entries.Get(1).Should().NotBe(null);
-        }
+        account.ShouldNotBeNull();
+        account.LoanId.ShouldBe(LoanId);
     }
+
+    [Fact]
+    public void HidesLoanFromAnotherBorrower()
+    {
+        var proxy = CreateProxy(LoanUserRole.Borrower, "BORROWER-2", out _);
+
+        proxy.GetAccount(LoanId).ShouldBeNull();
+    }
+
+    [Fact]
+    public void AllowsLoanOfficerToViewLoanButNotChangeRepaymentInstructions()
+    {
+        var proxy = CreateProxy(LoanUserRole.LoanOfficer, "OFFICER-1", out var service);
+
+        proxy.GetAccount(LoanId).ShouldNotBeNull();
+        proxy.UpdateRepaymentInstructions(LoanId, "New bank account").ShouldBeFalse();
+        service.GetAccount(LoanId)!.RepaymentInstructions.ShouldBe("Existing instructions");
+    }
+
+    [Fact]
+    public void AllowsBorrowerToUpdateTheirOwnRepaymentInstructions()
+    {
+        var proxy = CreateProxy(LoanUserRole.Borrower, BorrowerId, out var service);
+
+        proxy.UpdateRepaymentInstructions(LoanId, "Updated bank account").ShouldBeTrue();
+
+        service.GetAccount(LoanId)!.RepaymentInstructions.ShouldBe("Updated bank account");
+    }
+
+    [Fact]
+    public void DeniesBorrowerUpdatingAnotherBorrowersRepaymentInstructions()
+    {
+        var proxy = CreateProxy(LoanUserRole.Borrower, "BORROWER-2", out var service);
+
+        proxy.UpdateRepaymentInstructions(LoanId, "Unauthorized change").ShouldBeFalse();
+        service.GetAccount(LoanId)!.RepaymentInstructions.ShouldBe("Existing instructions");
+    }
+
+    [Fact]
+    public void DeniesPayoutUnlessUserIsServicingAdministrator()
+    {
+        var borrowerProxy = CreateProxy(LoanUserRole.Borrower, BorrowerId, out var borrowerService);
+        var officerProxy = CreateProxy(LoanUserRole.LoanOfficer, "OFFICER-1", out var officerService);
+
+        borrowerProxy.InitiatePayout(LoanId, 5_000m).ShouldBeFalse();
+        officerProxy.InitiatePayout(LoanId, 5_000m).ShouldBeFalse();
+        borrowerService.GetAccount(LoanId)!.OutstandingBalance.ShouldBe(80_000m);
+        officerService.GetAccount(LoanId)!.OutstandingBalance.ShouldBe(80_000m);
+    }
+
+    [Fact]
+    public void AllowsServicingAdministratorToManageLoanAndInitiatePayout()
+    {
+        var proxy = CreateProxy(
+            LoanUserRole.ServicingAdministrator,
+            "ADMIN-1",
+            out var service);
+
+        proxy.UpdateRepaymentInstructions(LoanId, "Administrator update").ShouldBeTrue();
+        proxy.InitiatePayout(LoanId, 5_000m).ShouldBeTrue();
+
+        service.GetAccount(LoanId)!.RepaymentInstructions.ShouldBe("Administrator update");
+        service.GetAccount(LoanId)!.OutstandingBalance.ShouldBe(75_000m);
+    }
+
+    [Fact]
+    public void ReturnsNotFoundForUnknownLoan()
+    {
+        var proxy = CreateProxy(LoanUserRole.ServicingAdministrator, "ADMIN-1", out _);
+
+        proxy.GetAccount("MISSING").ShouldBeNull();
+        proxy.UpdateRepaymentInstructions("MISSING", "Instructions").ShouldBeFalse();
+        proxy.InitiatePayout("MISSING", 1_000m).ShouldBeFalse();
+    }
+
+    [Fact]
+    public void RejectsNullDependencies()
+    {
+        var service = CreateService();
+        var user = new LoanUserContext("ADMIN-1", LoanUserRole.ServicingAdministrator);
+
+        Should.Throw<ArgumentNullException>(() => new LoanAccountAuthorizationProxy(null!, service));
+        Should.Throw<ArgumentNullException>(() => new LoanAccountAuthorizationProxy(user, null!));
+    }
+
+    private static LoanAccountAuthorizationProxy CreateProxy(
+        LoanUserRole role,
+        string userId,
+        out LoanAccountService service)
+    {
+        service = CreateService();
+        return new LoanAccountAuthorizationProxy(
+            new LoanUserContext(userId, role),
+            service);
+    }
+
+    private static LoanAccountService CreateService() =>
+        new(
+        [
+            new LoanAccount(
+                LoanId,
+                BorrowerId,
+                OutstandingBalance: 80_000m,
+                RepaymentInstructions: "Existing instructions")
+        ]);
 }
