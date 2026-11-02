@@ -1,9 +1,10 @@
 using System;
 using Microsoft.Extensions.DependencyInjection;
 using Shouldly;
+using SingletonDI;
 using Xunit;
 
-namespace SingletonDI.Test;
+namespace SingletonDITest;
 
 public class SingletonDITest
 {
