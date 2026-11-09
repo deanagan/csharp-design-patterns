@@ -1,124 +1,97 @@
+using System;
+using Shouldly;
 using Xunit;
-using Moq;
-using FluentAssertions;
 
-namespace Strategy.Test
+namespace Strategy.Test;
+
+public class StrategyTest
 {
-    public class StrategyShould
+    [Theory]
+    [InlineData(800, 0.06)]
+    [InlineData(750, 0.075)]
+    [InlineData(680, 0.095)]
+    [InlineData(600, 0.12)]
+    public void CalculatesRiskBasedRateForCreditTier(int creditScore, decimal expectedRate)
     {
-        private delegate decimal PriceCalc(IProduct product);
-        private ICoupon? _mockCoupon;
-        private IProduct? _mockProduct;
-        private IDiscountScheme? _discountScheme;
+        var pricer = new LoanOfferPricer(new RiskBasedLoanPricingStrategy());
 
-        ICoupon CreateMockCoupon(bool isExpired, int discountPercentage)
-        {
-            return Mock.Of<ICoupon>
-            (
-                coupon =>
-                coupon.IsExpired() == isExpired &&
-                coupon.DiscountPercentage() == discountPercentage
-            );
-        }
+        var rate = pricer.CalculateAnnualInterestRate(
+            new LoanPricingRequest(100_000m, creditScore));
 
-        IProduct CreateMockProduct(decimal sellingPrice, bool isOnSale)
-        {
-            return Mock.Of<IProduct>
-            (
-                product =>
-                product.SellingPrice() == sellingPrice &&
-                product.IsOnSale() == isOnSale
-            );
-        }
+        rate.ShouldBe(expectedRate);
+    }
 
-        [Fact]
-        public void ReturnMemberDiscountedPrice_WhenMemberWithValidCouponForRegularItem()
-        {
-            // Arrange
-            _mockCoupon = CreateMockCoupon(false, 5);
-            _mockProduct = CreateMockProduct(100M, false);
-            _discountScheme = new MemberDiscountScheme();
+    [Fact]
+    public void CalculatesSecuredRateWhenCollateralMeetsCoverageRequirement()
+    {
+        var pricer = new LoanOfferPricer(new SecuredLoanPricingStrategy());
 
-            // Act
-            var price = _discountScheme.ComputePrice(_mockProduct, _mockCoupon);
+        var rate = pricer.CalculateAnnualInterestRate(
+            new LoanPricingRequest(
+                requestedAmount: 100_000m,
+                creditScore: 700,
+                isSecured: true,
+                collateralValue: 75_000m));
 
-            // Assert
-            price.Should().Be(90M);
-        }
+        rate.ShouldBe(0.065m);
+    }
 
-        [Fact]
-        public void ReturnNonMemberDiscountedPrice_WhenNonMemberWithValidCouponForRegularItem()
-        {
-            // Arrange
-            _mockCoupon = CreateMockCoupon(false, 5);
-            _mockProduct = CreateMockProduct(100M, false);
-            _discountScheme = new NonMemberDiscountScheme();
+    [Fact]
+    public void RejectsSecuredPricingForAnUnsecuredApplication()
+    {
+        var strategy = new SecuredLoanPricingStrategy();
 
-            // Act
-            var price = _discountScheme.ComputePrice(_mockProduct, _mockCoupon);
+        Should.Throw<InvalidOperationException>(() =>
+            strategy.CalculateAnnualInterestRate(new LoanPricingRequest(100_000m, 700)));
+    }
 
-            // Assert
-            price.Should().Be(95M);
-        }
+    [Fact]
+    public void RejectsSecuredPricingWhenCollateralCoverageIsInsufficient()
+    {
+        var strategy = new SecuredLoanPricingStrategy();
+        var request = new LoanPricingRequest(
+            requestedAmount: 100_000m,
+            creditScore: 700,
+            isSecured: true,
+            collateralValue: 74_999m);
 
-        [Fact]
-        public void ReturnBaseMemberDiscountOnly_WhenMemberUsesExpiredCoupon()
-        {
-            // Arrange
-            _mockCoupon = CreateMockCoupon(true, 5);
-            _mockProduct = CreateMockProduct(100M, false);
-            _discountScheme = new MemberDiscountScheme();
+        Should.Throw<InvalidOperationException>(() => strategy.CalculateAnnualInterestRate(request));
+    }
 
-            // Act
-            var price = _discountScheme.ComputePrice(_mockProduct, _mockCoupon);
+    [Fact]
+    public void RejectsCreditScoreBelowTheSelectedStrategyMinimum()
+    {
+        var strategy = new RiskBasedLoanPricingStrategy();
 
-            // Assert
-            price.Should().Be(95M);
-        }
+        Should.Throw<InvalidOperationException>(() =>
+            strategy.CalculateAnnualInterestRate(new LoanPricingRequest(100_000m, 550)));
+    }
 
-        [Fact]
-        public void ReturnNoDiscount_WhenNonMemberUsesExpiredCoupon()
-        {
-            // Arrange
-            _mockCoupon = CreateMockCoupon(true, 5);
-            _mockProduct = CreateMockProduct(100M, false);
-            _discountScheme = new NonMemberDiscountScheme();
+    [Fact]
+    public void AllowsPricingStrategyToBeChangedForTheSameOfferContext()
+    {
+        var pricer = new LoanOfferPricer(new RiskBasedLoanPricingStrategy());
+        var request = new LoanPricingRequest(
+            requestedAmount: 100_000m,
+            creditScore: 700,
+            isSecured: true,
+            collateralValue: 80_000m);
 
-            // Act
-            var price = _discountScheme.ComputePrice(_mockProduct, _mockCoupon);
+        var riskBasedRate = pricer.CalculateAnnualInterestRate(request);
+        pricer.SetStrategy(new SecuredLoanPricingStrategy());
+        var securedRate = pricer.CalculateAnnualInterestRate(request);
 
-            // Assert
-            price.Should().Be(100M);
-        }
+        riskBasedRate.ShouldBe(0.095m);
+        securedRate.ShouldBe(0.065m);
+    }
 
-        [Fact]
-        public void ReturnBaseMemberDiscountedPrice_WhenMemberUsesValidCouponForProductAlreadyOnSale()
-        {
-            // Arrange
-            _mockCoupon = CreateMockCoupon(false, 5);
-            _mockProduct = CreateMockProduct(100M, true);
-            _discountScheme = new MemberDiscountScheme();
+    [Fact]
+    public void RejectsNullStrategyAndRequest()
+    {
+        var pricer = new LoanOfferPricer(new RiskBasedLoanPricingStrategy());
 
-            // Act
-            var price = _discountScheme.ComputePrice(_mockProduct, _mockCoupon);
-
-            // Assert
-            price.Should().Be(90M);
-        }
-
-        [Fact]
-        public void ReturnSalePriceOnly_WhenNonMemberUsesValidCouponForProductAlreadyOnSale()
-        {
-            // Arrange
-            _mockCoupon = CreateMockCoupon(false, 5);
-            _mockProduct = CreateMockProduct(97M, true);
-            _discountScheme = new NonMemberDiscountScheme();
-
-            // Act
-            var price = _discountScheme.ComputePrice(_mockProduct, _mockCoupon);
-
-            // Assert
-            price.Should().Be(97M);
-        }
+        Should.Throw<ArgumentNullException>(() => pricer.SetStrategy(null!));
+        Should.Throw<ArgumentNullException>(() => pricer.CalculateAnnualInterestRate(null!));
+        Should.Throw<ArgumentNullException>(() => new LoanOfferPricer(null!));
     }
 }
